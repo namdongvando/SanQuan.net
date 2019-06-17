@@ -1,0 +1,1 @@
+app.controller("profilemenuController", profilemenuController);  function profilemenuController($scope, $rootScope, $http, $routeParams) {}

@@ -1,0 +1,88 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+$DSDanhMuc = $Model_DanhMuc->LayDanhMucDeQuy();
+$DanhMucHienTai = $data['DanhMucHienTai'];
+$ThongBao = $this->getThongBao();
+if($ThongBao) {
+   ?>
+   <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+         <i class="fa fa-times">X</i>
+      </button>
+      <h4><i class="icon fa fa-ban"></i> <?php echo $ThongBao ?></h4>
+   </div>
+   <?php
+}
+?>
+
+
+<div class="box"> 
+   <div class="box-header">
+      <h3 class="box-title">Thuộc Tính Danh Mục</h3>
+   </div>
+   <div class="box-body">
+      <div class="row">
+         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <div class="box box-success">
+               <div class="box-header">
+                  <h3 class="box-title">Danh Sách Danh Mục</h3>
+               </div>
+               <div class="box-body">
+                  <ul>
+                     <?php
+                     foreach($DSDanhMuc as $DanhMuc) {
+                        ?>
+                        <li><?php echo $DanhMuc['MaDanhMuc'] ?>-<a href="<?php echo BASE_DIR ?>quantri/thuoctinhdanhmuc/<?php echo $DanhMuc['MaDanhMuc'] ?>" ><?php echo $DanhMuc['TenDanhMuc']; ?></a></li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+               </div>
+               <div class="box-footer"></div>
+            </div>
+
+         </div>
+         <?php
+         if($DanhMucHienTai) {
+            $ThuocTinhDanhMucHienTai = json_decode($DanhMucHienTai['ThuocTinh']);
+            ?>
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               <div class="box box-success">
+                  <div class="box-header">
+                     <h3 class="box-title"><?php echo $DanhMucHienTai['TenDanhMuc'] ?></h3>
+                  </div>
+                  <div class="box-body">
+                     <form class="" method="POST" action="<?php echo BASE_DIR ?>quantri/thuoctinhdanhmuc/<?php echo $DanhMucHienTai['MaDanhMuc'] ?>" >
+                        <div class="form-group">
+                           <img style="width: 100px;" class="img img-bordered" src="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinhDanhMucHienTai->Icon) ? $ThuocTinhDanhMucHienTai->Icon : '' ?>" >
+                           <label>
+                              Icon Danh Mục
+                              <input name="Icon" id="Icon"  class="form-control" value="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinhDanhMucHienTai->Icon) ? $ThuocTinhDanhMucHienTai->Icon : '' ?>"  type="text" size="60" />
+                              <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'Icon');" />
+                           </label>
+
+                        </div> 
+                        <div class="form-group">
+                           <img style="width: 100px;" class="img img-bordered" src="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinhDanhMucHienTai->Banner) ? $ThuocTinhDanhMucHienTai->Banner : '' ?>" >
+                           <label>
+                              Banner Danh Mục
+                              <input name="Banner" id="Banner" class="form-control" value="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinhDanhMucHienTai->Banner) ? $ThuocTinhDanhMucHienTai->Banner : '' ?>" type="text" size="60" />
+                              <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'Banner');" />
+                           </label>
+                        </div> 
+                        <div class="form-group">
+                           <input type="submit" value="Sừa" name="Sua" >
+                           <input type="hidden" value="<?php echo $DanhMucHienTai['MaDanhMuc'] ?>" name="MaDanhMuc" >
+                        </div>
+                     </form>
+                  </div>
+                  <div class="box-footer"></div>
+               </div>
+
+            </div>
+         <?php } ?>
+      </div>
+   </div>
+
+</div>
+

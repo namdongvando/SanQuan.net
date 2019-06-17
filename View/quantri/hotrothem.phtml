@@ -1,0 +1,66 @@
+<?php
+$Model_HoTro = new Model_HoTro();
+$_MaDanhMuc = $Model_HoTro->GetDanhMuc();
+ob_start();
+?>
+<div class="panel panel-success ">
+    <div class="panel-heading bg-green">
+        <h3 class="panel-title">Danh Sách Slide </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-6 col-md-6 ">
+            <form action="" method="POST" class="form" >
+                <input name="IdTin" type="hidden" >  
+                <input name="keyword" type="hidden" >  
+                <input name="NoiDung" type="hidden" value="" >  
+                <input name="MaDanhMuc" type="hidden" value="<?php echo $_MaDanhMuc ?>" >  
+                <input type="hidden" name="TieuDe" >  
+                <input type="hidden" name="TieuDeKhongDau" >  
+                <input type="hidden" name="TomTat" >  
+                <input type="hidden" name="AnHien" value="1" >  
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">SDT</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input name="title" type="text" class="form-control" >  
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">Tên Hỗ Trợ</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input name="description" type="text" class="form-control" >  
+                    </div>
+                </div>
+
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">Email</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input name="keyword" type="text" class="form-control" >  
+                    </div>
+                </div>
+                <input type="hidden" name="NgayDang" value="<?php echo date("Y-m-d"); ?>" class="form-control">  
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">Hình</label>
+                    <div class="col-lg-10 col-md-10">
+                        <div class="clearfix" ></div>
+                        <input class="" style="width: 350px;" value="" id="xFilePath" name="UrlHinh" type="text" />
+                        <input  type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/', 'xFilePath')" />
+                    </div>
+                </div>
+                <input type="hidden" name="TinNoiBat" value="0" >  
+                <input type="hidden" name="SoLanXem" value="0" class="form-control">  
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">Stt</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input name="Stt" value="" class="form-control">  
+                    </div>
+                </div>
+                <input type="hidden" name="lang" value="vi" class="form-control">  
+                <div class="clearfix" style="margin-bottom: 10px" ></div>
+                <div style="text-align: center;padding-top: 10px;">
+                    <input name="ThemSlide" value="Thêm" type="submit"  class="btn btn-success" >
+                    <input  value="Làm Lại" type="reset"  class="btn btn-default" >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

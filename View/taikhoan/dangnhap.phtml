@@ -1,0 +1,26 @@
+<?php
+$Model_KhachHang = new Model_KhachHang();
+?>
+<div class="col-lg-12 col-md-12 " >
+    <div class="" > 
+        <form action="" method="POST" class="" >
+            <h3 class="text-center" >Đăng Nhập</h3>
+            <p class="text-center" >Để bắt đầu sử dụng dịch vụ</p>
+            <div class="form-group" >
+                <label  >Tài Khoản</label>
+                <input name="email" class="form-control" value="" placeholder="email"  >
+            </div>
+            <div class="form-group" >
+                <label  >Mật Khẩu</label>
+                <input name="password" class="form-control" type="password" value="" placeholder="Mật Khẩu"  >
+            </div>
+            <div class="form-group text-center" >
+                <input name="DangNhap" value="Đăng Nhập" type="submit" class="btn btn-primary " >
+            </div>
+            <div class="clearfix" ></div>
+            <p > <a href="<?php echo $Model_KhachHang->getLinkDangKy() ?>" >Bạn chưa có tài khoản</a> </p>
+        </form>
+        <div class="clearfix" ></div>
+    </div>
+
+</div>

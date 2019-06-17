@@ -1,0 +1,75 @@
+<?php
+$DSDoiTac = $data['DSDoiTac'];
+$Model_TinTuc = new Model_TinTuc();
+?>
+<div class="panel panel-success ">
+    <div class="panel-heading bg-green">
+        <h3 class="panel-title">Danh Sách Đối Tác</h3>
+    </div>
+    <div class="panel-body table-responsive " >
+        <form action="<?php echo BASE_DIR ?>quantri/doitac" method="POST">
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>STT</th>
+                    <th colspan="2" style="text-align: center;" >Tùy Chọn</th>
+                    <th>Hình</th>
+                    <th>Tên Đối Tác</th>
+                    <th>Link</th>
+                    <th>Ẩn Hiện</th>
+                </tr>
+                <?php
+                $dem = 1;
+                if ($DSDoiTac)
+                    foreach ($DSDoiTac as $DoiTac) {
+                        $_DoiTac = new Model_DoiTac($DoiTac);
+                        ?>
+                        <tr style="" >
+                            <td style="width: 50px;vertical-align: middle">
+                                <?php echo $dem++ ?>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle"  >
+                                <a class="" href="<?php echo BASE_DIR ?>quantri/doitacsua/<?php echo $_DoiTac->MaDoiTac ?>">
+                                    <i class="fa fa-edit" ></i>
+                                    Sửa
+                                </a>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle "   >
+                                <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoadoitac/<?php echo $_DoiTac->MaDoiTac ?>">
+                                    <i class="fa fa-times" ></i>
+                                    Xóa
+                                </a>
+                            </td>
+                            <td>
+                                <img style="width: 100px;height: 50px;" src="<?php echo $_DoiTac->UrlHinh ?>" >  
+                            </td>
+                            <td>
+                                <?php echo $_DoiTac->TenDoiTac ?>
+                            </td>
+                            <td>
+                                <?php echo $_DoiTac->NoiDung ?>
+                            </td>
+                            <td>
+                                <input name="AnHien" value="1" type="checkbox" <?php echo $_DoiTac->AnHien == 1 ? 'checked="checked"' : '' ?>   >
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".Chon").change(function () {
+            if ($(this).prop("checked"))
+            {
+                $(this).parent().parent().parent().css({"background-color": "#aaa"})
+            } else {
+                $(this).parent().parent().parent().css({"background-color": "#fff"});
+            }
+        });
+
+    });
+</script>

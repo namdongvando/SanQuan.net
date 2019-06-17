@@ -1,0 +1,114 @@
+<?php
+$DSLienKetTrang = $data['DSTrangLienKet'];
+?>
+
+<div class="panel panel-danger">
+   <div class="panel-heading ">
+      <div class="panel-title">
+         {ThemTrangLienKet}
+      </div>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/Lien_Ket_Trang" method="POST">
+         <table class="table table-bordered">
+            <tr>
+               <td>
+                  <label>{TenTrang}</label>
+                  <input value="" name="TenTrang" type="text" class="form-control" ></td>
+               <td>
+                  <label>{Link}</label>
+                  <input value="" name="Link" type="text" class="form-control" ></td>
+               <td>
+                  <label>{GhiChu}</label>
+                  <input value="" name=GhiChu type="text" class="form-control" ></td>
+            </tr>
+            <tr>
+               <td colspan="3"><input value="{Them}" class="btn btn-success" type="submit" name="ThemTrangLienKet"  ></td>
+            </tr>
+         </table> 
+      </form>
+
+
+   </div>
+</div>
+
+
+
+
+<div class="panel panel-danger">
+   <div class="panel-heading ">
+      <div class="panel-title">
+         DSLienKetTrang
+      </div>
+   </div>
+   <div class="panel-body">
+      <table class="table table-bordered" id="datatable">
+         <thead>
+            <tr>
+               <th>{TenTrangLienKet}</th>
+               <th>{Link}</th>
+               <th>{Action}</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            foreach($DSLienKetTrang as $TrangLienKet) {
+               ?>
+               <tr> 
+                  <td><?php echo $TrangLienKet['TenTrang'] ?></td>
+                  <td><?php echo $TrangLienKet['Link'] ?></td>
+                  <td>
+                     <a href="<?php echo BASE_DIR ?>quantri/Xoa_Lien_Ket_Trang/<?php echo $TrangLienKet['MaTrangLienKiet'] ?>" class="xoa btn btn-danger">{Xoa}</a>
+                     <a class="btn btn-primary" data-toggle="modal" href='#modal-<?php echo $TrangLienKet['MaTrangLienKiet'] ?>'>{Sua}</a>
+                     <form action="<?php echo BASE_DIR ?>quantri/Sua_Lien_Ket_Trang" method="POST"> 
+                        <div class="modal fade" id="modal-<?php echo $TrangLienKet['MaTrangLienKiet'] ?>">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title"><?php echo $TrangLienKet['TenTrang'] ?></h4>
+                                 </div>
+                                 <div class="modal-body">
+                                    <table class="table table-bordered">
+                                       <tr>
+                                          <td>
+                                             <input class="form-control" name="TenTrang" value="<?php echo $TrangLienKet['TenTrang'] ?>" type="text" >
+                                             <input name="MaTrangLienKiet" value="<?php echo $TrangLienKet['MaTrangLienKiet'] ?>" type="hidden" >
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                          <td><input class="form-control" name="Link" value="<?php echo $TrangLienKet['Link'] ?>" type="text"></td>
+                                       </tr>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <input class="btn btn-success"  name="SuaTrangLienKet" value="{Sua}" type="submit">
+                                 </div>
+                              </div>
+                           </div>
+                        </div> 
+                     </form>
+               </tr>
+               <?php
+            }
+            ?>
+         </tbody>
+         <tfoot>
+            <tr>
+               <th>{TenTrangLienKet}</th>
+               <th>{Link}</th>
+               <th>{Action}</th>
+            </tr>
+         </tfoot>
+
+      </table>
+
+   </div>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<?php
+$View_Layout = new theme_home_layout();
+$View_quancaoview = new View_quancaoview();
+ob_start();
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <?php $View_Layout->layouthead(); ?>        
+        
+        <script type="text/javascript" src="/public/partials/loaderpartials/home/homeconfig.js" ></script>
+    </head>
+    <body ng-cloak="TRUE" ng-app="rootApp" ng-controller="homeController"  >
+        <?php
+        $View_Layout->layoutMenuCom($_Controller, $_Param);
+        ?>
+        <div class="container" >
+            <div class="row" >
+                <?php
+                include $Conten;
+                ?>
+            </div>
+        </div>
+        <?php
+        $View_Layout->LayoutCopyright();
+        ?>
+        
+        
+
+    </body>
+</html>
+
+
+<?php
+$str = ob_get_clean();
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption();
+foreach ($DSOption as $option) {
+    $_Option = new Model_Option($option);
+    $str = str_replace("{{$_Option->MaOption}}", $_Option->GiaTri, $str);
+}
+echo $str;
+?>

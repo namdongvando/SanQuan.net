@@ -1,0 +1,139 @@
+<?php
+$DSLoaiTin = $data['DSLoaiTin'];
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a  href="<?php echo BASE_DIR ?>quantri/tintuc">
+            <i class="btn btn-primary fa fa-arrow-left fa-border" ></i>
+        </a>
+        Thêm Bài Viết
+    </div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/sanphamthem" method="post" enctype="multipart/form-data" >
+            <div class="col-lg-9 col-md-9 " style="padding: 0px;margin: 0px;">
+                <table class="table table-bordered" >
+                    <tr>
+                        <td colspan="2" >
+                            <h4>
+                                Tiêu Đề Tin(không quá 200 ký tự).
+                            </h4>
+                            <input name="TieuDe" class="form-control" name="TieuDe" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h4>Tóm Tắt</h4>
+                            <textarea id="NoiDungTomTat" class="ckeditor" name="TomTat"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <h4>Nội Dung</h4>
+                            <textarea name="NoiDung" id="NoiDungChinh" ></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 col-md-3 " >
+                <table class="table table-bordered"> 
+                    <tr>
+                        <td colspan="2" >
+                            <h4>Danh Mục Bài Viết</h4>
+                            <select name="MaDanhMuc" class="form-control" >
+                                <?php
+                                if ($DSLoaiTin)
+                                    foreach ($DSLoaiTin as $DanhMuc) {
+                                        ?>
+                                        <option <?php echo isset($DanhMuc['CapCon']) ? 'disabled="disabled"' : '' ?>  value="<?php echo $DanhMuc['MaDanhMuc'] ?>" ><?php echo $DanhMuc['TenDanhMuc'] ?></option>
+                                        <?php
+                                        if (isset($DanhMuc['CapCon'])) {
+                                            foreach ($DanhMuc['CapCon'] as $DanhMuc1) {
+                                                ?>
+                                                <option value="<?php echo $DanhMuc1['MaDanhMuc'] ?>" >--|<?php echo $DanhMuc1['TenDanhMuc'] ?></option>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Giá
+                            <input type="text" value="" name="Gia"  class="form-control" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            keyword
+                            <textarea class="form-control"  name="keyword" cols="10" rows="4"  ></textarea>
+
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            description
+                            <textarea class="form-control"  name="description" cols="10" rows="4"  ></textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Title
+                            <textarea class="form-control"  name="title" cols="10" rows="4"  ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ẩn Hiện</td>
+                        <td>
+                            <div class="slideThree">	
+                                <input type="checkbox" checked="checked" value="1" id="slideThree" name="AnHien" />
+                                <label for="slideThree"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nổi Bật</td>
+                        <td>
+                            <div class="slideThree">	
+                                <input type="checkbox" checked="checked" value="1" id="slideFor" name="TinNoiBat" />
+                                <label for="slideFor"></label>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Thứ Tự</td>
+                        <td>
+                            <input   name="Stt" value="1" type="text" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Hình Ảnh
+                            <input type=text name="UrlHinh" id="UrlHinh" class="form-control"  value="" />
+                            <label>
+                                <input onclick="BrowseServer('Images:/slide/', 'UrlHinh')"  type="button" name="btnChonFile" id="btnChonFile" value="Chọn File" />
+                            </label>
+                            <div style="clear: both"></div>
+                            <div id="thumbnail">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><input class="them btn btn-success btn-block"  name="them"  type="submit" value="Thêm" ></th>
+                    </tr>
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="clearfix"></div>

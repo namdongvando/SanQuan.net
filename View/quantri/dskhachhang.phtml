@@ -1,0 +1,48 @@
+<?php
+$DSKhachHang = $data['DSKhachHang'];
+?>
+<div class="panel panel-danger">
+   <div class="panel-title">
+
+   </div>
+   <div class="panel-body">
+      <table class="table table-bordered" id="datatable">
+         <thead>
+            <tr>
+               <th>{txtEmail}</th>
+               <th>{Phone}</th>
+               <th>{HoTen}</th>
+               <th>{TinhTrang}</th>
+               <th>{TongSanPham}</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            foreach($DSKhachHang as $KhachHang) {
+               ?>
+               <tr>
+                  <td><?php echo $KhachHang['email'] ?></td>
+                  <td><?php echo $KhachHang['SDT'] ?></td>
+                  <td><?php echo $KhachHang['HoTen'] ?></td>
+                  <td><?php echo $KhachHang['active'] ?></td>
+                  <td><?php echo $KhachHang['TongSanPham'] ?></td>
+               </tr>
+               <?php
+            }
+            ?>
+
+         </tbody>
+
+         <tfoot>
+            <tr>
+               <th>{txtEmail}</th>
+               <th>{Phone}</th>
+               <th>{HoTen}</th>
+               <th>{TinhTrang}</th>
+               <th>{TongSanPham}</th>
+            </tr>
+         </tfoot>
+      </table>
+
+   </div>
+</div>

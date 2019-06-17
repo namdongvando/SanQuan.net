@@ -1,0 +1,42 @@
+<?php
+$Model_Option = new Model_Option();
+$DSLayout = array("SangQuan" => "Sang Quán", "SangQuanCafe" => "Sang Quán Cafe", "SangNhaHang" => "Sanh Nhà Hàng");
+?>
+<div class="panel panel-default" >
+    <div class="panel-heading"> 
+        <h3 class="panel-title" >
+            Danh Sach Layosut
+        </h3>
+    </div>
+    <div class="panel-body table-responsive" >
+        <table class="table table-bordered" >
+            <tr>
+                <td>STT</td>
+                <td>Mã Layout</td>
+                <td>Tên Layout</td>
+                <td>Action</td>
+            </tr>
+            <?php
+            $dem = 1;
+            foreach ($DSLayout as $k => $value) {
+                ?>
+                <tr>
+                    <td><?php echo $dem++; ?></td>
+                    <td><?php echo $k; ?></td>
+                    <td><?php echo $value; ?></td>
+                    <td>
+                        <a href="<?php echo $Model_Option->getLinkSuaOption() . $k; ?>" >Sửa</a>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+
+        </table>
+    </div>
+
+
+</div>
+
+
+

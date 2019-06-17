@@ -1,0 +1,312 @@
+<?php
+$DSDanhMuc = $data['DSDanhMuc'];
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title" >Hiện Thị Các Danh Muc Trên Tenplate </h3>
+   </div>
+   <div class="panel-body">
+   <div role="tabpanel">
+         <!-- Nav tabs -->
+         <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+               <a href="#MenuFooter" aria-controls="MenuFooter" role="tab" data-toggle="tab">MenuFooter</a>
+            </li>
+            <li role="presentation">
+               <a href="#DanhMucChinh" aria-controls="DanhMucChinh" role="tab" data-toggle="tab">Menu Danh Mục Chính</a>
+            </li>
+<!--            <li role="presentation">
+               <a href="#TinTuc" aria-controls="TinTuc" role="tab" data-toggle="tab">Tin Tức</a>
+            </li>-->
+<!--            <li role="presentation">
+               <a href="#TheThao" aria-controls="TheThao" role="tab" data-toggle="tab">Thể Thao</a>
+            </li>-->
+            <li role="presentation">
+               <a href="#index" aria-controls="index" role="tab" data-toggle="tab">Danh mục Hiển Thị Trên Trang Chính</a>
+            </li>
+            <li role="presentation">
+               <a href="#BannerMenuDanhMuc" aria-controls="BannerMenuDanhMuc" role="tab" data-toggle="tab">Banner Menu DanhMuc</a>
+            </li>
+            <li role="presentation">
+               <a href="#MenuNgang" aria-controls="MenuNgang" role="tab" data-toggle="tab">Menu Ngang</a>
+            </li>
+<!--            <li role="presentation">
+               <a href="#RaoVat" aria-controls="RaoVat" role="tab" data-toggle="tab">RaoVat</a>
+            </li>-->
+         </ul>
+
+         <!-- Tab panes -->
+         <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="MenuFooter">
+               <h3>Quản Trị Phần menufooter</h3>
+               <ul class="qualydsdanhmuc">
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+
+                  <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->menufooter)?$ThuocTinh->menufooter == 1?'checked="checked"' : '':'' ?>   value="1" onchange="ThemBotmenufooter('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="M<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="MenuNgang">
+               <h3>Quản Trị Phần Menu Ngang</h3>
+               <ul class="qualydsdanhmuc">
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+
+                  <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->MenuNgang)?$ThuocTinh->MenuNgang == 1?'checked="checked"' : '':'' ?>   value="1" onchange="ThemBotMenuNgang('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="M<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="DanhMucChinh">
+
+               <h3>Quản Trị Phần Danh Mục Chính</h3>
+               <ul>
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+                  <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->DanhMucChinh)?$ThuocTinh->DanhMucChinh == 1 ? 'checked="checked"' : '':'' ?>   value="1" onchange="ThemBotDanhMucChinh('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="D<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+
+
+            </div>
+            <!--<div role="tabpanel" class="tab-pane" id="DanhMucChinh"></div>-->
+            <!--<div role="tabpanel" class="tab-pane" id="DanhMucChinh"></div>-->
+            <!--<div role="tabpanel" class="tab-pane" id="DanhMucChinh"></div>-->
+            <div role="tabpanel" class="tab-pane" id="TinTuc">
+
+               <h3>Controller Tin Tức</h3>
+               <label>chỉ chọn 1 Danh Mục</label>
+               <ul>
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+                     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->TinTuc) ? $ThuocTinh->TinTuc == 1 ? 'checked="checked"' : '' : '' ?>   value="1" onchange="ThemBotTintuc('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="P<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="TheThao">
+
+               <h3>Controller Thể Thao</h3>
+               <label>chỉ chọn 1 Danh Mục</label>
+               <ul>
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+                     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->TheThao) ? $ThuocTinh->TheThao == 1 ? 'checked="checked"' : '' : '' ?>   value="1" onchange="ThemBotTheThao('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="P<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="index">
+
+               <h3>Danh Mục trên Trang index</h3>
+               <ul>
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+                     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->index) ? $ThuocTinh->index == 1 ? 'checked="checked"' : '' : '' ?>   value="1" onchange="ThemBotInDex('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="P<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="RaoVat">
+
+               <h3>Danh Muc Rao Vat</h3>
+               <ul>
+                  <?php
+                  foreach($DSDanhMuc as $DanhMuc) {
+                     $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                     ?>
+                     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3"><label><input type="checkbox" <?php echo isset($ThuocTinh->RaoVat) ? $ThuocTinh->RaoVat == 1 ? 'checked="checked"' : '' : '' ?>   value="1" onchange="ThemBotRaoVat('<?php echo $DanhMuc['MaDanhMuc'] ?>')" ><?php echo $DanhMuc['TenDanhMuc']; ?>
+                           <label id="P<?php echo $DanhMuc['MaDanhMuc'] ?>"></label>
+                        </label>
+                     </li>
+                     <?php
+                  }
+                  ?>
+               </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="BannerMenuDanhMuc">
+               <h3>Banner Menu Danh Muc</h3>
+               <form action="<?php echo BASE_DIR ?>quantri/suabannermenudanhmuc" method="POST">
+                  <ul>
+                     <?php
+                     foreach($DSDanhMuc as $DanhMuc) {
+                        $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+                        ?>
+                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="height: 200px;">
+                           <?php echo $DanhMuc['TenDanhMuc']; ?>(538x300)
+                           <img id="ing_<?php echo $DanhMuc['MaDanhMuc']; ?>" src="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinh->BannerMenuDanhMuc) ? $ThuocTinh->BannerMenuDanhMuc : '' ?>"  style="height: 100px;" >
+                           <input name="BannerMenuDanhMuc[<?php echo $DanhMuc['MaDanhMuc']; ?>]" style="width: 100%;" value="<?php echo BASE_DIR ?>public/img/images/<?php echo isset($ThuocTinh->BannerMenuDanhMuc) ? $ThuocTinh->BannerMenuDanhMuc : '' ?>" id="x<?php echo $DanhMuc['MaDanhMuc']; ?>" name="urlHinh" type="text" />
+                           <input  type="button" value="Browse Server"  onclick="BrowseServer('Images:/', 'x<?php echo $DanhMuc['MaDanhMuc']; ?>')" />
+                           <input  type="submit" value="Sửa" name="Sua"  />
+
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+               </form>
+
+            </div>
+         </div>
+      </div>
+<div class="clearfix"> </div>
+   </div>
+   
+</div>
+
+
+
+
+
+<script>
+   function ThemBotDanhMucChinh(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotdanhmucchinh/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotmenufooter(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotmenufooter/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotTintuc(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotcontrollertintuc/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotTheThao(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotcontrollerthethao/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotInDex(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotindex/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotRaoVat(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotraovat/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ThemBotMenuNgang(str) {
+      if (str.length == 0) {
+         document.getElementById("txtHint").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById(str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/thembotmenungang/" + str, true);
+         xmlhttp.send();
+      }
+   }
+
+</script>

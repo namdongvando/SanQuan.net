@@ -1,0 +1,85 @@
+<?php
+$DSOption = $data['DSTuVung'];
+?>
+<div class="panel panel-primary">   
+   <div class="panel-heading">
+      <h3 class="panel-title">Từ Điển Việt - Anh</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/tudienthem/" method="POST" >
+         <input value="" name="MaTuVung" type="text" >
+         <input value="Thêm Từ Vựng" name="Thêm Từ Vụng" type="submit" >
+      </form>
+      <!--      <div class="thanhcuon">-->
+      <div >
+         <form action="<?php echo BASE_DIR ?>quantri/tudien/" method="POST" >
+            <table class="table table-bordered" id="datatable" > 
+               <thead>
+                  <tr>
+                     <td>Mã Từ Khóa</td>
+                     <td>Tiếng Việt </td>
+                     <td>Xóa</td>
+                  </tr>
+               </thead>
+               <tbody>
+                  <?php
+                  if($DSOption) {
+                     foreach($DSOption as $Option) {
+                        ?>
+                        <tr>
+                           <td><?php echo $Option['MaText'] ?></td>
+                           <td>
+                              <input  id="<?php echo $Option['MaText'] ?>VI" style="<?php echo $Option['GiaTriVI'] != "" ? 'border: 0px;' : 'border: 1px red solid;' ?>" onchange="SuaTuVung('<?php echo $Option['MaText'] ?>')" value="<?php echo $Option['GiaTriVI'] ?>" name="" class="form-control" >
+                              <i id="<?php echo $Option['MaText'] ?>VOK"></i>
+                           </td>
+                           <td>
+                              <input class="checkbox1" type="checkbox" name="XoaTuVung[<?php echo $Option["MaText"] ?>]" value="<?php echo $Option["MaText"] ?>">
+                           </td>
+                        </tr>
+                        <?php
+                     }
+                  }
+                  ?>
+               </tbody>
+               <tfoot>
+                  <tr>
+                     <td>Mã Từ Khóa</td>
+                     <td>Tiếng Việt </td>
+                     <td>
+                        <label>
+                           <input type="checkbox" id="selecctall"/>Chọn Hết
+                        </label>
+
+                     </td>
+                  </tr>
+               </tfoot>
+            </table>
+            <input type="submit" name="XoaTV" value="Xóa Các Muc Chọn" class="btn btn-danger" >
+         </form>
+
+      </div>
+
+   </div>
+</div>
+<script>
+   function SuaTuVung(MaText) {
+
+      var TiengViet = document.getElementById(MaText + 'VI').value;
+      var TiengAnh = document.getElementById(MaText + 'EN').value;
+      var xmlhttp = new XMLHttpRequest();
+      $.post("<?php echo BASE_DIR ?>quantri/tudiensua/",
+	    {
+	       TuVung: MaText,
+	       GiaTriVI: TiengViet,
+	       GiaTriEN: TiengAnh
+	    },
+      function (data, status) {
+         $("#" + MaText + 'VOK').html(status);
+         $("#" + MaText + 'EOK').html(status);
+      });
+
+   }
+
+
+
+</script>

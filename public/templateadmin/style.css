@@ -1,0 +1,939 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,vietnamese);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,700,300&subset=latin,vietnamese);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic&subset=latin,vietnamese);
+@import url(http://fonts.googleapis.com/css?family=Arimo:400,700,400italic&subset=latin,vietnamese);
+.main-header .sidebar-toggle:before{content:""}
+.btn-lienhedangtin a{
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+}
+.btn-lienhedangtin li:last-child{
+    border-right: none;
+}
+.btn-lienhedangtin ul{
+    padding: 0px;
+    margin: 0px;
+}
+.btn-lienhedangtin li{
+    padding: 0px;
+    margin: 0px;
+    border-right: 1px solid #aaa;
+    list-style: none;
+}
+.btn-lienhedangtin{
+    z-index: 10000;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: #3c8dbc;
+}
+@media screen and (max-width: 767px) {
+    .listSanPham .item .SanPham{
+        margin-bottom: 2px;
+    }
+    .listSanPham .item{
+        padding: 2px;
+
+    }
+    .SanPham{
+        border-bottom: 1px solid #ddd;
+        height: 300px;
+    }
+    .panel-TinNoiBat {
+        margin-bottom: 5px;
+    }
+    .panel-title{
+
+    }
+    .panel-TinNoiBat .panel-heading .panel-title{
+        text-align: left;
+        text-transform: capitalize;
+    }
+    .panel-TinNoiBat .panel-heading{
+        background-color: #0063dc;
+        color: #fff;
+        border-radius: 0px;
+    }
+    .panel-TinNoiBat .panel-body{
+        padding: 0px;
+        height: 200px;
+        position: relative;
+    }
+    .panel-TinNoiBat .panel-body .SanPhamGiaBG{
+        position: absolute;
+        top: 45px;
+        left: 150px;
+        display: table;
+
+    }
+    .owl-carouselul{
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+    }
+    .listDanhMuc a:hover{
+        color: #18baa5;
+    }
+    .listDanhMuc a{
+        color: #666;
+        letter-spacing: -0.03em;
+        display: block;
+        padding: 3px 0px;
+        border-bottom: 1px dotted #ddd;
+    }
+    .TinhThanhNoiBat li a{
+        padding: 5px 15px;
+        display: block;
+        background-color: #006599;
+        color: #fff;
+        text-decoration: none;
+        margin: 1px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .TinhThanhNoiBat li{
+        float: left ;
+        width: 33.3%;
+    }
+    .TinhThanhNoiBat .dropdown-menu li{
+        width: 50%;
+        box-sizing: border-box;
+    }
+    .TinhThanhNoiBat .dropdown-menu{
+        margin: 0px 10px;
+        padding: 0px 0px;
+        width: 300px;
+        right:  0px;
+        left: auto;
+    }
+    .TinhThanhNoiBat{
+        display: table;
+        margin: 0;
+        padding: 0px;
+        list-style-type: none;
+    }
+
+
+    .SanPhamKV{
+        font-size: 10px;
+    }
+    .BannerNoiBat > a > img{
+        width: 100%;height: 200px;
+    }
+    .BannerNoiBat{
+        border: 3px solid #055699 ;position: relative;
+    }
+    .TieuDeTinNoiBat h3{
+        color: #fff;font-size: 30px;text-align: center;text-transform: uppercase;
+    }
+    .LinkBannerNoiBat{
+        display: block;
+
+    }
+    .TieuDeTinNoiBat{
+        position: absolute;top: 10px;width: 100%;
+        text-shadow: 0px 0px 2px gold;
+    }
+    .GiaTinNoiBat h3{
+        padding: 25px;
+        height: 40px;
+        width:40px;
+        text-align: center;
+        background-color: rgba(173, 1, 1, 0.72);
+        border: 5px solid #fff;
+        color: gold;font-size: 30px;display: table;margin: auto;border-radius: 100%;; 
+    }
+    .GiaTinNoiBat{
+        position: absolute;bottom: 50px;width: 100%;
+    }
+    .tieude{
+        margin: 10px 0px;
+        font-size: 18px;
+        color: #666;
+        display: table;
+    }
+    .panel-timkiem .panel-heading{
+        display: block;
+    }
+    .SanPhamTen a{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #666;
+        overflow: hidden;
+        font-weight: normal;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTen{
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .SanPhamGia{
+        margin: 5px;
+        color: #0f76bf;
+        font-weight: bold;
+    }
+    .linkDM{
+        width: 100%;float: left;white-space: nowrap;overflow: hidden;box-sizing: border-box;padding: 5px;
+        text-overflow: ellipsis;
+        color: #000;
+    }
+    .navbar-nav li a {
+        color: #777;
+        font-weight: bold;
+    }
+    .SanPhamGia{
+        margin: 0px;
+        color: red;
+        font-weight: bold;
+    }
+    .SanPhamGia span{
+        font-size: 16px;
+    }
+    .SanPhamTen{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #0063dc;
+        overflow: hidden;
+        width: 100%;
+        font-weight: bold;
+        height: 36px;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTen a{
+        color: #666;
+    }
+
+
+
+    .tieude{
+        margin: 10px 0px;
+        font-size: 18px;
+        color: #666;
+        border-bottom: 2px solid #0f76bf;
+        display: table;
+    }
+    .formdangnhap{
+        color: #0063dc !important;
+    }
+    .lisThongke li h3{
+        color: #0063dc;
+        font-size: 20px;
+
+    }
+    .lisThongke{
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+    .GoiTinChonimg{
+        display: none;
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 80px;
+        color: red;
+
+    }
+    .GoiTinChon{
+        display: none;
+    }
+    .GoiTinChon:checked ~ .GoiTinChonimg{
+        display: table;
+    }
+    .SoToilet li{
+        float: left;
+        padding: 5px;
+        list-style-type: none;
+    }
+    table.form-dangky tr td{
+        border: 0px solid #fff;
+    }
+    .SanPhamHinh{
+        height: 120px;
+        overflow: hidden;
+    }
+    .btn-nguoilienhe{
+        border-radius: 0px;
+        background-color: #fff;
+        color: green;
+        font-weight: bold;
+        border: 2px solid green;
+    }
+    .SanPhamHinh{
+        /*        box-shadow: 0px 0px 4px #000 ;*/
+    }
+    .SanPhamGia{
+        margin: 5px;
+        color: red;
+        font-weight: bold;
+    }
+    .SanPhamGia span{
+        font-size: 18px;
+    }
+    .bannertrai{
+        padding-left: 0px;
+    }
+    .banner{
+        height: 120px;
+        overflow: hidden;
+    }
+    .bg_do{
+        background-image: url('../img/bg_do.jpg');
+        background-size: cover;
+        background-color: #b1261f;
+    }
+    .bg_xanh{
+        background-image: url('../img/bg_xang.jpg');
+        background-size: cover;
+    }
+    .SanPhamKV{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0px;
+    }
+    .SanPhamTen{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #0063dc;
+        overflow: hidden;
+        width: 100%;
+        font-weight: bold;
+        height: 36px;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTenCom{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: justify;
+        color: #18baa5;
+        idth: 100%;
+        text-transform: lowercase;
+        height: 42px;
+        
+    }
+    .SanPhamTenCom a{
+        color: #666;
+        text-shadow: 0 1px 0 #666 ;
+        font-weight: inherit;
+        text-transform: lowercase;
+    }
+    .SanPhamTenCom a:hover{
+        color: #0f76bf;
+        text-shadow: 0 1px 0 #0f76bf;
+        text-transform: lowercase;
+    }
+    .SanPhamTenNet{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #ec018c;
+        overflow: hidden;
+        width: 100%;
+        font-weight: bold;
+        height: 36px;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTenNet a{
+        color: #666;
+        text-transform: lowercase;
+    }
+    .SanPhamTenNet a:hover{
+        color: #ec018c;
+        font-weight: bold;
+        text-transform: lowercase;
+    }
+    .SanPhamTen a{
+        color: #000;
+        font-weight: 500;
+    }
+    .panel-timkiem{
+        border: 0px;
+
+    }
+    .panel-timkiem .panel-heading{
+        border-radius: 0px; 
+        border: 2px solid #0063dc;
+        display: table;
+    }
+    .panel-noiBat .panel-heading .panel-title{
+        font-size: 20px ;
+        color: #fff;
+        text-transform: uppercase;
+
+    }
+    .panel-timkiem .panel-title{
+        position: relative;
+        padding-left: 40px;
+    }
+    .panel-timkiem .panel-title img{
+        position: absolute;
+        left: -30px;
+        top: -23px;
+    }
+    .linkTinKiemKV{
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: left;
+    }
+    .LinkCol3{
+        box-sizing: border-box;
+        padding: 2px;
+    }
+    .form-control{
+        border-radius: 0px; 
+    }
+    .tieudeTin{
+        font-weight: bold;
+        color: #666;
+        font-size: 20px;
+        text-transform: none;
+    }
+    .ThongTinChungTin h3{
+        margin: 10px;
+        font-size: 16px;
+        color: #0063dc;
+    }
+    .ThongTinChungTin p{
+        color: red;
+        font-weight: bold;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .titleThongTin{
+        font-size: 18px;
+        margin: 0px;
+    }
+    .DanhmucTimKiem a:hover{
+        color: #ec018c;
+        font-weight: bold;
+    }
+    .DanhmucTimKiem a{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        padding: 3px;
+        box-sizing: border-box;
+        border-radius: 0px; 
+    }
+    .DanhmucTimKiem{
+        width: 33%;
+        padding: 3px;
+        box-sizing: border-box;
+        float: left;
+    }
+    .bg_2:hover,.bg_3:hover{
+        color: #fff;
+    }
+    .bg_2{
+        background-image: url('../img/bg_2.png');
+        background-size: cover;
+        padding: 13px;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+    }
+    .bg_3{
+        background-image: url('../img/bg_3.png');
+        background-size: cover;
+        padding: 13px;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .bg_4{
+        border: 1px solid #ccc;
+    }
+    .menudanhmuccafe li a{
+        display: block;
+        padding: 5px 20px;
+        font-size: 16px; 
+        font-weight: bold;
+        color: #000;
+    }
+    .menudanhmuccafe li{
+        float: left;
+    }
+    .menudanhmuccafe{
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        list-style-type: none;
+    }
+    .SanPhamQuanCafe .SanPhamHinh .SanPhamGia {
+        position: absolute;
+        background-image: url('../img/bg_gia.png');
+        background-size: initial;
+        background-repeat: no-repeat;
+        top: 0px;
+        left: 0px;
+        width: 85px;
+    }
+    .SanPhamQuanCafe .SanPhamHinh .SanPhamGia h3{
+        width: 30px;
+        text-align: center;
+        padding: 0 20px; 
+        color: #fff;
+    }
+    .SanPhamQuanCafe .SanPhamHinh{
+        position: relative;
+    }
+    .bg_6{
+        background-color: #eee;
+    }
+    .color_vn a:hover{
+        color: red;
+    }
+    .color_net a:hover{
+        color: #ec018c;
+    }
+    .media.SanPham > .media-body{
+        height: 160px;
+    }
+    .media.SanPham .media-left a{
+        overflow: hidden;
+        height: 160px;
+        width: 200px;
+        display: block;
+    }
+    .media.SanPham .HinhSanPham{
+        height: auto;
+        min-height: 160px;
+        width:  200px;
+
+    }
+    .media.SanPham{
+        margin-bottom: 15px;
+    }
+    .SanPhamDanhMuc{
+        float: left ;
+        width: 50%;
+        height: 26px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .DanhmucTimKiemCafe{
+        padding-left: 0px;
+    }
+    .SanPham.thumbnail{
+        height: 280px;   
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .listSanPham .item .SanPham{
+        margin-bottom: 2px;
+    }
+    .listSanPham .item{
+        padding: 2px;
+
+    }
+    .TinhThanhNoiBat li a{
+        padding: 5px 15px;
+        display: block;
+        background-color: #006599;
+        color: #fff;
+        text-decoration: none;
+        margin: 1px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .TinhThanhNoiBat li{
+        float: left ;
+        width: 16.6%;
+    }
+    .TinhThanhNoiBat .dropdown-menu li{
+        width: 198px;
+        box-sizing: border-box;
+    }
+    .TinhThanhNoiBat .dropdown-menu{
+        margin: 0px 10px;
+        padding: 0px 0px;
+        width: 800px;
+        right:  -40px;
+        left: auto;
+    }
+    .TinhThanhNoiBat{
+        display: table;
+        margin: 0;
+        padding: 0px;
+        list-style-type: none;
+    }
+
+    .BannerNoiBat > a > img{
+        width: 100%;height: 220px;
+    }
+    .BannerNoiBat{
+        border: 3px solid #055699 ;position: relative;
+    }
+    .TieuDeTinNoiBat h3{
+        color: #fff;font-size: 30px;text-align: center;text-transform: uppercase;
+    }
+    .LinkBannerNoiBat{
+        display: block;
+
+    }
+    .TieuDeTinNoiBat{
+        position: absolute;top: 10px;width: 100%;
+        text-shadow: 0px 0px 2px gold;
+    }
+    .GiaTinNoiBat h3{
+        padding: 25px;
+        height: 40px;
+        width:40px;
+        text-align: center;
+        background-color: rgba(173, 1, 1, 0.72);
+        border: 5px solid #fff;
+        color: gold;font-size: 30px;display: table;margin: auto;border-radius: 100%;; 
+    }
+    .GiaTinNoiBat{
+        position: absolute;bottom: 50px;width: 100%;
+    }
+    .tieude{
+        margin: 10px 0px;
+        font-size: 18px;
+        color: #666;
+        border-bottom: 2px solid #0f76bf;
+        display: table;
+    }
+    .formdangnhap{
+        color: #0063dc !important;
+    }
+    .lisThongke li h3{
+        color: #0063dc;
+        font-size: 20px;
+
+    }
+    .lisThongke{
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+    .GoiTinChonimg{
+        display: none;
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 80px;
+        color: red;
+
+    }
+    .GoiTinChon{
+        display: none;
+    }
+    .GoiTinChon:checked ~ .GoiTinChonimg{
+        display: table;
+    }
+    .SoToilet li{
+        float: left;
+        padding: 5px;
+        list-style-type: none;
+    }
+    table.form-dangky tr td{
+        border: 0px solid #fff;
+    }
+    .SanPhamHinh{
+        overflow: hidden;
+        height: 250px;
+    }
+    .btn-nguoilienhe{
+        border-radius: 0px;
+        background-color: #fff;
+        color: green;
+        font-weight: bold;
+        border: 2px solid green;
+    }
+    .SanPhamHinh{
+        /*        box-shadow: 0px 0px 4px #000 ;*/
+    }
+    .SanPhamGia{
+        margin: 5px;
+        color: red;
+        font-weight: bold;
+    }
+    .SanPhamGia span{
+        font-size: 18px;
+    }
+    .bannertrai{
+        padding-left: 0px;
+    }
+    .banner{
+        height: 120px;
+        overflow: hidden;
+    }
+    .bg_do{
+        background-image: url('../img/bg_do.jpg');
+        background-size: cover;
+        background-color: #b1261f;
+    }
+    .bg_xanh{
+        background-image: url('../img/bg_xang.jpg');
+        background-size: cover;
+    }
+    .SanPhamKV{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0px;
+    }
+    .SanPhamTen{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #0063dc;
+        overflow: hidden;
+        width: 100%;
+        font-weight: bold;
+        height: 36px;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTenCom{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #0063dc;
+        overflow: hidden;
+        width: 100%;
+        height: 36px;
+        text-shadow: 0 1px 0 #666;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTenCom a{
+        color: #666;
+        text-shadow: 0 1px 0 #666 ;
+        font-weight: inherit;
+        text-transform: lowercase;
+    }
+    .SanPhamTenCom a:hover{
+        color: #0f76bf;
+        text-shadow: 0 1px 0 #0f76bf;
+        text-transform: lowercase;
+    }
+    .SanPhamTenNet{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-transform: none;
+        font-size: 16px;
+        text-align: justify;
+        color: #ec018c;
+        overflow: hidden;
+        width: 100%;
+        font-weight: bold;
+        height: 36px;
+        text-overflow: ellipsis;
+    }
+    .SanPhamTenNet a{
+        color: #666;
+        text-transform: lowercase;
+    }
+    .SanPhamTenNet a:hover{
+        color: #ec018c;
+        font-weight: bold;
+        text-transform: lowercase;
+    }
+    .SanPhamTen a{
+        color: #000;
+        font-weight: 500;
+    }
+    .panel-timkiem{
+        border: 0px;
+
+    }
+    .panel-timkiem .panel-heading{
+        border-radius: 0px; 
+        border: 2px solid #0063dc;
+        display: table;
+    }
+    .panel-noiBat .panel-heading .panel-title{
+        font-size: 20px ;
+        color: #fff;
+        text-transform: uppercase;
+
+    }
+    .panel-timkiem .panel-title{
+        position: relative;
+        padding-left: 40px;
+    }
+    .panel-timkiem .panel-title img{
+        position: absolute;
+        left: -30px;
+        top: -23px;
+    }
+    .linkTinKiemKV{
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: left;
+    }
+    .LinkCol3{
+        box-sizing: border-box;
+        padding: 2px;
+    }
+    .form-control{
+        border-radius: 0px; 
+    }
+    .tieudeTin{
+        font-weight: bold;
+        color: #666;
+        font-size: 20px;
+        text-transform: none;
+    }
+    .ThongTinChungTin h3{
+        margin: 10px;
+        font-size: 16px;
+        color: #0063dc;
+    }
+    .ThongTinChungTin p{
+        color: red;
+        font-weight: bold;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .titleThongTin{
+        font-size: 18px;
+        margin: 0px;
+    }
+    .DanhmucTimKiem a:hover{
+        color: #ec018c;
+        font-weight: bold;
+    }
+    .DanhmucTimKiem a{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        padding: 3px;
+        box-sizing: border-box;
+        border-radius: 0px; 
+    }
+    .DanhmucTimKiem{
+        width: 33%;
+        padding: 3px;
+        box-sizing: border-box;
+        float: left;
+    }
+    .bg_2:hover,.bg_3:hover{
+        color: #fff;
+    }
+    .bg_2{
+        background-image: url('../img/bg_2.png');
+        background-size: cover;
+        padding: 13px;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+    }
+    .bg_3{
+        background-image: url('../img/bg_3.png');
+        background-size: cover;
+        padding: 13px;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .bg_4{
+        border: 1px solid #ccc;
+    }
+    .menudanhmuccafe li a{
+        display: block;
+        padding: 5px 20px;
+        font-size: 16px; 
+        font-weight: bold;
+        color: #000;
+    }
+    .menudanhmuccafe li{
+        float: left;
+    }
+    .menudanhmuccafe{
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        list-style-type: none;
+    }
+    .SanPhamQuanCafe .SanPhamHinh .SanPhamGia {
+        position: absolute;
+        background-image: url('../img/bg_gia.png');
+        background-size: initial;
+        background-repeat: no-repeat;
+        top: 0px;
+        left: 0px;
+        width: 85px;
+    }
+    .SanPhamQuanCafe .SanPhamHinh .SanPhamGia h3{
+        width: 30px;
+        text-align: center;
+        padding: 0 20px; 
+        color: #fff;
+    }
+    .SanPhamQuanCafe .SanPhamHinh{
+        position: relative;
+    }
+    .bg_6{
+        background-color: #eee;
+    }
+    .color_vn a:hover{
+        color: red;
+    }
+    .color_net a:hover{
+        color: #ec018c;
+    }
+    .media.SanPham > .media-body{
+        height: 160px;
+    }
+    .media.SanPham .media-left a{
+        overflow: hidden;
+        height: 160px;
+        width: 200px;
+        display: block;
+    }
+    .media.SanPham .HinhSanPham{
+        height: auto;
+        min-height: 160px;
+        width:  200px;
+
+    }
+    .media.SanPham{
+        margin-bottom: 15px;
+    }
+    .SanPhamDanhMuc{
+        float: left ;
+        width: 50%;
+        height: 26px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .DanhmucTimKiemCafe{
+        padding-left: 0px;
+    }
+}
+@media print
+{    
+
+}

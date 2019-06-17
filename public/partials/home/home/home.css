@@ -1,0 +1,29 @@
+.img-sanpham{
+    height: 250px;
+}
+.SanPhamMoi .nameProduct{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.SanPhamMoi .img{
+    margin: 0px;
+    width: 100%;
+}
+.SanPhamMoi:hover{
+    border: 1px solid #aaa;
+}
+.SanPhamMoi{
+    box-shadow: 0 0 0px #aaa;
+    border-radius: 0px;
+    padding: 0px;
+    border: 1px solid #fff;
+}
+.priceProduct{
+    font-weight: bold;
+    color: #f00;
+}
+.title-product{
+    font-weight: bold;
+}

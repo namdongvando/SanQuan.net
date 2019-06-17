@@ -1,0 +1,15 @@
+<div class="clearfix" ng-controller="homeController" style="margin-bottom: 20px;" >
+    <div ng-repeat="item in _RssKD.channel.item">
+        <a style="font-weight: bold;font-size: 16px;color: #000;" target="_blank" href="{{item.link}}"  >
+            {{item.title}}
+        </a>
+        <hr>
+    </div>
+<!--    <div ng-repeat="item in _RssPL.channel.item">
+        <a href="{{item.link}}"  >
+            {{item.title}}
+        </a>
+    </div>
+    -->
+</div>
+

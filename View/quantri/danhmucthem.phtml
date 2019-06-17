@@ -1,0 +1,84 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+?>
+<form action="" method="POST">
+    <input type="hidden" name="MaDanhMuc" value="<?php echo $Model_DanhMuc->MaDanhMuc ?>"  >
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding-left: 5px;font-weight: bold;">
+            <a href="danhmuc" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            Thêm Danh Mục 
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 " >
+                    <div class="form-group">
+                        <label for="">Danh Mục Cha</label>
+                        <select class="form-control" name="CapCha" >
+                            <option value="0" >Chọn Danh Mục</option>
+                            <?php
+                            $DSDanhMuc = $data['DSDanhMucCha'];
+                            foreach ($DSDanhMuc as $DanhMuc) {
+                                ?>
+                                <option  value="<?php echo $DanhMuc['MaDanhMuc']; ?>" ><?php echo $DanhMuc['TenDanhMuc']; ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tên Danh mục</label>
+                        <input autofocus="autofocus" name="TenDanhMuc"  dataset="#TenKhongDau" id="TenDanhMuc" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="STT">STT</label>
+                        <input name="STT" onblur="" id="STT" type="text"  class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label>Pages
+                        </label>
+                        <select name="LoaiDanhMuc" class="form-control"    >
+                            <option value="0" >Chọn Pages</option>
+                            <?php
+                            $Model_Pages = new Model_Pages();
+                            $DSPages = $Model_Pages->DSPages();
+                            foreach ($DSPages as $Pages) {
+                                $_Pages = new Model_Pages($Pages);
+                                ?>
+                                <option value="<?php echo $_Pages->Pagesid ?>" ><?php echo $_Pages->TieuDe ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        Hìn Danh Mục
+                        <input class="form-control" name="UrlHinh" id="UrlHinh" type="text" />
+                        <input  type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/slide/', 'UrlHinh')" />
+                        <div style="clear: both"></div>
+                        <div id="thumbnail">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 " >
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="NoiDung">Nội Dung</label>
+                                <textarea name="NoiDung" id="NoiDungChinh" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" name="ThemDanhMuc" class="btn btn-primary">Thêm</button>
+            <button type="reset"  class="btn btn-default">Làm Lại</button>
+        </div>
+    </div>
+</form>
+
+
+

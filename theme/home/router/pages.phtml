@@ -1,0 +1,45 @@
+<?php
+$_Pages = new Model_Pages($data['Pages']);
+$_Param[0] = $_Param[0];
+$_Param[0] = intval($_Param[0]);
+$_Param[0] = $_Param[0] <= 0 ? 1 : $_Param[0];
+//var_dump($_Pages);
+?>
+<div class="col-lg-12 col-md-12" >
+    <h2 class="tieude"  >
+        <?php
+        echo $_Pages->TieuDe;
+        ?>
+    </h2>
+    <div class="" >
+        <?php
+        $Model_TinTuc = new Model_TinTuc();
+        $SL = 30;
+        $DSTinTuc = $Model_TinTuc->DSTinMoiNhat($SL);
+        if ($DSTinTuc) {
+            foreach ($DSTinTuc as $SanPham) {
+                $_TinTuc = new Model_TinTuc($SanPham);
+                ?> 
+                <div class="alert alert-info"  >
+                    <a href="<?php echo $_TinTuc->LinkFullChiTiet ?>" class="" >
+                        <h2 style="font-size: 18px;" ><?php echo $_TinTuc->TieuDe ?></h2> 
+                    </a> 
+                    <p><?php echo $_TinTuc->TomTat ?></p>
+                </div>
+                <?php
+            }
+        } else {
+            echo "Đang Cập Nhật Bài Viết";
+        }
+        ?>
+    </div>
+    <div class="col-lg-12 col-md-12" >
+        <?php
+//        $TPage = ceil($Tong / $SL);
+//        echo $Model_TinTuc->PhanTrang($TPage, $_Param[0], BASE_DIR . $_Pages->TenKhongDau . "/[i]");
+        ?>
+    </div>
+
+</div>
+
+

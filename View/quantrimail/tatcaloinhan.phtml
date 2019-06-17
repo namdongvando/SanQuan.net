@@ -1,0 +1,71 @@
+<?php
+$Model_DangKy = new Model_DangKy();
+$page = $_Param[0];
+$page = intval($page);
+$page > 1 ? $page : 1;
+$DSDangKy = $Model_DangKy->DSLoiNhanPT($page, 10, $TongSanPham);
+?>
+
+<div class="panel panel-default" >
+    <div class="panel-body" >
+        <div class="clearfix"  ></div>
+        <div class="panel panel-default" >  
+            <div class="panel-heading" >
+                <h3 class="panel-title" >
+                    Danh Sách Lời nhắn Khách Hàng
+                </h3>
+            </div>
+            <div class="panel-body table-responsive" >
+                <table  class="table table-bordered"  >
+                    <thead>
+                        <tr>
+                            <td>STT</td>
+                            <td>Email</td>
+                            <td>Họ Tên</td>
+                            <td>SĐT</td>
+                            <td>Tiêu Đề</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $dem = 1;
+                        foreach ($DSDangKy as $Email) {
+                            ?>
+                            <tr>
+                                <td><?php echo $dem++; ?></td>
+                                <td><?php echo $Email['Email'] ?></td>
+                                <td><?php echo $Email['HoTen'] ?></td>
+                                <td><?php echo $Email['SDT'] ?></td>
+                                <td><?php echo $Email['TieuDE'] ?></td>
+                                <td>
+                                    <a href="<?php echo BASE_DIR ?>quantrimail/xoaloinhan/<?php echo $Email['id']; ?>" class="btn btn-danger" >Xóa</a>
+                                    <a href="<?php echo BASE_DIR ?>quantrimail/xemloinhan/<?php echo $Email['id']; ?>" class="btn btn-primary" >Sửa</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td>STT</td>
+                            <td>Email</td>
+                            <td>Họ Tên</td>
+                            <td>SĐT</td>
+                            <td>Tiêu Đề</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+
+                </table>
+
+                <?php
+                $TongTrang = ceil($TongSanPham / 10);
+                echo $Model_DangKy->PhanTrang($TongTrang, $page, BASE_DIR . "quantrimail/tatcaloinhan/[i]");
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+

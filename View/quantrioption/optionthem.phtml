@@ -1,0 +1,38 @@
+<?php
+$Model_Option = new Model_Option();
+?>
+<div class="panel panel-danger">   
+   <div class="panel-heading">
+      <h3 class="panel-title">Thêm Tùy Chọn</h3>
+   </div>
+   <div class="panel-body">
+       <form action="<?php echo $Model_Option->getLinkThemOption() ?>" method="POST">
+         <table class="table table-bordered">
+            <tr>
+               <td>Ma Tùy Chọn</td>
+               <td>
+                   <input type='text' name="MaOption" class="form-control"  >
+               </td>
+            </tr>
+            <tr>
+               <td>Loại Tùy Chọn</td>
+               <td>
+                  <select name="LoaiOption" class="form-control" > 
+                      <?php 
+                      echo View_html::GetElementOptionByID($Model_Option->DSLoaiOption(), 1);
+                      ?>
+                     
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>Tên Tùy Chọn</td>
+               <td>
+                  <input type='text' name="title" class="form-control"  >
+               </td>
+            </tr>
+         </table>
+         <input class="btn-sm btn-success " name="ThemOption" type="submit" value="Thêm Option">
+      </form>
+   </div>
+</div>

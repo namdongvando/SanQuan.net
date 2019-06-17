@@ -1,0 +1,37 @@
+<?php
+$Option = $data['Option'];
+$ThuocTinh = json_decode($Option['GhiChu']);
+?>
+<div class="panel panel-danger">   
+   <div class="panel-heading">
+      <h3 class="panel-title">Option</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/suaoption/<?php echo $Option['MaOption']; ?>" method="POST">
+         <table class="table table-bordered">
+            <tr>
+               <td>{Ten}</td>
+               <td><input type='text'  value="<?php echo $Option['MaOption'] ?>" class="form-control"  >
+                  <input type='hidden' name="MaOption" value="<?php echo $Option['MaOption'] ?>" ></td>
+            </tr>
+            <tr>
+               <td>{Loai}</td>
+               <td>
+                  <select name="type" class="form-control" > 
+                     <option <?php echo $ThuocTinh->type == "IMG"?'selected="selected"':'' ?>  value="IMG">{Hinh}</option>
+                     <option <?php echo $ThuocTinh->type == "TEXT"?'selected="selected"':'' ?> value="TEXT">{Text}</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>{title}</td>
+               <td>
+                  <input type='text' value="<?php echo $ThuocTinh->title ?>" name="title" class="form-control"  >
+               </td>
+            </tr>
+         </table>
+         <input class="btn-sm btn-success " name="SuaOption" type="submit" value="{ThemOption}">
+      </form>
+
+   </div>
+</div>

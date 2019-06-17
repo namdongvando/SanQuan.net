@@ -1,0 +1,59 @@
+<?php
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+?> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+    <?php
+    $Model_DanhMuc = new Model_DanhMuc();
+    $DSDanhMuc = $Model_DanhMuc->DSDanhMuc();
+    foreach ($DSDanhMuc as $DanhMuc) {
+        $_DanhMuc = new Model_DanhMuc($DanhMuc);
+        ?> 
+        <url>
+            <loc><?php echo BASE_URL . $_DanhMuc->LinkDanhMuc ?></loc>
+            <lastmod><?php echo date("Y-m-d", time() - 360) ?></lastmod>
+        </url>
+        <?php
+    }
+    ?>
+    <?php
+    $Model_Pages = new Model_Pages();
+    $DSPages = $Model_Pages->DSPages();
+    foreach ($DSPages as $Page) {
+        $_Page = new Model_Pages($Page);
+        if ($_Page->TieuDe != "") {
+            ?> 
+            <url>
+                <loc><?php echo BASE_URL . $_Page->LinkPages ?></loc>
+                <lastmod><?php echo date("Y-m-d", time() - 360) ?></lastmod>
+            </url>
+            <?php
+        }
+    }
+    ?>
+    <?php
+    $Model_TinTuc = new Model_TinTuc();
+    $DSPages = $Model_TinTuc->DSTinTucAll();
+    foreach ($DSPages as $Page) {
+        $_Page = new Model_TinTuc($Page);
+        ?> 
+        <url>
+            <loc><?php echo $_Page->LinkFullChiTiet ?></loc>
+            <lastmod><?php echo date("Y-m-d", time() - 360) ?></lastmod>
+        </url>
+        <?php
+    }
+    ?>
+    <?php
+    $Model_SanPham = new Model_SanPham();
+    $DSSanPham = $Model_SanPham->DSSanPham();
+    foreach ($DSSanPham as $SanPham) {
+        $_SanPham = new Model_SanPham($SanPham);
+        ?> 
+        <url>
+            <loc><?php echo $_SanPham->LinkChiTiet ?></loc>
+            <lastmod><?php echo date("Y-m-d", time() - 360) ?></lastmod>
+        </url>
+    <?php
+}
+?>
+</urlset>

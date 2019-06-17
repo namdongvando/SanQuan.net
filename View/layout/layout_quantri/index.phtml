@@ -1,0 +1,55 @@
+<?php
+if (!isset($_COOKIE["Menu_Action"])) {
+    setcookie("Menu_Action", 1, time() + (86400 * 30));
+}
+
+$Model_QuanTri = new Model_QuanTri();
+$_NhanVienHienTai = new Model_QuanTri($Model_QuanTri->NhanVienHienTai()) ;
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="<?php echo BASE_DIR ?>quantri/" >
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Quản trị Quản Trị</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <?php include 'head.php'; ?>
+    </head>
+    <body class="hold-transition sidebar-mini skin-green-light <?php echo $_COOKIE['Menu_Action'] == 1 ? '' : 'sidebar-collapse' ?>">
+        <div class="wrapper">
+            <?php
+            include 'TopMenu.php';
+            include 'LeftMenu.php';
+            ?>
+            <div class="content-wrapper">
+                <div class="content">
+                    <?php
+                    $ThongBao = isset($data['ThongBao']) ? $data['ThongBao'] : FALSE;
+                    if ($ThongBao) {
+                        $Model_Quantri = new Model_QuanTri();
+                        $ThongBao = $Model_Quantri->_decode($ThongBao);
+                        ?>
+                        <div class="alert alert-<?php echo $ThongBao->Loai ?>">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <?php echo $ThongBao->NoiDung ?>
+                        </div>
+                        <?php
+                    }
+                    include $Conten;
+                    ?>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                </div>
+                <strong>Copyright &copy; 2014-<?php echo date("Y") ?> </strong> 
+            </footer>
+        </div>
+        <?php
+        include 'js.php';
+        ?>
+
+    </body>
+</html>

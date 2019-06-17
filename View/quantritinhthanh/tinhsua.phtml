@@ -1,0 +1,69 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantri/">Quản Trị Chung</a>
+    </li>
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantritinhthanh/listtinh">Tỉnh Thành</a>
+    </li>
+    <li class="active">Sửa Tỉnh Thành</li>
+</ol>
+
+<?php
+$Model_TinhThanh = new Model_TinhThanh();
+$DiaChiHT = $Model_TinhThanh->TimTinhHuyen($_Param[0]);
+if (!$DiaChiHT) {
+    $Model_TinhThanh->_header($Model_TinhThanh->getLinkQuanTri());
+}
+
+$DiaChiHT = new Model_TinhThanh($DiaChiHT);
+
+$DSTinh = $Model_TinhThanh->DSTinh();
+?>
+<div class="container-fluid" >
+    <div class="panel panel-success">
+
+        <div class="panel-heading bg-green "  >
+            <h3 class="panel-title"  >
+                Sửa Huyện Tỉnh Thành Phố
+            </h3>
+        </div>
+        <div class="panel-body" >
+            <form action="<?php echo $Model_TinhThanh->getLinkFormSuaQuanTri() ?>" method="POST" >
+                <div class="col-md-6 col-lg-6" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td >Tỉnh Thành Phố Trực Thuộc</td>
+                            <td >
+                                <select class="form-control" name="MaDiaChiCha"  >
+                                    <option value="0" >Chọn Tỉnh Thành Phố</option>
+                                    <?php
+                                    foreach ($DSTinh as $Tinh) {
+                                        $_Tinh = new Model_TinhThanh($Tinh);
+                                        ?>
+                                    <option <?php echo $DiaChiHT->MaDiaChi == $_Tinh->MaDiaChi ? 'disabled="disabled"' : '' ?>  <?php echo $DiaChiHT->MaDiaChiCha == $_Tinh->MaDiaChi ? 'selected="selected"' : '' ?>   value="<?php echo $_Tinh->MaDiaChi ?>" ><?php echo $_Tinh->TenDiaChi ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tên Địa Chỉ / khu vực</td>
+                            <td >
+                                <input name="TenDiaChi" value="<?php echo $DiaChiHT->TenDiaChi ?>" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <input type="hidden" name="MaDiaChi" value="<?php echo $DiaChiHT->MaDiaChi ?>" >
+                                <input type="submit"  class="btn btn-success" value="Sửa" >
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

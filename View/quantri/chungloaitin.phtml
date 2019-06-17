@@ -1,0 +1,54 @@
+<?php
+//print_r($data['DSChungloai']);
+?>
+<a class="btn btn-success btn-sm pull-right" href="<?php echo BASE_DIR ?>quantri/themchungloaitin">{ThemChungLoaiTin}</a>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Chủng loại Tin
+      
+   </div>
+   <div class="panel-body">
+      
+      
+      
+      
+      <table class="table table-bordered table-hover" id="datatable">
+
+         <thead>
+	  <tr>
+	     <th>{MaCL}</th>
+	     <th>{TenCL}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </thead>
+         <tbody>
+	  <?php
+	  if($data['DSChungloai'])
+	  foreach($data['DSChungloai'] as $ChungLoai) {
+	     ?>   
+   	  <tr>
+   	     <td><?php echo $ChungLoai['MaCL'] ?></td>
+   	     <td><?php echo $ChungLoai['TenCL'] ?></td>
+   	     <td>
+	        <a href="<?php echo BASE_DIR ?>quantri/suachungloaitin/<?php echo $ChungLoai['MaCL']; ?>">sửa</a>/
+	        <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoachungloaitin/<?php echo $ChungLoai['MaCL']; ?>">Xóa</a>
+   	  </tr>
+	     <?php
+	  }
+	  ?>
+
+
+         </tbody>
+         <tfoot>
+	  <tr>
+	     <th>{MaCL}</th>
+	     <th>{TenCL}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </tfoot>
+      </table>
+
+
+
+   </div>
+</div>

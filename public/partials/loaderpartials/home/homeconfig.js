@@ -1,0 +1,1 @@
+document.write('<script type="text/javascript" src="/public/root/assets/assetConfig.js"></script>');document.write('<script type="text/javascript" src="/public/partials/loaderpartials/home/sysPathHome.js"></script>');document.write('<script type="text/javascript" src="/public/root/assets/libs/agb.min.js"></script>');

@@ -1,0 +1,34 @@
+<div class="panel panel-danger">   
+   <div class="panel-heading">
+      <h3 class="panel-title">Option</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/themoption" method="POST">
+         <table class="table table-bordered">
+            <tr>
+               <td>{Ten}</td>
+               <td><input type='text' name="MaOption" class="form-control"  ></td>
+            </tr>
+            <tr>
+               <td>{Loai}</td>
+               <td>
+                  <select name="type" class="form-control" > 
+                     <option value="IMG">{Hinh}</option>
+                     <option value="TEXT">{Text}</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>{title}</td>
+               <td>
+                  <input type='text' name="title" class="form-control"  >
+               </td>
+            </tr>
+
+
+         </table>
+         <input class="btn-sm btn-success " name="ThemOption" type="submit" value="{ThemOption}">
+      </form>
+
+   </div>
+</div>

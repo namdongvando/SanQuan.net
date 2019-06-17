@@ -1,0 +1,31 @@
+.input_edit{
+   border: none;
+   width: 100%;
+   padding: 5px;
+   border-radius: 3px;
+}
+.input_edit:focus{
+   border: 1px solid #000;
+}
+.input_container{
+   position: relative;
+}
+.input_container input{
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   z-index: 0;
+}
+.input_container samp{
+   top: 0px;
+   color: green;
+   right: 0px;
+   position: absolute;
+   z-index: 1;
+}
+.xoa{
+    color: red;
+}
+.btn-danger.xoa{
+    color: #fff;
+}

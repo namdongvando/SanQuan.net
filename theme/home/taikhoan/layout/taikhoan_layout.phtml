@@ -1,0 +1,106 @@
+<?php
+$View_Layout = new View_layout();
+ob_start();
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <?php $View_Layout->layouthead(); ?>        
+    </head>
+    <body>
+        <?php
+        $View_Layout->layoutMenuCom($_Controller,$_Param);
+        ?>
+        <div class="container" >
+            <div class="row" >
+                <div class="panel panel-default" style="border-color: #fff; " >
+                    <div class="panel-body" style="padding-top: 0px; " >
+                        <div class="row" >
+                            <?php
+                            $ThongBao = isset($data['ThongBao']) ? $data['ThongBao'] : 'false';
+                            if ($ThongBao != 'false') {
+                                $ThongBao = $Model_DanhMuc->_decode($ThongBao);
+                                ?>
+                                <div class="alert alert-<?php echo $ThongBao->Loai ?>" >
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <?php echo $ThongBao->NoiDung ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <div class="col-lg-5 col-md-5" >
+                                <?php
+                                include $Conten;
+                                ?>
+                            </div>
+                            <div class="col-lg-7 col-md-7" >
+                                <div class="row" >
+                                    <ul class="lisThongke" >
+                                        <li>
+                                            <img style="float: right;margin-right: 20px;" src="<?php echo BASE_DIR ?>public/home/img/cafe.png" alt="Sang Quán cafe"/>
+                                            <h3>Sang Quán cafe</h3>
+                                            <p>
+                                                Trên <b style="color: #0e76bc;font-size: 18px;" >3k+</b> Quán cafe đã sang nhượng thành công.<br>
+                                                Chúng tôi tự hòa đem đến hiệu quả sang quán cafe.
+                                            </p>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <img style="float: left;margin-right: 20px;" src="<?php echo BASE_DIR ?>public/home/img/shop.png" alt=""/>
+                                            <h3>Sang Shop Thời Trang</h3>
+                                            <p>
+                                                Trên 3k+ Quán cafe đã sang nhượng thành công.<br>
+                                                Chúng tôi tự hòa đem đến hiệu quả sang quán thời trang.
+                                            </p>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <img style="float: right;margin-right: 20px;" src="<?php echo BASE_DIR ?>public/home/img/quanan.png" alt=""/>
+                                            <h3>Sang Shop Thời Trang</h3>
+                                            <p>
+                                                Trên 3k+ Quán cafe đã sang nhượng thành công.<br>
+                                                Chúng tôi tự hòa đem đến hiệu quả sang quán cafe.
+                                            </p>
+                                            <div class="clearfix"></div>
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <?php
+        $View_Layout->layoutLienHe();
+        $View_Layout->LayoutCopyright();
+        ?>
+        <script src="<?php echo BASE_DIR ?>public/home/js/bootstrap.js"></script>
+        <script src="<?php echo BASE_DIR ?>public/home/js/owl.carousel.min.js" type="text/javascript"></script>
+        <script>
+            $('#link').click(function () {
+                $("html, body").animate({scrollTop: 0}, 600);
+                return false;
+            });
+        </script>
+    </body>
+</html>
+<?php
+$str = ob_get_clean();
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption();
+foreach ($DSOption as $option) {
+    $_Option = new Model_Option($option);
+    $str = str_replace("{{$_Option->MaOption}}", $_Option->GiaTri, $str);
+}
+echo $str;
+?>
+
+

@@ -1,0 +1,21 @@
+<?php
+// get DOM from URL or file
+$html = file_get_html('http://www.sangquan.com.vn/');
+$Model_DanhMuc = new Model_DanhMuc();
+
+// find all link
+//body > div:nth-child(3) > ul > li:nth-child(1) > a
+foreach ($html->find('body > div:nth-child(3).category ul li a') as $e) {
+    $Model_DanhMuc->bodautv($e->plaintext);
+    $Dm = $Model_DanhMuc->TimDanhMucTieuDe($Model_DanhMuc->bodautv($e->plaintext));
+    if (!$Dm) {
+        echo $e->plaintext . 'OK <br>';
+        $Model_DanhMuc->ThemDanhMuc4Tem($e->plaintext, $Model_DanhMuc->bodautv($e->plaintext));
+    } else {
+        echo $e->plaintext . 'Fali <br>';
+    }
+    ?>
+    <a href="<?php echo BASE_DIR ?>laytin/tinchodanhmuc/<?php echo $e->href ?>" > Lấy Tin </a>
+    <?php
+}
+?>

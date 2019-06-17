@@ -1,0 +1,45 @@
+<?php
+$Model_SanPham = new Model_SanPham();
+$_SanPham = new Model_SanPham($Model_SanPham->TimSanPham($_Param[0]));
+?>
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo $_SanPham->getLinkSuaSanPham() . $_SanPham->MaSP; ?>">Sửa</a>
+    </li>
+    <li class="active"><?php echo $_SanPham->TenSP ?></li>
+</ol>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Chi Tiết Sản Phẩm</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered" >
+            <?php
+            foreach ($_SanPham as $k => $v) {
+                if ($v) {
+                    ?>
+                    <tr>
+                        <td  >
+                            <?php echo $k ?>
+                        </td>
+                        <td  >
+                            <?php
+                            if (!is_array($v)) {
+                                echo $_SanPham->$k;
+                            }  else {
+                                foreach ($v as $v1) {
+                                    echo $v1;
+                                }
+                            }
+                            ?>
+                        </td>
+
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </table>
+    </div>
+</div>
+

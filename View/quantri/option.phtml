@@ -1,0 +1,58 @@
+<?php
+$DSOption = $data['DSOption'];
+?>
+<form action="<?php echo BASE_DIR ?>quantri/option" method="POST">
+    <div class="panel panel-success">   
+        <div class="panel-heading bg-green">
+            <h3 class="panel-title">Thông Tin Chung Của Website</h3>
+        </div>
+        <div class="panel-body">
+            <div >
+                <table class="table table-bordered" id="datatable" > 
+                    <tr>
+                        <td>Tên Tùy Chọn</td>
+                        <td>Giá Trị</td>
+                        <td>Xóa</td>
+                    </tr>
+                    <?php
+                    if ($DSOption) {
+                        foreach ($DSOption as $Option) {
+                            $GhiChu = json_decode($Option['GhiChu']);
+                            ?>
+                            <tr>
+                                <td><?php
+                                    echo $GhiChu->title;
+                                    ?></td>
+                                <td>
+                                    <?php
+                                    if ($Option['LoaiOption'] == 0) {
+                                        ?>
+                                        <textarea Class="nhan" style="width: 100%;" name="GiaTriVn[<?php echo $Option['MaOption'] ?>]" ><?php echo $Option['GiaTriVN'] ?></textarea>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <img src="<?php echo BASE_DIR ?>public/img/images/<?php echo $Option['GiaTriVN'] ?>"  width="100" height="100">
+                                        <input id="Hinh<?php echo $Option['MaOption']; ?>1" name="GiaTriVn[<?php echo $Option['MaOption'] ?>]" value="<?php echo BASE_DIR ?>public/img/images/<?php echo $Option['GiaTriVN'] ?>" type="text" size="60" />
+                                        <input type="button" value="Browse Server" onclick="BrowseServer('Images:/', 'Hinh<?php echo $Option['MaOption']; ?>1')" />
+                                        <?php
+                                    }
+                                    ?>
+                                    <button class="btn btn-success" name="SuaOption" type="submit" >Lưu</button>
+                                </td>
+                                <td>
+                                    <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoaoption/<?php echo $Option['MaOption'] ?>">Xóa</a>
+                                </td>
+                            </tr>   
+                            <?php
+                        }
+                    }
+                    ?>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+

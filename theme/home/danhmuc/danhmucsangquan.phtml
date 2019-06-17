@@ -1,0 +1,48 @@
+<?php
+$_DanhMuc = new Model_DanhMuc($data['Page']);
+$Model_TinhThanh = new Model_TinhThanh();
+$_Param[0] = $_Param[0];
+$_Param[0] = intval($_Param[0]);
+$_Param[0] = $_Param[0] <= 0 ? 1 : $_Param[0];
+$DSTinh = $Model_TinhThanh->DSHuyenTheoTinh(32);
+?>
+<div class="col-lg-12 col-md-12" >
+    <?php
+    foreach ($DSTinh as $Tinh) {
+        $_Tinh = new Model_TinhThanh($Tinh);
+        ?>
+        <div class="col-lg-4 col-md-4" >
+            <h3 class="SanPhamTenCom" style="height: 24px;" >
+                <a style="height: 24px;white-space: nowrap" href="<?php echo BASE_DIR ?>danhmuc/timkiem/<?php echo $_Tinh->MaDiaChi ?>/<?php echo $_DanhMuc->MaDanhMuc ?>" class="text-left"  >
+                    <i class="fa fa-caret-right" style="color: #0066cc;" ></i>
+                    <?php echo $_DanhMuc->TenDanhMuc . " " . $_Tinh->TenDiaChi; ?> 
+                </a>
+            </h3>
+        </div>
+        <?php
+    }
+    ?>
+    <div class="clearfix" ></div>
+    <div class="row" style="margin-top: 20px;" >
+        <?php
+        $Model_SanPham = new Model_SanPham();
+        $SL = 21;
+        $DSTinTuc = $Model_SanPham->DSSanPham4LoaiPT($_DanhMuc->MaDanhMuc, $_Param[0], $SL, $Tong);
+        if ($DSTinTuc) {
+            foreach ($DSTinTuc as $SanPham) {
+                $_SanPham = new Model_SanPham($SanPham);
+                $View_SanPham = new View_sanphamview();
+                $View_SanPham->ListSanPham($_SanPham);
+            }
+        } else {
+            echo "Đang Cập Nhật Bài Viết";
+        }
+        ?>
+    </div>
+    <div class="col-lg-12 col-md-12" >
+        <?php
+        $TPage = ceil($Tong / $SL);
+        echo $Model_SanPham->PhanTrang($TPage, $_Param[0], BASE_DIR . $_DanhMuc->TenKhongDau . "/[i]");
+        ?>
+    </div>
+</div>

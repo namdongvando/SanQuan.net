@@ -1,0 +1,147 @@
+<?php
+$Model_Option = new Model_Option();
+?>
+<form action="<?php echo $Model_Option->getLinkDSOption(); ?>" method="POST">
+    <div class="panel panel-success">   
+        <div class="panel-heading bg-green">
+            <h3 class="panel-title">Thông Tin Chung Của Website</h3>
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-primary" href="<?php echo BASE_DIR ?>quantrioption/optionthem/" >
+                <i class="fa fa-plus" ></i>
+                Thêm Option
+            </a>
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Hình ảnh</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab" aria-controls="tab" role="tab" data-toggle="tab">Đoạn Văn</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab1" aria-controls="tab" role="tab" data-toggle="tab">Thông Tin SEO</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <table class="table table-bordered" >
+                            <?php
+                            $DSOption = $Model_Option->DSOption4TienTo("Option_");
+                            if ($DSOption)
+                                foreach ($DSOption as $Op) {
+                                    $_Option = new Model_Option($Op);
+                                    ?>
+                                    <tr>
+                                        <td><?php
+                                            echo $_Option->Title;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($_Option->LoaiOption == 1) {
+                                                ?>
+                                                <img src="<?php echo $_Option->GiaTri; ?>"  width="100" height="100">
+                                                <br>
+                                                <input id="Hinh<?php echo $_Option->MaOption; ?>1" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" value="<?php echo $_Option->GiaTri; ?>" type="text" size="60" />
+                                                <input type="button" value="Browse Server" onclick="BrowseServer('Images:/logo/', 'Hinh<?php echo $_Option->MaOption; ?>1')" />
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <textarea Class="nhan" style="width: 100%;" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" ><?php echo $_Option->GiaTri ?></textarea>
+                                                <?php
+                                            }
+                                            ?>
+                                            <button class="btn btn-success" name="SuaOption" type="submit" >Lưu</button>
+                                        </td>
+                                        <td>
+                                            <a class="xoa" href="<?php echo BASE_DIR ?>quantrioption/xoaoption/<?php echo $_Option->MaOption ?>">Xóa</a>
+                                        </td>
+                                    </tr>  
+                                    <?php
+                                }
+                            ?>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab">
+                        <table class="table table-bordered" >
+                            <?php
+                            $DSOption = $Model_Option->DSOption4TienTo("Lang_");
+                            if ($DSOption)
+                                foreach ($DSOption as $Op) {
+                                    $_Option = new Model_Option($Op);
+                                    ?>
+                                    <tr>
+                                        <td><?php
+                                            echo $_Option->Title;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($_Option->LoaiOption == 1) {
+                                                ?>
+                                                <img src="<?php echo $_Option->GiaTri; ?>"  width="100" height="100">
+                                                <br>
+                                                <input id="Hinh<?php echo $_Option->MaOption; ?>1" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" value="<?php echo $_Option->GiaTri; ?>" type="text" size="60" />
+                                                <input type="button" value="Browse Server" onclick="BrowseServer('Images:/logo/', 'Hinh<?php echo $_Option->MaOption; ?>1')" />
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <textarea Class="nhan" style="width: 100%;" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" ><?php echo $_Option->GiaTri ?></textarea>
+                                                <?php
+                                            }
+                                            ?>
+                                            <button class="btn btn-success" name="SuaOption" type="submit" >Lưu</button>
+                                        </td>
+                                        <td>
+                                            <a class="xoa" href="<?php echo BASE_DIR ?>quantrioption/xoaoption/<?php echo $_Option->MaOption ?>">Xóa</a>
+                                        </td>
+                                    </tr>  
+                                    <?php
+                                }
+                            ?>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab1">
+                        <table class="table table-bordered" >
+                            <?php
+                            $DSOption = $Model_Option->DSOption4TienTo("SEO_");
+                            if ($DSOption)
+                                foreach ($DSOption as $Op) {
+                                    $_Option = new Model_Option($Op);
+                                    ?>
+                                    <tr>
+                                        <td><?php
+                                            echo $_Option->Title;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($_Option->LoaiOption == 1) {
+                                                ?>
+                                                <img src="<?php echo $_Option->GiaTri; ?>"  width="100" height="100">
+                                                <br>
+                                                <input id="Hinh<?php echo $_Option->MaOption; ?>1" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" value="<?php echo $_Option->GiaTri; ?>" type="text" size="60" />
+                                                <input type="button" value="Browse Server" onclick="BrowseServer('Images:/logo/', 'Hinh<?php echo $_Option->MaOption; ?>1')" />
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <textarea Class="nhan" style="width: 100%;" name="GiaTriVN[<?php echo $_Option->MaOption ?>]" ><?php echo $_Option->GiaTri ?></textarea>
+                                                <?php
+                                            }
+                                            ?>
+                                            <button class="btn btn-success" name="SuaOption" type="submit" >Lưu</button>
+                                        </td>
+                                        <td>
+                                            <a class="xoa" href="<?php echo BASE_DIR ?>quantrioption/xoaoption/<?php echo $_Option->MaOption ?>">Xóa</a>
+                                        </td>
+                                    </tr>  
+                                    <?php
+                                }
+                            ?>
+                        </table></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,241 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc;
+$DSDanhMucTinTuc = $Model_DanhMuc->LayDanhMucDeQuy();
+foreach($DSDanhMucTinTuc as $DanhMucTinTuc) {
+   $ThuocTinhDanhMucTinTuc = json_decode($DanhMucTinTuc['ThuocTinh']);
+   if($ThuocTinhDanhMucTinTuc->TinTuc == 1) {
+      $DanhMuc = $DanhMucTinTuc;
+   }
+}
+
+include 'menu/menutintuc.php';
+?>
+
+
+
+
+<div class="container">
+   <div class="row">
+      <div class="col-lg-9">
+         <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+               <li role="presentation" class="active">
+                  <a href="#MenuChinh" aria-controls="MenuChinh" role="tab" data-toggle="tab">Menu Chính</a>
+               </li>
+               <li role="presentation">
+                  <a href="#huongdan" aria-controls="huongdan" role="tab" data-toggle="tab">Hướng Dẫn</a>
+               </li>
+               <li role="presentation">
+                  <a href="#khungGiua" aria-controls="khungGiua" role="tab" data-toggle="tab">Khung Dữa</a>
+               </li>
+               <li role="presentation">
+                  <a href="#TinTucInDex" aria-controls="khungGiua" role="tab" data-toggle="tab">Tin Tuc Index</a>
+               </li>
+               <li role="presentation">
+                  <a href="#VeCongTy" aria-controls="khungGiua" role="tab" data-toggle="tab">Công Ty</a>
+               </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+               <div role="tabpanel" class="tab-pane active" id="MenuChinh">
+                  <ul>
+                     <?php
+                     foreach($DanhMuc['CapCon'] as $DanhMucCon) {
+                        $ThuocTinhDanhMuc = json_decode($DanhMucCon['ThuocTinh']);
+                        ?>
+                        <li class="col-lg-3">
+                           <label><input name="" onchange="ChonBoMenuTinTuc('<?php echo $DanhMucCon['MaDanhMuc'] ?>')"  <?php echo isset($ThuocTinhDanhMuc->MenuTinTuc) ? $ThuocTinhDanhMuc->MenuTinTuc == 1 ? 'checked="checked"' : '' : '' ?>  value="" type="checkbox" ><?php echo $DanhMucCon['TenDanhMuc']; ?></label>
+                           <samp id="DM<?php echo $DanhMucCon['MaDanhMuc'] ?>"></samp>
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+               </div>
+               <div role="tabpanel" class="tab-pane" id="huongdan">
+                  <ul>
+                     <?php
+                     foreach($DanhMuc['CapCon'] as $DanhMucCon) {
+                        $ThuocTinhDanhMuc = json_decode($DanhMucCon['ThuocTinh']);
+                        ?>
+                        <li class="col-lg-3">
+                           <label><input name="" onchange="ChonBoHuongDan('<?php echo $DanhMucCon['MaDanhMuc'] ?>')"  <?php echo isset($ThuocTinhDanhMuc->HuongDanTinTuc) ? $ThuocTinhDanhMuc->HuongDanTinTuc == 1 ? 'checked="checked"' : '' : '' ?>  value="" type="checkbox" ><?php echo $DanhMucCon['TenDanhMuc']; ?></label>
+                           <samp id="HD<?php echo $DanhMucCon['MaDanhMuc'] ?>"></samp>
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+
+
+               </div>
+               <div role="tabpanel" class="tab-pane" id="khungGiua">
+                  <ul>
+                     <?php
+                     foreach($DanhMuc['CapCon'] as $DanhMucCon) {
+                        $ThuocTinhDanhMuc = json_decode($DanhMucCon['ThuocTinh']);
+                        ?>
+                        <li class="col-lg-3">
+                           <label><input name="" onchange="ChonBoKhungGiuaTinTuc('<?php echo $DanhMucCon['MaDanhMuc'] ?>')"  <?php echo isset($ThuocTinhDanhMuc->KhungGiuaTinTuc) ? $ThuocTinhDanhMuc->KhungGiuaTinTuc == 1 ? 'checked="checked"' : '' : '' ?>  value="" type="checkbox" ><?php echo $DanhMucCon['TenDanhMuc']; ?></label>
+                           <samp id="KG<?php echo $DanhMucCon['MaDanhMuc'] ?>"></samp>
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+
+
+               </div>
+               <div role="tabpanel" class="tab-pane" id="TinTucInDex">
+                  <ul>
+                     <?php
+                     foreach($DanhMuc['CapCon'] as $DanhMucCon) {
+                        $ThuocTinhDanhMuc = json_decode($DanhMucCon['ThuocTinh']);
+                        ?>
+                        <li class="col-lg-3">
+                           <label><input name="" onchange="ChonBoTinTucInDex('<?php echo $DanhMucCon['MaDanhMuc'] ?>')"  <?php echo isset($ThuocTinhDanhMuc->TinTucIndex) ? $ThuocTinhDanhMuc->TinTucIndex == 1 ? 'checked="checked"' : '' : '' ?>  value="" type="checkbox" ><?php echo $DanhMucCon['TenDanhMuc']; ?></label>
+                           <samp id="IDe<?php echo $DanhMucCon['MaDanhMuc'] ?>"></samp>
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+
+
+               </div>
+               <div role="tabpanel" class="tab-pane" id="VeCongTy">
+                  <ul>
+                     <?php
+                     foreach($DanhMuc['CapCon'] as $DanhMucCon) {
+                        $ThuocTinhDanhMuc = json_decode($DanhMucCon['ThuocTinh']);
+                        ?>
+                        <li class="col-lg-3">
+                           <label><input name="" onchange="ChonBoTinVeCongTy('<?php echo $DanhMucCon['MaDanhMuc'] ?>')"  <?php echo isset($ThuocTinhDanhMuc->VeCongTy) ? $ThuocTinhDanhMuc->VeCongTy == 1 ? 'checked="checked"' : '' : '' ?>  value="" type="checkbox" ><?php echo $DanhMucCon['TenDanhMuc']; ?></label>
+                           <samp id="CT<?php echo $DanhMucCon['MaDanhMuc'] ?>"></samp>
+                        </li>
+                        <?php
+                     }
+                     ?>
+                  </ul>
+
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3">
+         <h3>Thêm DanhMuc</h3>
+         <form action="<?php echo BASE_DIR ?>quantri/themdanhmuc" method="POST" class="form-inline">
+            <table class="table">
+               <tr>
+                  <td>Tên Danh Mục</td>
+                  <td><input class="form-control" name="TenDanhMuc" value="" ></td>
+               </tr>
+               <tr>
+                  <td>Tên Danh Mục Tiếng Anh</td>
+                  <td><input class="form-control" name="TenDanhMucEn" value="" ></td>
+               </tr>
+               <tr>
+                  <td>STT</td>
+                  <td><input class="form-control" name="STT" value="" >
+                     <input class="form-control" type="hidden" name="CapCha" value="<?php echo $DanhMuc['MaDanhMuc'] ?>" >
+                  </td>
+               </tr>
+               <tr>
+
+                  <td rowspan="2">
+                     <input class="btn btn-success btn-sm" name="ThemDanhMuc" type="submit" value="Thêm" >
+
+                  </td>
+               </tr>
+
+            </table>
+
+         </form>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+<script>
+   function ChonBoMenuTinTuc(str) {
+      if (str.length == 0) {
+         document.getElementById("DM" + str).innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("DM" + str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/chonbomenutintuc/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ChonBoHuongDan(str) {
+      if (str.length == 0) {
+         document.getElementById("HD" + str).innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("HD" + str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/chonbochonbohuongdan/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ChonBoKhungGiuaTinTuc(str) {
+      if (str.length == 0) {
+         document.getElementById("KG" + str).innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("KG" + str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/chonbochonbokhunggiuatintuc/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ChonBoTinTucInDex(str) {
+      if (str.length == 0) {
+         document.getElementById("IDe" + str).innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("IDe" + str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/chonbochonbotintucindex/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function ChonBoTinVeCongTy(str) {
+      if (str.length == 0) {
+         document.getElementById("CT" + str).innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("CT" + str).innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/chonbochonbotincongty/" + str, true);
+         xmlhttp.send();
+      }
+   }
+</script>

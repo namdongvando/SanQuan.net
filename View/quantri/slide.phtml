@@ -1,0 +1,71 @@
+<?php
+$DSSlide = $data['DSSlide'];
+$Model_Slide = new Model_Slide();
+?>
+<div class="panel panel-success ">
+    <div class="panel-heading bg-green">
+        <h3 class="panel-title">Danh Sách Slide </h3>
+    </div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/slide" method="POST">
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>STT</th>
+                    <th colspan="2" style="text-align: center;" >Tùy Chọn</th>
+                    <th>Hình Chính</th>
+                    <th>Hình Đối Tác</th>
+                    <th>Ẩn Hiện</th>
+                </tr>
+                <?php
+                $dem = 1;
+                if ($DSSlide)
+                    foreach ($DSSlide as $Slide) {
+                        $Model_Slide->Slide($Slide);
+                        ?>
+                        <tr style="" >
+                            <td style="width: 50px;vertical-align: middle">
+                                <?php echo $dem++ ?>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle"  >
+                                <a class="" href="slidesua/<?php echo $Model_Slide->MaSlide ?>">
+                                    <i class="fa fa-edit" ></i>
+                                    Sửa
+                                </a>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle "   >
+                                <a class="xoa" href="xoaslide/<?php echo $Model_Slide->MaSlide ?>">
+                                    <i class="fa fa-times" ></i>
+                                    Xóa
+                                </a>
+                            </td>
+                            <td>
+                                <img style="width: 100px;height: 50px;" src="<?php echo $Model_Slide->UrlHinh ?>" >  
+                            </td>
+                            <td>
+                                <img style="width: 100px;height: 50px;" src="<?php echo $Model_Slide->UrlHinh1 ?>" >  
+                            </td>
+                            <td>
+                                <input name="AnHien" value="1" type="checkbox" <?php echo $Model_Slide->AnHien == 1 ? 'checked="checked"' : '' ?>   >
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".Chon").change(function () {
+            if ($(this).prop("checked"))
+            {
+                $(this).parent().parent().parent().css({"background-color": "#aaa"})
+            } else {
+                $(this).parent().parent().parent().css({"background-color": "#fff"});
+            }
+        });
+
+    });
+</script>

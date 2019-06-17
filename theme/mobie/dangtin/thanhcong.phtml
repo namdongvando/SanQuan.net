@@ -1,0 +1,25 @@
+<?php 
+$Model_SanPham = new Model_SanPham();
+$_SanPham = new Model_SanPham($Model_SanPham->TimSanPham($_Param[0]));
+?>
+<div class="container" >
+    <div class="alert alert-success">
+        <strong>Đăng Tin Thành Công!</strong> Liên Hệ Quản Tri Viên Để Tư Vấn Đăng Tin
+    </div>
+
+
+    <h3 class="text-center" style="color: red"  >
+        * Liên hệ quản trị để được tư vấn và hiển thi tin
+    </h3>
+
+    <h2 class="text-center"  >HÌNH THỨC THANH TOÁN</h2>
+    <p class="text-center" style="font-size: 18px;" >
+        Thanh toán qua ngân hàng bằng cách chuyển khoản : <br>
+        ( Lưu ý: Nội dung chuyển khoản quý khách ghi thanh toán cho mã tin đăng của mình - <?php echo $_SanPham->MaSP ?> ) <br>
+        + Ngân hàng TMCP Ngoại Thương Việt Nam – Vietcombank <br>
+        - Chủ tài khoản :   Trương Duy Sang  <br>
+        - Số tài khoản    :  0441003949279 <br>
+        - Chi nhánh ngân hàng :  Tân Bình, TP.HCM     <br>
+        Liên Hê: 097.889.2755
+    </p>
+</div>

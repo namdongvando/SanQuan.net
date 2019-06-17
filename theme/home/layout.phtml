@@ -1,0 +1,94 @@
+<?php
+$View_Layout = new theme_home_layout();
+$View_quancaoview = new View_quancaoview();
+ob_start();
+?>
+<!DOCTYPE HTML>
+<html lang="vi" >
+    <head>
+        <?php $View_Layout->layouthead(); ?>        
+        <script type="text/javascript" src="/public/partials/loaderpartials/home/homeconfig.js" ></script>
+    </head>
+    <body ng-cloak="TRUE" ng-app="rootApp" ng-controller="homeController" ng-init="homeint()" >
+        <?php
+        $View_Layout->layoutMenuCom($_Controller, $_Param);
+        ?> 
+        <div class="clearfix" ></div>
+        <?php
+        if ($_Controller == "index")
+            $View_Layout->TinHot();
+        ?>
+        <div class="container" >
+            <div class="row" >
+                <div class="panel panel-default" style="border-color: #fff; " >
+                    <div class="panel-body" style="padding-top: 0px; " >
+                        <div class="row" >
+                            <div class="col-lg-9 col-md-9" >
+                                <div class="row">
+                                    <?php
+                                    include $Conten;
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3" >
+                                <?php
+                                $View_Layout->layoutLeft();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix" ></div>
+
+                    <div class="panel" style="margin-bottom: 15px;border-radius: 0px;" >
+                        <div class="panel-heading" style="border-radius: 0px;border-bottom: 1px solid #18baa5"  >
+                            <h3 class="panel-title" style="font-weight: bold;font-size: 1.8em;"  >{Lang_DanhMuc}</h3>
+                        </div>
+                        <div class="panel-body" >
+                            <a class="col-md-3 DanhMucSangQuan" ng-repeat="item in getDanhMucByParent(0)|orderBy:'STT'" 
+                               href="{{item.Link}}"   >
+                                <i class="fa fa-angle-double-right" ></i>
+                                {{item.TenDanhMuc}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  >
+            <nav class="navbar navbar-right  navbar-fixed-bottom" style="bottom: 0px!important;background-color: rgba(255, 0, 0, 0.7);border-color: red;" role="navigation">
+                <div >
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" style="color: #fff !important;line-height: 15px;" href="tel:{Lang_SDTHoTro}">{Lang_SDTHoTro}</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li ><a style="color: #fff;" href="tellTo:{Lang_SDTHoTro}">{Lang_HTDangTin}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <?php
+        $View_Layout->LayoutCopyright();
+        ?>
+    </body>
+</html>
+<?php
+$str = ob_get_clean();
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption();
+foreach ($DSOption as $option) {
+    $_Option = new Model_Option($option);
+    $str = str_replace("{{$_Option->MaOption}}", $_Option->GiaTri, $str);
+}
+echo $str;
+?>

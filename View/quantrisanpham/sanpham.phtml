@@ -1,0 +1,112 @@
+<?php
+$DSSanhMuc = $data['DSLoaiTin'];
+$Model_SanPham = new Model_SanPham();
+$PaRam = $_Param;
+?>
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-left: 10px; ">
+        <i class="fa fa-list-ol"></i>
+        Danh Sách Bài viết
+    </div>
+    <div id="ThongBao"></div>
+    <div class="panel-body">
+        <p>Tin đăng hiển thị theo <b>độ quan trong</b> giảm dần , tiếp đó đến <b>ngày đăng</b></p>
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-offset-3 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 ">
+            <div class="panel panel-success">
+                <div class="panel-heading bg-green" >
+                    <h3 class="panel-title" style="font-weight: bold;text-align: center;"  >Danh Mục Sanh Nhượng</h3>
+                </div>
+                <div class="panel-body">
+                    <select id="DanhMucSelect" class="form-control" onchange="window.location.href = '<?php echo $Model_SanPham->getLinkDSSanPham() ?>' + this.value;" >s
+                        <option value="">__Tất Cả Danh Mục__</option>
+                        <?php
+                        foreach ($DSSanhMuc as $DanhMuc) {
+                            ?>
+                            <option <?php echo $DanhMuc['MaDanhMuc'] == $PaRam[0] ? 'selected="selected"' : '' ?>    value="<?php echo $DanhMuc['MaDanhMuc'] ?>">
+                                <?php echo $DanhMuc['TenDanhMuc'] ?>
+                            </option>
+                            <?php
+                            if (isset($DanhMuc['CapCon'])) {
+                                if ($DanhMuc['CapCon'])
+                                    foreach ($DanhMuc['CapCon'] as $DM) {
+                                        ?>
+                                        <option <?php echo $DM['MaDanhMuc'] == $PaRam[0] ? 'selected="selected"' : '' ?>    value="<?php echo $DM['MaDanhMuc'] ?>">
+                                            --|<?php echo $DM['TenDanhMuc'] ?>
+                                        </option>
+                                        <?php
+                                    }
+                            }
+                        }
+                        ?>
+                    </select>
+
+                </div>
+            </div>
+
+        </div>
+        <form action="<?php echo $Model_SanPham->getLinkXoaSanPham() ?>" method="POST" >
+            <table class="table table-bordered table-hover" id="datatable">
+                <thead>
+                    <tr>
+                        <th style="width: 20px" >Chọn</th>
+                        <th style="width: 40px;" >STT</th>
+                        <th>Tiêu Đề</th>
+                        <th>Chủ Sản Phẩm</th>
+                        <th>Địa Chỉ</th>
+                        <th style="width: 100px;text-align: center;" >Vị Trị</th>
+                        <th style="width: 100px;text-align: center;" >Giá</th>
+                        <th style="width: 100px;text-align: center;" >Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($data['DSTinTuc']) {
+                        $Dem = 1;
+                        foreach ($data['DSTinTuc'] as $TinTuc) {
+                            $_TinTuc = new Model_SanPham($TinTuc);
+                            ?>   
+                            <tr>
+                                <td><label style="display: block;"><input class="checkbox1" name="Chon[<?php echo $_TinTuc->MaSP ?>]" type="checkbox" value="<?php echo $_TinTuc->MaSP; ?>" ></label> </td>
+                                <td style="text-align: center;" ><?php echo $Dem++;
+                            ?></td>
+                                <td><?php echo $_TinTuc->TenSP ?></td>
+                                <td><?php echo $_TinTuc->NguoiLienHe ?></td>
+                                <td><?php echo $_TinTuc->DiaChi ?></td>
+                                <td><?php echo $_TinTuc->getNameViTri($_TinTuc->TinNoiBat); ?></td>
+                                <td><?php echo $_TinTuc->GiaVND ?></td>
+                                <td style="text-align: center;">
+                                    <input id="<?php echo $_TinTuc->MaSP ?>" onchange="AnHienTin('<?php echo $_TinTuc->MaSP ?>')"  <?php echo $TinTuc['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >
+                                </td>
+                                <td style="width: 100px;text-align: center;">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" href="<?php echo $Model_SanPham->getLinkSuaSanPham() . $_TinTuc->MaSP; ?>"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-danger xoa" href="<?php echo $Model_SanPham->getLinkXoaSanPham() . $_TinTuc->MaSP; ?>"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th><label> <input type="checkbox" id="selecctall"/> Hết Chọn </label></th>
+                        <th>STT</th>
+                        <th>Tiêu Đề</th>
+                        <th>Chủ Sản Phẩm</th>
+                        <th>Địa Chỉ</th>
+                        <th style="text-align: center;" >Vị Trí</th>
+                        <th style="text-align: center;" >Giá</th>
+                        <th>Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <input name="XoaChon" class="xoa"  value="Xóa Mục Đang Chọn" type="submit" >
+
+        </form>
+    </div>
+</div>

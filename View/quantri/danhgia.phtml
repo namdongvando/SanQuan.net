@@ -1,0 +1,71 @@
+<?php
+$DSDanhGia = $data['DSDanhGia'];
+$Model_DanhGia = new Model_DanhGia();
+?>
+<div class="panel panel-success ">
+    <div class="panel-heading bg-green">
+        <h3 class="panel-title">Danh Sách DanhGia </h3>
+    </div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/slide" method="POST">
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>STT</th>
+                    <th colspan="2" style="text-align: center;" >Tùy Chọn</th>
+                    <th>Hình</th>
+                    <th>Tiêu Đề</th>
+                    <th>Ẩn Hiện</th>
+                </tr>
+                <?php
+                $dem = 1;
+                if ($DSDanhGia)
+                    foreach ($DSDanhGia as $DanhGia) {
+                        $Model_DanhGia->DanhGia($DanhGia);
+                        ?>
+                        <tr style="" >
+                            <td style="width: 50px;vertical-align: middle">
+                                <?php echo $dem++ ?>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle"  >
+                                <a class="" href="danhgiasua/<?php echo $Model_DanhGia->MaDanhGia ?>">
+                                    <i class="fa fa-edit" ></i>
+                                    Sửa
+                                </a>
+                            </td>
+                            <td style="width: 80px;vertical-align: middle "   >
+                                <a class="xoa" href="xoadanhgia/<?php echo $Model_DanhGia->MaDanhGia ?>">
+                                    <i class="fa fa-times" ></i>
+                                    Xóa
+                                </a>
+                            </td>
+                            <td>
+                                <img style="width: 100px;height: 50px;" src="<?php echo $Model_DanhGia->HinhDanhGia($DanhGia['UrlHinh']) ?>" >  
+                            </td>
+                            <td>
+                                <?php echo $Model_DanhGia->TenHinh; ?> 
+                            </td>
+                            <td>
+                                <input name="AnHien" value="1" type="checkbox" <?php echo $Model_DanhGia->AnHien == 1 ? 'checked="checked"' : '' ?>   >
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".Chon").change(function () {
+            if ($(this).prop("checked"))
+            {
+                $(this).parent().parent().parent().css({"background-color": "#aaa"})
+            } else {
+                $(this).parent().parent().parent().css({"background-color": "#fff"});
+            }
+        });
+
+    });
+</script>

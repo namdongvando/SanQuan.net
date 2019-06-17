@@ -1,0 +1,116 @@
+<?php
+$_Option = new Model_Option($data['Option']);
+?>
+<div class="panel panel-warning" >
+    <div class="panel-heading" >
+        <h3 class="panel-title" >
+            Thông Thông Tin Layout
+            <?php echo $_Option->MaOption; ?>
+        </h3>
+    </div>
+    <div class="panel-body" >
+        <form action="<?php echo $_Option->getLinkSuaOption() . $_Option->MaOption ?>" method="POST" >
+            <div class="col-lg-6" >
+                <div class="form-group"  >
+                    <label>
+                        Mã Option
+                    </label>
+                    <input class="form-control" readonly="readonly" name="MaOption" value="<?php echo $_Option->MaOption ?>" type="text" >
+                </div>
+                <div class="form-group"  >
+                    <label>
+                        Tiêu Đề
+                    </label>
+                    <input class="form-control" name="GhiChu[title]" value="<?php echo $_Option->Title ?>" type="text" >
+                </div>
+                <div class="form-group"  >
+                    <label>
+                        Loại (1:IMG ; 0 TEXT)
+                    </label>
+                    <input class="form-control" name="LoaiOption" value="<?php echo $_Option->LoaiOption ?>" type="text" >
+                </div>
+            </div>
+            <div class="col-lg-6" >
+                <div class="form-group" >
+                    <label>Giá Trị</label>
+                    <textarea name="GiaTri" class="form-control" rows="3" ><?php echo $_Option->GiaTri ?></textarea>
+                    <input name="SuaOptionGiaTri" value="Sửa Nội Dung" type="submit" class="btn btn-primary" >
+                </div>
+
+                <table class="table" >
+                    <?php
+                    $DSGiaTri = $_Option->_decode($_Option->GiaTri);
+                    if ($DSGiaTri) {
+                        foreach ($DSGiaTri as $k => $v) {
+                            ?>
+                            <tr >
+                                <td>
+                                    <div class="form-group" >
+                                        <label>Thuộc Tính Layout Tính: <?php echo $k ?> - Key</label>
+                                        <input class="form-control" name="k[]" value="<?php echo $k ?>" type="text" >
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group" >
+                                        <label>- Value</label>
+                                        <input class="form-control" name="v[]" value="<?php echo $v ?>" type="text" >
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </table>
+                <input name="SuaOption" value="Sửa" type="submit" class="btn btn-primary" >
+            </div>
+            <div class="clearfix" ></div>
+            <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Danh Sách Danh Mục</a>
+            <input class="btn btn-success"  type="button" value="Hình Ảnh" onclick="BrowseServer('Images:/', '')" />
+        </form>
+    </div>
+</div>
+
+<div class="modal fade " id="modal-id">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Danh Sách Danh Mục</h4>
+            </div>
+            <div class="modal-body table-responsive">
+                <table class="table" >
+                    <tr>
+                        <th>Mã Danh Mục</th>
+                        <th>Tên Danh Mục</th>
+                    </tr>
+                    <?php
+                    $Model_DanhMuc = new Model_DanhMuc();
+                    $DSDanhMuc = $Model_DanhMuc->DSDanhMuc();
+                    foreach ($DSDanhMuc as $DanhMuc) {
+                        $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                        ?>                        
+                        <tr>
+                            <td>
+                                <?php
+                                echo $_DanhMuc->MaDanhMuc
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                echo $_DanhMuc->TenDanhMuc
+                                ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<?php
+$slide = $data['Slide'];
+$_MaDanhMuc = $slide['MaDanhMuc'];
+$Model_Slide = new Model_Slide();
+$Model_Slide->Slide($slide);
+ob_start();
+?>
+<div class="panel panel-success ">
+    <div class="panel-heading bg-green">
+        <h3 class="panel-title">Danh Sách Slide </h3>
+    </div>
+    <div class="panel-body">
+        <form action="" method="POST" class="form" >
+            <div class="col-lg-6 col-md-6">
+                <input name="IdTin" type="hidden" value="<?php echo $slide['IdTin']; ?>" >  
+                <input name="title" type="hidden" value="<?php echo $slide['title']; ?>" class="form-control">  
+                <input name="keyword" type="hidden" value="<?php echo $slide['keyword']; ?>" class="form-control">  
+                <input type="hidden" name="description" value="<?php echo $slide['description']; ?>" class="form-control">  
+                <input name="MaDanhMuc" type="hidden" value="<?php echo $_MaDanhMuc; ?>" class="form-control">  
+                <input type="hidden" name="TieuDeKhongDau" value="<?php echo $slide['TieuDeKhongDau']; ?>" class="form-control">  
+                <div class="form-group-sm">
+                    <div class="col-lg-12 col-md-12">
+                        <h3>Tên Hình</h3>
+                        <input name="TieuDe" value="<?php echo $Model_Slide->TenHinh; ?>" class="form-control">  
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    {Stt}
+                    <div class="col-lg-12 col-md-12">
+                        <input name="Stt" value="<?php echo $Model_Slide->STT; ?>" class="form-control">  
+                    </div>
+                </div>
+
+                <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                    {AnHien}
+                    <div class="col-lg-12 col-md-12">
+                        <input type="checkbox" name="AnHien" <?php echo $Model_Slide->AnHien == 1 ? 'checked="checked"' : ''; ?> value="<?php echo $slide['AnHien']; ?>" >  
+                    </div>
+                </div>
+                <input type="hidden" name="NgayDang" value="<?php echo date("Y-m-d"); ?>" class="form-control">  
+                <div class="clearfix" style="margin-bottom: 10px" ></div> 
+                <input type="hidden" name="TinNoiBat" value="0" >  
+                <input type="hidden" name="SoLanXem" value="1" class="form-control">  
+                <input type="hidden" name="lang" value="vi" class="form-control">  
+                <input type="hidden" name="NoiDung" value="" class="form-control">  
+                <div class="clearfix" style="margin-bottom: 10px" ></div>
+                <div style="text-align: center;padding-top: 10px;">
+                    <input name="SuaSlide" value="Sửa" type="submit"  class="btn btn-success" >
+                    <input  value="Làm Lại" type="reset"  class="btn btn-default" >
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="clearfix" style="margin-bottom: 10px" ></div> 
+                <div class="form-group-sm">
+                    <label class="col-lg-2 col-md-2">{UrlHinh}</label>
+                    <div class="col-lg-12 col-md-12">
+                        <input class="form-control" style="display: none;" value="<?php echo $Model_Slide->UrlHinh ?>" id="UrlHinh" name="UrlHinh" type="text" />
+                        <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2" >
+                            Chọn Hình
+                            <input style="display: none;"  type="button" value="<?php echo $Model_Slide->UrlHinh ?>" class="ChonSV" onclick="BrowseServer('Images:/slide/', 'UrlHinh')" />
+                            <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1" >
+                                <img src="<?php echo $Model_Slide->UrlHinh ?>" style="height: 100px;opacity: 0.4" >
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px" ></div> 
+                <div class="form-group-sm">
+                    <label class="col-lg-12 col-md-12">Hình Nhỏ</label>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="clearfix" ></div>
+                        <input class="form-control" style="display: none" value="<?php echo $Model_Slide->UrlHinh1 ?>" id="TomTat" name="TomTat" type="text" />
+
+                        <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2" >
+                            Chọn Hình
+                            <input  style="display: none" type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/benhvien/', 'TomTat')" />
+                            <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1" >
+                                <img src="<?php echo $Model_Slide->UrlHinh1 ?>" style="height: 100px;opacity: 0.4" >
+                            </div>
+                        </label>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<?php
+$str = ob_get_clean();
+$str = str_replace("{NoiDung}", "Nội Dung", $str);
+$str = str_replace("{AnHien}", "Ẩn Hiện", $str);
+$str = str_replace("{UrlHinh}", "Hình", $str);
+$str = str_replace("{Stt}", "STT", $str);
+echo $str;
+?>

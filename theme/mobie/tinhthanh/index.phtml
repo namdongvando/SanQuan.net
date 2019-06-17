@@ -1,0 +1,23 @@
+<?php
+$maTinhThanh = explode("-", $_Param[0]);
+$maTinhThanh = end($maTinhThanh);
+$Model_TinhThanh = new Model_TinhThanh();
+$_KhuVuc = new Model_TinhThanh($Model_TinhThanh->TimTinhHuyen($maTinhThanh));
+?>
+    <div class="panel panel-primary" >
+        <div class="panel-heading" >
+            <h3 class="panel-title" >Tin Theo Khu Vực : <?php echo $_KhuVuc->TenDiaChi ?></h3>
+        </div>
+        <div class="panel-body" >
+            <?php
+            $Model_SanPham = new Model_SanPham();
+            $View_SanPham = new View_sanphamview();
+            $DSSanPham = $Model_SanPham->DSSanPham4TinhThanh('\"Huyen\"\:\"' . $maTinhThanh . '\"', '\"Tinh\"\:\"' . $maTinhThanh . '\"');
+            if ($DSSanPham)
+                foreach ($DSSanPham as $SanPham) {
+                    $_SanPham = new Model_SanPham($SanPham);
+                    $View_SanPham->ListSanPham($_SanPham);
+                }
+            ?>
+        </div>
+    </div>

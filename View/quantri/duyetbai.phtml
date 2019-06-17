@@ -1,0 +1,89 @@
+<?php
+//print_r($data['DSLoaiTinCL']);
+$ChiTietTin = $data['ChiTietTinTuDong'][0];
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Chi tiết Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/duyetbai" method="post">
+         <table class="table table-bordered" >
+	  <caption>Thêm Chủng Loại Tin</caption>
+	  <tr>
+	     <td>{TieuDe}</td>
+	     <td>
+	        <input class="form-control"  name="TieuDe" type="text" value="<?php echo $ChiTietTin['TieuDe'] ?>" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{KeyWord}</td>
+	     <td>
+	        <input class="form-control"  name="Keyword" type="text" value="" >
+	     </td>
+	  </tr>
+	  <tr>
+	  <tr>
+	     <td>{Hinh}</td>
+	     <td>
+	        <input id="xFilePath" name="Hinh" type="text" size="60" value="" />
+	        <input type="button" value="Browse Server" onclick="BrowseServer();" />
+	        <!--<input name="Hinh" id="HinhCongTy" data-taget="HinhCongTy" type="text" class="form-control LayHinh"  />-->
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{NoiDung}</td>
+	     <td>
+	        <textarea name="NoiDung"  class="ckeditor"><?php echo $ChiTietTin['NoiDung'] ?></textarea>
+
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{LoaiTin}</td>
+	     <td>
+	        <select class="form-control" name="MaLoai">
+		 <?php
+		 foreach($data['DSLoaiTinCL'] as $LoaiTins) {
+		    ?>
+
+   		 <option style="color: #ffffff; background-color: #000;" disabled="disabled"><?php echo $LoaiTins[0]['TenCL'] ?></option>
+		    <?php
+		    foreach($LoaiTins as $LoaiTin) {
+		       ?>
+      		 <option value="<?php echo $LoaiTin['MaLoai'] ?>"   ><?php echo $LoaiTin['TenLoai'] ?></option>
+		       <?php
+		    }
+		 }
+		 ?>
+	        </select>
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{ThuTu}</td>
+	     <td>
+	        <input  name="Stt"  value=""   type="text"  >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{Hot}</td>
+	     <td>
+	        <input  name="Hot"  value="1"   type="checkbox"  >
+
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{AnHien}</td>
+	     <td>
+	        <input  name="AnHien"  value="1"  type="checkbox"  >
+
+	     </td>
+	  </tr>
+	  <tr>
+	     <th colspan="2"><input class="sua"  name="duyettin"  type="submit" value="{Sua}" ></th>
+	  </tr>
+         </table>
+
+      </form>
+
+   </div>
+</div>

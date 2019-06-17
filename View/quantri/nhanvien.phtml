@@ -1,0 +1,56 @@
+<?php
+$DSNhanVien = $data['DSNhanVien'];
+?>
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">Danh Sách Nhân Viên</h3>
+   </div>
+   <div class="panel-body">
+      <table class="table table-bordered table-hover" id="datatable">
+         <thead>
+            <tr>
+               <th>Username</th>
+               <th>Họ Tên</th>
+               <th>Email</th>
+               <th>SDT</th>
+               <th>Địa Chỉ</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            foreach($DSNhanVien as $NhanVien) {
+               ?>
+               <tr>
+                  <td><?php echo $NhanVien['username'] ?></td>
+                  <td><?php echo $NhanVien['HoTen'] ?></td>
+                  <td><?php echo $NhanVien['email'] ?></td>
+                  <td><?php echo $NhanVien['SDT'] ?></td>
+                  <td><?php echo $NhanVien['DiaChi'] ?></td>
+                  <td>
+                     <div class="btn-group">
+                        <a href="<?php echo BASE_DIR ?>nhanvien_xem/<?php echo $NhanVien['username'] ?>" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                        <a href="<?php echo BASE_DIR ?>nhanvien_xoa/<?php echo $NhanVien['username'] ?>" class="xoa btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                     </div>
+                  </td>
+               </tr>
+               <?php
+            }
+            ?>
+
+         </tbody>
+         <tfoot>
+            <tr>
+               <th>Username</th>
+               <th>Họ Tên</th>
+               <th>Email</th>
+               <th>SDT</th>
+               <th>Địa Chỉ</th>
+               <th>Action</th>
+            </tr>
+         </tfoot>
+      </table>
+
+
+   </div>
+</div>

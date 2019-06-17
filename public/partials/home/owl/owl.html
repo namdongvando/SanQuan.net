@@ -1,0 +1,18 @@
+<div id="carouselExampleIndicators"  >
+    <div class="col-md-4 item carouseSanPham" ng-repeat="item in _DuAnMoi track by $index" ng-finish-render="ngRepeatFinished" >
+        <div class="thumbnail">
+            <i class="tag " style="z-index: 9999" ></i>
+            <a href="{{item.link}}"  >
+                <img ng-error="/public/no-image.jpg" class="img im-sanpham img-responsive" src="{{item.UrlHinh}}" alt="{{item.nameProduct}}">
+            </a>
+            <div class="caption">
+                <h5 class="nameProduct" >{{item.nameProduct}}</h5>
+                <h3>
+                    <span class="pull-right">{{item.Price}}</span>
+                </h3>
+            </div>
+            <div class="clearfix" ></div>
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+</div>

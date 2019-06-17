@@ -1,0 +1,28 @@
+<div class="clearfix" style="margin-bottom: 20px;" ></div>
+<div class="col-lg-12 col-md-12 listSanPham " >
+    <div class="row">
+        <?php
+        $SL = 120;
+        $pageht = $_Param[0];
+        $pageht = intval($pageht);
+        $pageht = $pageht > 1 ? $pageht : 1;
+        $Model_SanPham = new Model_SanPham();
+        $View_SanPham = new View_sanphamview();
+        $DSSanPham = $Model_SanPham->DSSanPhamPT($pageht, $SL, $Tong);
+        if ($DSSanPham)
+            foreach ($DSSanPham as $SanPham) {
+                $_SanPham = new Model_SanPham($SanPham);
+                $View_SanPham->ListSanPham($_SanPham);
+            }
+        ?>
+    </div>
+</div>
+<div class="clearfix" ></div>
+<div class="col-lg-12 col-md-12" >
+    <?php
+    $TongTrang = ceil($Tong / $SL);
+    echo $Model_SanPham->PhanTrang($TongTrang, $pageht, BASE_DIR . 'index/[i]');
+    ?>
+</div>
+<div class="clearfix" ></div>
+

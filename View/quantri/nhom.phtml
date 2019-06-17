@@ -1,0 +1,47 @@
+<?php
+$DSNhom = $data['DSNhom'];
+?>
+
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">{ThongTinChung}</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/nhom" method="POST">
+         <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th>{Nhom}</th>
+                  <th>{TenNhom}</th>
+               </tr>
+            </thead>
+            <tbody>
+               <?php
+               foreach($DSNhom as $Nhom) {
+                  ?>
+                  <tr>
+                     <td><?php echo $Nhom['Nhom'] ?></td>
+                     <td>
+                        <input name="TenNhom[<?php echo $Nhom['Nhom'] ?>]" value="<?php echo $Nhom['TenNhom'] ?>" type="text" class="class" />
+                     </td>
+                  </tr>
+                  <?php
+               }
+               ?>
+            <tbody>
+            <tfoot>
+               <tr>
+                  <th>{Nhom}</th>
+                  <th>{TenNhom}</th>
+               </tr>
+            </tfoot>
+
+         </table>
+         <input name="SuaNhom" value="Sừa Nhóm" type="submit" class="btn btn-success" />
+      </form>
+
+
+   </div>
+</div>
+
+

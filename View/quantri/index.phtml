@@ -1,0 +1,52 @@
+<div class="panel panel-primary" >
+    <div class="panel-heading" >
+        <h3 class="panel-title" >Bảng Đăng Tin</h3>
+    </div>
+    <div class="panel-body" >
+        <h3 >Thay Đổi Độ Quan Trong Dể Thay Đổi Thứ Tự</h3>
+        <form action="" method="POST" >
+            <table class="table table-bordered table-hover" >
+                <tr>
+                    <th>Stt</th>
+                    <th>Tiêu Đề Tin</th>
+                    <th>Giá</th>
+                    <th>Độ Quan Trong</th>
+                    <th>Số Lần Xem</th>
+                </tr>
+                <?php
+                $Model_SanPham = new Model_SanPham();
+                $_Param[0] = isset($_Param[0])?$_Param[0]:1;
+                $DSSanPham = $Model_SanPham->DSSanPhamPT($_Param[0], 10, $Tong);
+                $Dem = (($_Param[0]-1)*10)+1;
+                if ($DSSanPham)
+                    foreach ($DSSanPham as $SP) {
+                        $_SanPham = new Model_SanPham($SP);
+                        echo <<<SANPHAM
+                <tr>
+                    <td>{$Dem}</td>
+                    <td>{$_SanPham->TenSP}</td>
+                    <td>{$_SanPham->GiaVND}</td>
+                    <td><input value="{$_SanPham->DoQuanTrong}" name="DoQuanTrong[{$_SanPham->MaSP}]"  ></td>
+                    <td>{$_SanPham->SoLanXem}</td>
+                </tr>    
+SANPHAM;
+                        $Dem++;
+                    }
+                ?>
+            </table>
+            <input name="SuaDoQuanTrong" value="Cập Nhập" class="btn btn-danger btn-sm sua" type="submit" >
+        </form>
+        <div class="container" >
+            <?php
+            $TongPage = ceil($Tong / 10);
+            echo $Model_SanPham->PhanTrang($TongPage, $_Param[0], "[i]");
+            ?>
+        </div>
+
+
+    </div>
+
+</div>
+
+<?php
+?>

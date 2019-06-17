@@ -1,0 +1,80 @@
+<div class="clearfix" ></div>
+<div class="container" ng-controller="quangcaoController" ng-init="loadQuangCao('1')" style="margin-top: 10px;" >
+    <div class="" >
+        <div ng-repeat="item in DSQuangCao" style="margin-bottom: 10px;" >
+            <a href="{{item.LinkQuanCao}}" >
+                <img class="img img-responsive " style="width: 100%;" title="{{item.TenQuanCao}}" src="{{item.UrlHinh}}" >
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix" style="margin-bottom: 20px;" ></div>
+<div ng-repeat="item in _SanPhamHOT" class="col-xs-6 "  >
+    <div class="SanPhamHome" >
+        <div >
+            <div class="SanPhamImg" >
+                <img src="{{item.UrlHinh}}" class="img img-responsive"  >
+            </div>
+            <span class=" bnt-gia btn-sm pull-left"  >{{item.GiaVND}}</span>
+            <a href="{{item.Link}}" >
+                <h2 class="title"  >
+                    {{item.TieuDe}}
+                </h2>
+            </a>
+            <div class="text-justify sumary" >
+                {{item.TomTat}}
+            </div>
+            <a href="tel:{{item.DienThoai}}" style="font-weight: bold;white-space: nowrap" class="center-block"  >
+                <i class="fa fa-phone " style="border: 1px solid #18baa5;padding: 2px;" ></i>
+                {{item.DienThoai}}({{item.NguoiLienHe}})
+            </a>
+            <span class="lblKhuVuc pull-right"  >{{item.KhuVuc}}</span>
+            <div class="clearfix" > </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6"  ng-repeat="item in _CanSangGap"   >
+    <div class="SanPhamHome" >
+        <div >
+            <div class="SanPhamImg" >
+                <img src="{{item.UrlHinh}}" class="img img-responsive"  >
+            </div>
+            <span class=" bnt-gia btn-sm pull-left"  >{{item.GiaVND}}</span>
+            <a href="{{item.Link}}" >
+                <h2 class="title"  >
+                    {{item.TieuDe}}
+                </h2>
+            </a>
+            <a href="tel:{{item.DienThoai}}" style="font-weight: bold;white-space: nowrap" class="center-block"  >
+                <i class="fa fa-phone " style="border: 1px solid #18baa5;padding: 2px;" ></i>
+                {{item.DienThoai}}({{item.NguoiLienHe}})
+            </a>
+            <span class="lblKhuVuc pull-right"  >{{item.KhuVuc}}</span>
+            <div class="clearfix" > </div>
+        </div>
+        <div class="clearfix" ></div>
+    </div>
+</div>
+<div class="col-xs-6" ng-repeat="item in _SanPhamTranChu"   >
+    <div class="SanPhamHome" >
+        <div >
+            <div class="SanPhamImg" >
+                <img src="{{item.UrlHinh}}" class="img img-responsive"  >
+            </div>
+            <span class=" bnt-gia btn-sm pull-left"  >{{item.GiaVND}}</span>
+            <a href="{{item.Link}}" >
+                <h2 class="title"  >
+                    {{item.TieuDe}}
+                </h2>
+            </a>
+            <a href="tel:{{item.DienThoai}}" style="font-weight: bold;white-space: nowrap" class="center-block"  >
+                <i class="fa fa-phone " style="border: 1px solid #18baa5;padding: 2px;" ></i>
+                {{item.DienThoai}}({{item.NguoiLienHe}})
+            </a>
+            <span class="lblKhuVuc pull-right"  >{{item.KhuVuc}}</span>
+            <div class="clearfix" > </div>
+        </div>
+        <div class="clearfix" ></div>
+    </div>
+</div>
+<div class="clearfix"  ></div>

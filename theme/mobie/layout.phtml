@@ -1,0 +1,69 @@
+<?php
+$View_Layout = new theme_mobie_layout();
+$View_quancaoview = new View_quancaoview();
+ob_start();
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <?php $View_Layout->layouthead() ?>
+        <script type="text/javascript" src="/public/partials/loaderpartials/home/homeconfig.js" ></script>
+        <?php $View_Layout->layoutjs() ?>
+    </head>
+    <body ng-cloak="TRUE" ng-app="rootApp" ng-controller="homeController"  class="hold-transition skin-blue-light sidebar-mini">
+        <div class="wrapper">
+            <?php
+            $View_Layout->layoutMenu();
+            ?>
+            <div class="content-wrapper">
+                <section class="panel"  >
+                    <div class="clearfix" ></div>
+                    <?php
+                    include $Conten;
+                    ?>
+                </section>
+            </div>
+            <?php $View_Layout->footer($_Controller, $_Param) ?>        
+        </div>
+        
+        <div class="container btn-lienhedangtin" >
+            <ul>
+                <li class="col-xs-6 " >
+                    <a href="tel:{Lang_SDTHoTro}" class="btn-dangtin"  >
+                        <i class="fa fa-phone" ></i>
+                        {Lang_SDTHoTro}
+                    </a>
+                </li>
+                <li class="col-xs-6" >
+                    <a href="<?php echo BASE_DIR ?>dangtin" class="btn-dangtin"  >
+                        Đăng Tin Ngay
+                        <i class="fa fa-upload" ></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="fb-root"></div>
+        <script type="text/javascript" >
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=1235248759897668";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+    </body>
+</html>
+
+<?php
+$str = ob_get_clean();
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption();
+foreach ($DSOption as $option) {
+    $_Option = new Model_Option($option);
+    $str = str_replace("{{$_Option->MaOption}}", $_Option->GiaTri, $str);
+}
+echo $str;
+?>

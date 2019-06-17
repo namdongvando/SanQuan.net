@@ -1,0 +1,69 @@
+<div>Điểm Seo: <span id='DiemSeo'>
+      <img style="width: 10px" src="<?php echo BASE_DIR ?>public/img/images/icon/ajax-loader.gif" alt=""/>
+   </span>
+</div>
+<div>Thứ Hạng Alexa: <span id='ThuHang'>
+      <img style="width: 10px" src="<?php echo BASE_DIR ?>public/img/images/icon/ajax-loader.gif" alt=""/>
+   </span>
+</div>
+<div>Google index pages: <span id='Googleindexedpages'>
+      <img style="width: 10px" src="<?php echo BASE_DIR ?>public/img/images/icon/ajax-loader.gif" alt=""/>
+   </span>
+</div>
+<div>Google index pages: <span id='seoreport'>
+      <img style="width: 10px" src="<?php echo BASE_DIR ?>public/img/images/icon/ajax-loader.gif" alt=""/>
+   </span>
+</div>
+
+
+
+<script>
+   DiemSeo();
+   function DiemSeo() {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("DiemSeo").innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>ajax/diemseo.php", true);
+         xmlhttp.send();
+     
+   }
+   ThuHang();
+   function ThuHang() {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("ThuHang").innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>ajax/thuhang.php", true);
+         xmlhttp.send();
+     
+   }
+   Googleindexedpages();
+   function Googleindexedpages() {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("Googleindexedpages").innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>ajax/Googleindexedpages.php", true);
+         xmlhttp.send();
+     
+   }
+   seoreport();
+   function seoreport() {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     document.getElementById("seoreport").innerHTML = xmlhttp.responseText;
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>ajax/seoreport.php", true);
+         xmlhttp.send();
+     
+   }
+</script>

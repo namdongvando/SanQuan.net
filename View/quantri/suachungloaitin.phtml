@@ -1,0 +1,37 @@
+	        
+<?php
+print_r($data);
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      chi tiết Chủng loại Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/suachungloaitin" method="post">
+         <table class="table table-bordered table-hover" >
+	  <tr>
+	     <th>{MaCL}</th>
+	     <th>
+	        <input value="<?php echo $data['ChiTietChungLoaiTin']['MaCL'] ?>" type="hidden" >
+	        <input value="<?php echo $data['ChiTietChungLoaiTin']['MaCL'] ?>" readonly="readonly" name="MaCL" type="text" >
+
+	     </th>
+	  </tr>
+	  <tr>
+	     <th>{TenCL}</th>
+	     <th>
+	        <input value="<?php echo $data['ChiTietChungLoaiTin']['TenCL'] ?>" name="TenCL" type="text" >
+
+	     </th>
+	  </tr>
+	  <tr>
+	     <th colspan="2"><input class="sua"  name="sua"  type="submit" value="{sua}" ></th>
+	  </tr>
+
+
+         </table>
+
+      </form>
+
+   </div>
+</div>

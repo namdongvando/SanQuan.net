@@ -1,0 +1,105 @@
+<nav class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+         <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Gian Hàng Bi Báo Cáo</a></li>
+            <li ><a href="<?php echo BASE_DIR.$_Controller."/".$_Action ?>"><i class="fa fa-refresh"></i> Làm mới Gian Hang</a></li>            
+         </ul>
+      </div><!-- /.navbar-collapse -->
+   </div>
+</nav>
+<table class="table table-compare" id="datatable">
+   <thead>
+      <tr>
+         <th>STT</th>
+         <th>Mã Cửa Hàng</th>
+         <th>Tên Cửa Hàng</th>
+         <th>Chủ Gian Hàng</th>
+         <th>Tên Hiển Thị</th>
+         <th>Đảm Bảo</th>
+         <th>Ẩn Hiện</th>
+         <th>Xem Gian Hàng</th>
+         <th>Xóa</th>
+      </tr>
+   </thead>
+   <tbody>
+      <?php
+//      print_r($data);
+      $dem = 1;
+      foreach($data['DSGianHang'] as $GianHang) {
+         $ThongTinGianHang = json_decode($GianHang['GhiChu']);
+         ?>
+         <tr>
+            <td><?php echo $dem ?></td>
+            <td><?php echo $GianHang['MaCuaHang'] ?></td>
+            <td><?php echo $GianHang['TenCuaHang'] ?></td>
+            <td><?php echo $GianHang['MaKhachHang'] ?></td>
+            <td><?php echo $GianHang['TenHienThi'] ?></td>
+
+            <td>
+               <input id="DMI<?php echo $GianHang['MaCuaHang']; ?>" type="checkbox" onchange="CuaHangDamBao('<?php echo $GianHang['MaCuaHang'] ?>')" <?php echo isset($ThongTinGianHang->GianHangDamBao) ? $ThongTinGianHang->GianHangDamBao == 1 ? 'checked="checked"' : '' : '' ?>   >
+               <label for="DMI<?php echo $GianHang['MaCuaHang']; ?>" id="DM<?php echo $GianHang['MaCuaHang']; ?>">
+                  <?php echo isset($ThongTinGianHang->GianHangDamBao) ? $ThongTinGianHang->GianHangDamBao == 1 ? 'Đảm Bảo' : 'Không Đảm Bảo' : 'Không Đảm Bảo' ?>
+               </label>
+            </td>
+            <td>
+               <input id="hienthi<?php echo $GianHang['MaCuaHang']; ?>" type="checkbox" onchange="AnHienCuaHang('<?php echo $GianHang['MaCuaHang'] ?>')" <?php echo $GianHang['AnHien'] == 1 ? 'checked="checked"' : '' ?>   value="<?php echo $GianHang['AnHien'] ?>" >
+               <label for="hienthi<?php echo $GianHang['MaCuaHang']; ?>" id="<?php echo $GianHang['MaCuaHang']; ?>">
+                  <?php echo $GianHang['AnHien'] == 1 ? 'Hiển Thị' : 'Ẩn' ?>
+               </label>
+            </td>
+            <td>
+               (Tên Hiển Thị không có dấu viết liền không dấu)
+               <input name="TenHienThi" value="<?php echo $GianHang['TenHienThi']; ?>">
+               <a href="<?php echo BASE_DIR ?>gianhang/<?php echo $GianHang['TenHienThi']; ?>" target="_blank">
+                  <i class="fa fa-eye"></i>
+               </a>
+            </td>
+            <td>
+               <a href="<?php echo BASE_DIR ?>quantri/GianHangXoa/<?php echo $GianHang['MaCuaHang'] ?>" class="fa fa-trash-o xoa"></a>
+            </td>
+         </tr>
+         <?php
+         $dem++;
+      }
+      ?>      
+   </tbody>
+   <tfoot>
+      <tr>
+         <th>STT</th>
+         <th>Mã Cửa Hàng</th>
+         <th>Tên Cửa Hàng</th>
+         <th>Chủ Gian Hàng</th>
+         <th>Tên Hiển Thị</th>
+         <th>Đảm Bảo</th>
+         <th>Ẩn Hiện</th>
+         <th>Xem Gian Hàng</th>
+         <th>Xóa</th>
+      </tr>
+   </tfoot>
+</table>
+
+<script>
+   function AnHienCuaHang(str) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	  document.getElementById(str).innerHTML = xmlhttp.responseText;
+         }
+      };
+      xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/AnHienCuaHang/" + str, true);
+      xmlhttp.send();
+   }
+   function CuaHangDamBao(str) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	  document.getElementById("DM" + str).innerHTML = xmlhttp.responseText;
+         }
+      };
+      xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/CuaHangDamBao/" + str, true);
+      xmlhttp.send();
+   }
+</script>

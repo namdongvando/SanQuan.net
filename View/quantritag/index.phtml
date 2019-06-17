@@ -1,0 +1,58 @@
+<?php
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption4LoaiOption(4);
+?> 
+<div class="panel panel-default" >
+    <div class="panel-heading " >
+        <h3 class="panel-title" >Quản Trị Tag Tìm Kiếm</h3>
+    </div>
+    <div class="panel-body" >
+        <h3 class="panel-title" >Thêm Tag Mới</h3>
+        <form action="<?php echo BASE_DIR ?>quantritag/tagthem" method="POST" >
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>Giá Trị</label>
+                    <textarea class="form-control" name="GiaTri" placeholder="Giá Trị" type="text"></textarea>
+                </div>
+                <div class="col-xs-12" style="margin-top: 10px;" >
+                    <input class="btn btn-success" name="ThemOption" value="Thêm" type="submit" >
+                </div>
+            </div>
+        </form>    
+        <hr>
+        <table class="table table-bordered" >
+            <tr>
+                <td>Stt</td>
+                <td>Mã tag</td>
+                <td>Giá Trị</td>
+                <td>Tùy Chỉnh</td>
+            </tr>
+            <?php
+            $dem = 1;
+            if ($DSOption)
+                foreach ($DSOption as $tag) {
+                    $_Option = new Model_Option($tag);
+                    ?>
+                    <tr>
+                        <td><?php echo $dem++; ?></td>
+                        <td><?php echo $_Option->MaOption ?></td>
+                        <td><?php echo $_Option->GiaTri ?></td>
+                        <td>
+                            <a href="<?php echo BASE_DIR ?>quantritag/xoatag/<?php echo $_Option->MaOption ?>" class="btn btn-danger" >
+                                Xóa
+                            </a>
+
+                        </td>
+                    </tr>
+                    <?php
+                }
+            ?>
+
+
+        </table>
+
+
+
+    </div>    
+
+</div>

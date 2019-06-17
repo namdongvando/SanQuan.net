@@ -1,0 +1,86 @@
+<?php
+$DSKhachHang = $data['DSKhachHang'];
+?> 
+<div class="panel panel-success">
+   <div class="panel-heading">
+      <h3 class="panel-title">Tìm Kiếm Khách hàng</h3>
+   </div>
+   <div class="panel-body">
+      <!--<input type="search" onkeyup="TimKhachHang(this.value);" name="TimKhachHang" id="input" class="form-control" >-->
+      <div id="KetQuanTimKiem">
+         <?php
+         $DSKhachHang = $data['DSKhachHang'];
+         ?>
+         <table class="table table-bordered table-hover" id="datatable">
+            <thead>
+               <tr>
+                  <th>Email</th>
+                  <th>HoTen</th>
+                  <th>SDT</th>
+                  <th>Đia Chỉ</th>
+                  <th>Thao Tác</th>
+               </tr>
+            </thead>
+            <tbody>
+               <?php
+               if($DSKhachHang) {
+                  foreach($DSKhachHang as $KhacHang) {
+                     $thuocTinh = json_decode($KhacHang['ThongTinChung']);
+                     ?>
+                     <tr>
+                        <td><?php echo $KhacHang['email'] ?></td>
+                        <td><?php echo $KhacHang['HoTen'] ?></td>
+                        <td><?php echo $KhacHang['SDT'] ?></td>
+                        <td><?php echo $KhacHang['DiaChi'] ?></td>
+                        <td>
+                            <a class="btn btn-danger" href="<?php echo BASE_DIR ?>quantri/khachhangct/<?php echo $KhacHang['email'] ?>"  >xem</a>
+                           <a class="btn btn-danger" href="<?php echo BASE_DIR ?>quantri/<?php echo $KhacHang['active'] == 1 ? 'lock' : 'unlock' ?>account/<?php echo $KhacHang['email']; ?>"><i class="fa fa-<?php echo $KhacHang['active'] == 1 ? 'lock' : 'unlock' ?>"></i></a>
+                           <a class="btn btn-danger" href="<?php echo BASE_DIR ?>quantri/xoaaccount/<?php echo $KhacHang['email']; ?>"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                     </tr>
+                     <?php
+                  }
+               }
+               ?>
+            </tbody>
+            <tfoot>
+               <tr>
+                  <th>Email</th>
+                  <th>HoTen</th>
+                  <th>SDT</th>
+                  <th>Đia Chỉ</th>
+                  <th>Thao Tác</th>
+               </tr>
+            </tfoot>
+         </table>
+
+      </div>
+   </div>
+</div>
+<!--tìm kiếm thông tin khách hàng dang tìm-->
+<script>
+   function TimKhachHang(str) {
+      if (str.length > 2) {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+              document.getElementById("KetQuanTimKiem").innerHTML = xmlhttp.responseText;
+           }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/timkiemkhachhang/" + str, true);
+         xmlhttp.send();
+      }
+   }
+   function XemKhachHang(str) {
+      if (str.length > 3) {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+              document.getElementById("KetQuanTimKiem").innerHTML = xmlhttp.responseText;
+           }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/xemtaikhoan/" + str, true);
+         xmlhttp.send();
+      }
+   }
+</script>

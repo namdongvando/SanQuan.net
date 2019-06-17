@@ -1,0 +1,323 @@
+<?php
+$TinTuc = $data['TinTuc'];
+$TinTuc = new Model_SanPham($TinTuc);
+$Model_TinhThanh = new Model_TinhThanh();
+$DSLoaiTin = $data['DSLoaiTin'];
+?>
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo $TinTuc->getLinkXemSanPham() . $TinTuc->MaSP; ?>"><?php echo $TinTuc->TenSP; ?></a>
+    </li>
+    <li class="active">sửa</li>
+</ol>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a  href="<?php echo $TinTuc->getLinkDSSanPham() ?>">
+            <i class="btn btn-primary fa fa-arrow-left fa-border" ></i>
+        </a>
+        Sửa Sẩn Phẩm
+    </div>
+    <div class="panel-body">
+        <form action="" method="post" enctype="multipart/form-data" >
+            <div class="col-lg-9 col-md-9 " style="padding: 0px;margin: 0px;">
+                <table class="table table-bordered" >
+                    <tr>
+                        <td colspan="2" >
+                            <h4>
+                                Tiêu Đề Tin(không quá 200 ký tự).
+                            </h4>
+                            <input name="TieuDe" class="form-control" value="<?php echo $TinTuc->TenSP ?>" name="TieuDe" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            <h4>
+                                Đia Chỉ
+                            </h4>
+                            <input name="GhiChu[DiaChi]" required="required" class="form-control" required="required" value="<?php echo $TinTuc->DiaChi ?>" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            keyword
+                            <textarea class="form-control"  name="keyword" cols="10" rows="4"  ><?php echo $TinTuc->keyword ?></textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            description
+                            <textarea class="form-control"  name="description" cols="10" rows="4"  ><?php echo $TinTuc->description ?></textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Title
+                            <textarea class="form-control"  name="title" cols="10" rows="4"  ><?php echo $TinTuc->title ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h4>Tóm Tắt</h4>
+                            <textarea id="NoiDungTomTat" class="ckeditor" name="TomTat"><?php echo $TinTuc->TomTat ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h4>Nội Dung</h4>
+                            <textarea name="NoiDung" id="NoiDungChinh" ><?php echo $TinTuc->NoiDung ?></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 col-md-3  table-responsive" >
+                <table class="table table-bordered"> 
+                    <tr>
+                        <td colspan="2" >
+                            <h4>Danh Mục Bài Viết</h4>
+                            <select name="MaDanhMuc" class="form-control" >
+                                <option value="0" >Chọn Danh Mục</option>
+                                <?php
+                                foreach ($DSLoaiTin as $DanhMuc) {
+                                    ?>
+                                    <option <?php echo $TinTuc->MaDanhMuc == $DanhMuc['MaDanhMuc'] ? 'selected' : "" ?>  <?php echo isset($DanhMuc['CapCon']) ? 'disabled="disabled"' : '' ?>  value="<?php echo $DanhMuc['MaDanhMuc'] ?>" ><?php echo $DanhMuc['TenDanhMuc'] ?></option>
+                                    <?php
+                                    if (isset($DanhMuc['CapCon'])) {
+                                        foreach ($DanhMuc['CapCon'] as $DanhMuc1) {
+                                            ?>
+                                            <option <?php echo $TinTuc->MaDanhMuc == $DanhMuc1['MaDanhMuc'] ? 'selected' : "" ?> value="<?php echo $DanhMuc1['MaDanhMuc'] ?>" >--|<?php echo $DanhMuc1['TenDanhMuc'] ?></option>
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            <h4>Vị Trí</h4>
+                            <select name="GhiChu[ViTri]" class="form-control" >
+                                <?php
+                                $DSVT = $TinTuc->getDSViTri();
+
+                                foreach ($DSVT as $k => $VT) {
+                                    ?>
+                                    <option  <?php echo $TinTuc->ViTri == $k ? 'selected' : "" ?>   value="<?php echo $k; ?>" ><?php echo $VT ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            <h4>Gói Đăng Tin</h4>
+                            <select name="GhiChu[GoiDangTin]" class="form-control" >
+                                <option  <?php echo $TinTuc->GoiDangTin == 1 ? 'selected' : "" ?>   value="1" >Free</option>
+                                <option  <?php echo $TinTuc->GoiDangTin == 1 ? 'selected' : "" ?>   value="1" >Gói Basic</option>
+                                <option  <?php echo $TinTuc->GoiDangTin == 2 ? 'selected' : "" ?>   value="2" >Gói Maximum</option>
+                            </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <p>Giá <b>(0=Thương Lượng , -1 = liên hệ)</b></p> 
+                            <input type="text" value="<?php echo $TinTuc->Gia ?>" name="Gia"  class="form-control" />
+                        </td>
+                        <td class="text-center" >
+                            <label style="margin-top: 10px;">
+                                Triệu <br>
+                                <input <?php echo $TinTuc->DonVi == 1 ? 'checked="checked"' : '' ?>  type="radio" value="1" name="GhiChu[DonVi]"  />
+                            </label>
+                            <label style="margin-top: 10px;">
+                                Tỷ <br>
+                                <input <?php echo $TinTuc->DonVi == 2 ? 'checked="checked"' : '' ?>  type="radio" value="2" name="GhiChu[DonVi]"  />
+                            </label>
+                            <label style="margin-top: 10px;">
+                                USD <br>
+                                <input <?php echo $TinTuc->DonVi == 3 ? 'checked="checked"' : '' ?>  type="radio" value="3" name="GhiChu[DonVi]"  />
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Ẩn hiện giá
+                        </td>
+                        <td class="text-center" >
+                            <label >
+                                <input <?php echo $TinTuc->HienGia == 1 ? 'checked="checked"' : '' ?>  type="checkbox" value="1" name="GhiChu[HienGia]"  />
+                            </label>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="2">
+                            Người Liên Hệ
+                            <input type="text" value="<?php echo $TinTuc->NguoiLienHe ?>" name="GhiChu[NguoiLienHe]"  class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Số Điện Thoại
+                            <input type="text" value="<?php echo $TinTuc->DienThoai ?>" name="GhiChu[DienThoai]"  class="form-control" />
+                        </td>
+                    </tr>
+<!--                    <tr>
+                        <td >
+                            Chiều Ngang
+                            <select name="GhiChu[ChieuNgang]" class="form-control" >
+                                <?php
+                                for ($i = 3; $i < 50; $i++) {
+                                    ?>
+                                    <option <?php echo $TinTuc->ChieuNgang == $i ? 'selected="selected"' : '' ?>  value="<?php echo $i ?>" ><?php echo $i ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+
+                        </td>
+                        <td >
+                            Chiều Dọc
+                            <select name="GhiChu[ChieuRong]" class="form-control" >
+                                <?php
+                                for ($i = 3; $i < 50; $i++) {
+                                    ?>
+                                    <option <?php echo $TinTuc->ChieuRong == $i ? 'selected="selected"' : '' ?> value="<?php echo $i ?>" ><?php echo $i ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td colspan="2">
+                            Độ Quan trọng
+                            <input type="text" value="<?php echo $TinTuc->DoQuanTrong ?>" name="DoQuanTrong"  class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  >
+                            <?php $DSTinh = $Model_TinhThanh->DSTinh(); ?>
+                            Tinh
+                            <select class="form-control" name="GhiChu[Tinh]" onchange="LayHuyen(this.value)" >
+                                <?php
+                                foreach ($DSTinh as $Tinh) {
+                                    $_Tinh = new Model_TinhThanh($Tinh);
+                                    ?>
+                                    <option <?php echo $TinTuc->Tinh == $_Tinh->MaDiaChi ? 'selected="selected"' : '' ?>  value="<?php echo $_Tinh->MaDiaChi; ?>" ><?php echo $_Tinh->TenDiaChi; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </td>
+                        <td >
+                            <?php $DSTinh = $Model_TinhThanh->DSHuyenTheoTinh($TinTuc->Tinh); ?>
+                            Huyện
+                            <select class="form-control" name="GhiChu[Huyen]" id="SHuyen" >
+                                <?php
+                                foreach ($DSTinh as $Tinh) {
+                                    $_Tinh = new Model_TinhThanh($Tinh);
+                                    ?>
+                                    <option <?php echo $TinTuc->Huyen == $_Tinh->MaDiaChi ? 'selected="selected"' : '' ?> value="<?php echo $_Tinh->MaDiaChi; ?>" ><?php echo $_Tinh->TenDiaChi; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td>Ẩn Hiện</td>
+                        <td>
+                            <div class="slideThree">	
+                                <select name="AnHien" class="form-control" >
+                                    <option value="1"  >Hiện</option>
+                                    <option value="0" >Ẩn</option>
+                                </select>
+                                <label for="slideThree"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nổi Bật</td>
+                        <td>
+                            <div class="slideThree">	
+                                <select name="TinNoiBat" class="form-control" >
+                                    <?php
+                                    $DSViTri = $TinTuc->DSViTri();
+                                    echo View_html::GetElementOptionByID($DSViTri, $TinTuc->TinNoiBat);
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thứ Tự</td>
+                        <td>
+                            <input   name="Stt" value="<?php echo $TinTuc->Stt ?>" type="text" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Hình Đại Diện</label>
+                            <br>
+                            <img src="<?php echo $TinTuc->UrlHinh ?>" style="height: 50px;" >
+                            <input type="file" name="UrlHinh"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            <label>Tải Hình Từ Máy Tính</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            <?php
+                            if ($TinTuc->ListHinh)
+                                foreach ($TinTuc->ListHinh as $HinhSanPham) {
+                                    $TenSP = basename($HinhSanPham);
+                                    ?>
+                                    <div style="position: relative;" >
+                                        <img src="<?php echo $HinhSanPham ?>" style="height: 50px;" >
+                                        <a style="padding: 3px;border: 1px solid red;" href="<?php echo BASE_DIR ?>quantrisanpham/xoahinh/<?php echo $TinTuc->IDKhachHang ?>/<?php echo $TenSP; ?>" >x</a>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                            <input type="file" name="imgClien[]" multiple="multiple" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <input class=" btn btn-success btn-block"  name="sua"  type="submit" value="Sửa" >
+                            <input name="IdTin"  type="hidden" value="<?php echo $TinTuc->MaSP ?>" >
+                        </th>
+                    </tr>
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function LayHuyen(str) {
+        if (str.length == 0) {
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("SHuyen").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "<?php echo BASE_DIR ?>index/layhuyen/" + str, true);
+            xmlhttp.send();
+        }
+    }
+</script>

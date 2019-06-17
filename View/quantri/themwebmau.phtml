@@ -1,0 +1,73 @@
+<?php
+$DSDanhMuc = $data['DSDanhMuc'];
+?>
+<div class="panel panel-primary"> 
+   <div class="panel-heading ">
+      {ThemWebMau}
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/themwebmau" method="POST">
+         <div class="col-lg-6">
+	  <table class="table table-bordered">
+	     <tr>
+	        <td>{Hinh}</td>
+	        <td>
+		 <input id="xFilePath" name="HinhDaiDien" type="text" />
+		 <input type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/', 'xFilePath')" />
+		 
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{Gia}</td>
+	        <td>
+		 <input name="Gia" type="text" class="form-control" />
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{Link}</td>
+	        <td>
+		 <input name="Link" type="text" class="form-control" />
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{LoaiWeb}</td>
+	        <td>
+		 <select name="MaDanhMuc" class="form-control" >
+		    <?php
+		    foreach($DSDanhMuc as $DanhMuc) {
+		       $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+		       if($ThuocTinh->type == 3) {
+			if(isset($DanhMuc['CapCon'])) {
+			   foreach($DanhMuc['CapCon'] as $k => $DSWebMau) {
+			      ?>
+	  		    <option value="<?php echo $DSWebMau['MaDanhMuc'] ?>">
+			         <?php echo $DSWebMau['TenDanhMuc']; ?>
+	  		    </option>
+			      <?php
+			   }
+			}
+		       }
+		    }
+		    ?>
+		 </select>
+	        </td>
+	     </tr>
+	     <tr>
+	        <td colspan="2">
+		 <input name="ThemWebMau" value="{SuaWebMau}" type="submit" >
+	        </td>
+	     </tr>
+	  </table>
+
+         </div>
+
+      </form>
+
+
+   </div>
+
+</div>
+
+
+
+

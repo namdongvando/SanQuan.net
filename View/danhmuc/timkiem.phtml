@@ -1,0 +1,41 @@
+<?php
+$Model_SanPham = new Model_SanPham();
+$Model_DanhMuc = new Model_DanhMuc();
+$Model_TinhThanh = new Model_TinhThanh();
+$MaTinh = intval($_Param[0]);
+$MaDanhMuc = intval($_Param[1]);
+$DSTinh = $Model_TinhThanh->DSHuyenTheoTinh($MaTinh);
+if (!$DSTinh) {
+    $Dmht = $Model_TinhThanh->TimTinhHuyen($MaTinh);
+    $DSTinh = $Model_TinhThanh->DSHuyenTheoTinh($Dmht["MaDiaChiCha"]);
+}
+$_Tinh = new Model_TinhThanh($Model_TinhThanh->TimTinhHuyen($MaTinh));
+$_DanhMuc = new Model_DanhMuc($Model_DanhMuc->TimDanhCha($MaDanhMuc));
+?>
+<div class="panel panel-primary panel-timkiem"    >
+    <div class="panel-body" >
+        <?php
+        foreach ($DSTinh as $Tinh) {
+            $_Tinh = new Model_TinhThanh($Tinh);
+            ?>
+            <div class="DanhmucTimKiem color_vn" >
+                <a href="<?php echo BASE_DIR ?>danhmuc/timkiem/<?php echo $_Tinh->MaDiaChi ?>/<?php echo $_DanhMuc->MaDanhMuc ?>" class="btn btn-block text-left "  >
+                    <i class="fa fa-caret-right" style="color: #0066cc;" ></i>
+                    <?php echo $_DanhMuc->TenDanhMuc . " " . $_Tinh->TenDiaChi; ?> 
+                </a>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="clearfix" ></div>
+    </div>
+</div>
+<?php
+$DSSanPham = $Model_SanPham->DSTinTuc4LoaiHuyen($MaDanhMuc, $MaTinh, $TongSanPham, 0, 21);
+if ($DSSanPham)
+    foreach ($DSSanPham as $SanPham) {
+        $_SanPham = new Model_SanPham($SanPham);
+        $View_SanPham = new View_sanphamview();
+        $View_SanPham->ListSanPham($_SanPham);
+    }
+?>

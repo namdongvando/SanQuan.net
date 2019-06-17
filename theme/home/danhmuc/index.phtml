@@ -1,0 +1,40 @@
+<?php
+$_DanhMuc = new Model_DanhMuc($data['Page']);
+$_Param[0] = $_Param[0];
+$_Param[0] = intval($_Param[0]);
+$_Param[0] = $_Param[0] <= 0 ? 1 : $_Param[0];
+?>
+<div class="col-lg-12 col-md-12" >
+    <h3 class="tieude"  >
+        <?php
+        echo $_DanhMuc->TenDanhMuc;
+        ?>
+    </h3>
+    <div class="row" >
+        <?php
+        $Model_SanPham = new Model_SanPham();
+        $SL = 50;
+        $DSTinTuc = $Model_SanPham->DSSanPham4LoaiPT($_DanhMuc->MaDanhMuc, $_Param[0], $SL, $Tong);
+        if ($DSTinTuc) {
+            foreach ($DSTinTuc as $SanPham) {
+                $_SanPham = new Model_SanPham($SanPham);
+                $View_SanPham = new View_sanphamview();
+                $View_SanPham->ListSanPham($_SanPham);
+            }
+        } else {
+            echo "Đang Cập Nhật Bài Viết";
+        }
+        ?>
+    </div>
+    <div class="col-lg-12 col-md-12" >
+        <?php
+        $TPage = ceil($Tong / $SL);
+        echo $Model_SanPham->PhanTrang($TPage, $_Param[0], BASE_DIR . $_DanhMuc->TenKhongDau . "/[i]");
+        ?>
+    </div>
+    
+</div>
+<div ng-controller="locationController" >
+    <a href="<?php echo $_DanhMuc->Link ?>{{item.Link}}" style="font-weight: bold;" ng-repeat="item in getLocationByParent('<?php echo $_SESSION["KhuVuc"]["MaDiaChi"]; ?>')" class="col-lg-4 col-md-4 list-group-item" >{{item.TenDiaChi}}</a>
+</div>
+

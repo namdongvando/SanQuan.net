@@ -1,0 +1,83 @@
+<?php
+$DSSanPham = $data['GioHang'];
+?>
+<div style="background-color: #eee" >
+    <div class="container bg-aqua-gradient"  >
+        <div class="row" style="padding: 40px 0;" >
+            <h3 class="text-center" >Giỏ Hàng</h3>
+            <div class="col-md-8" style="background: #fff;" >
+                <div class="row" >
+                    <table class="table table-compare">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Name</th>
+                                <th>QTY</th>
+                                <th>Price</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($DSSanPham) {
+                                foreach ($DSSanPham as $SanPham) {
+                                    $_SanPham = new Model_SanPham($SanPham);
+                                    ?>
+                                    <tr>
+                                        <td class="cart-item-image">
+                                            <a href="<?php echo $_SanPham->LinkChiTiet ?>">
+                                                <img style="max-height: 100px;max-width: 150px;" src="<?php echo $_SanPham->UrlHinh ?>" alt="<?php echo $_SanPham->TieuDe ?>" title="<?php echo $_SanPham->TieuDe ?>" />
+                                            </a>
+                                        </td>
+                                        <td><a href="<?php echo $_SanPham->LinkChiTiet ?>"><?php echo $_SanPham->TenSP ?></a>
+                                        </td>
+                                        <td class="cart-item-quantity">
+                                            <a href="<?php echo $_SanPham->GiamSLGioHang ?>" >
+                                                <i class="fa fa-minus cart-item-minus"></i>
+                                            </a>
+                                            <input type="text" style="width: 40px;text-align: center;border-radius: 5px; " name="cart-quantity" class="cart-quantity" value="<?php echo $_SanPham->SoLuong ?>" />
+                                            <a href="<?php echo $_SanPham->TangSLGioHang ?>" >
+                                                <i class="fa fa-plus cart-item-plus"></i>
+                                            </a>
+                                        </td>
+                                        <td><?php echo $_SanPham->Gia ?></td>
+                                        <td class="text-center">
+                                            <a class="fa fa-times" style="width: 25px;height: 25px;background-color: #aaa;padding: 6px;color: #fff;border-radius: 50px;" href="<?php echo $_SanPham->XoaGioHang; ?>"></a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#" class="btn btn-primary">Update the cart</a>
+            </div>
+            <div class="col-md-4">
+                <table class="table table-compare table-bordered" >
+                    <tr>
+                        <td>Sub Total</td>
+                        <td>$500.00</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td>$500.00</td>
+                    </tr>
+                    <tr>
+                        <td>Taxes</td>
+                        <td>$500.00</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>$500.00</td>
+                    </tr>
+                </table>
+                <div class="clearfix" ></div>
+                <a href="#" class="btn btn-primary btn-lg">Checkout</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

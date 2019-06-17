@@ -1,0 +1,342 @@
+<?php
+$Model_Option = new Model_Option();
+$DSOption = $Model_Option->DSOption();
+foreach ($DSOption as $option) {
+    $_option = new Model_Option($option);
+    define($_option->MaOption, $_option->GiaTri);
+}
+ob_start();
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title><?php echo isset($data['title'])? : "Mỹ Phẩm vivian" ?></title>
+        <meta name="keywords" content="<?php echo isset($data['Keywords'])? : "Mỹ Phẩm vivian" ?>" />
+        <meta name="description" content="<?php echo isset($data['Description'])? : "Mỹ Phẩm vivian" ?>">
+        <meta name="author" content="namdong92@gmail.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="<?php echo Option_Logo ?>">
+        <link rel="stylesheet" href="<?php echo BASE_DIR ?>public/hoatuoi/css/boostrap.css">
+        <link rel="stylesheet" href="<?php echo BASE_DIR ?>public/hoatuoi/css/font_awesome.css">
+        <link rel="stylesheet" href="<?php echo BASE_DIR ?>public/hoatuoi/css/styles.css">
+        <link rel="stylesheet" href="<?php echo BASE_DIR ?>public/hoatuoi/css/mystyles.css">
+        <link rel="stylesheet" href="<?php echo BASE_DIR ?>public/hoatuoi/css/switcher.css">
+        <!--<link href="css/schemes/pink.css" rel="stylesheet" type="text/css"/>-->
+        <!--<link href="css/schemes/hot-pink.css" rel="stylesheet" type="text/css"/>-->
+        <link href="<?php echo BASE_DIR ?>public/hoatuoi/css/schemes/jgger.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="<?php echo BASE_DIR ?>public/hoatuoi/css/schemes/pink.css" rel="stylesheet" type="text/css"/>-->
+
+
+    </head>
+
+    <body class="boxed" style='background-image: url("<?php echo BASE_DIR ?>public/hoatuoi/img/backgrounds/flowers.jpg");background-repeat: no-repeat;background-attachment: fixed;background-size: cover'>
+        <div class="global-wrap">
+            <!-- //////////////////////////////////
+            //////////////MAIN HEADER///////////// 
+            ////////////////////////////////////-->
+<!--            <div class="top-main-area text-center" style="margin: 0px;padding: 0px;background-image: url('<?php echo BASE_DIR ?>public/hoatuoi/bg.png')" >
+                <div class="container" >
+                    <a href="" class="logo" style="padding: 0px;margin-top: 0px;" >
+                        <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/logos/logo.png" alt=""/>
+                    </a>
+                </div>
+            </div>-->
+            <div class="top-main-area" >
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="{Home}">
+                                <img src="<?php echo Option_Logo ?>" style="height: 100px;width: auto;" alt="Mỹ Phẩm vivian"/>
+                            </a>
+                        </div>
+                        <div class="col-md-7 col-md-offset-3">
+                            <div class=""  > 
+                                <ul class="header-features">
+                                    <li class="col-md-4 col-xm-12" style="text-align: center;" >
+                                        <div style="margin: auto;display: table;" class="fa fa-phone"></div>
+                                        <div class="clearfix" ></div>
+                                        <div class="header-feature-caption" style="margin: auto;">
+                                            <h5 class="header-feature-title">{HotLine}</h5>
+                                            <p class="header-feature-sub-title">24/7 phone assistance</p>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-4 col-xm-12" style="text-align: center;" >
+                                        <div style="margin: auto;display: table;" class="fa fa-truck"></div>
+                                        <div class="clearfix" ></div>
+                                        <div class="header-feature-caption" style="margin: auto;">
+                                            <h5 class="header-feature-title">Giao Hàng</h5>
+                                            <p class="header-feature-sub-title">Giao Hàng Miễn Phí Toàn Quốc</p>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-4 col-xm-12" style="text-align: center;" >
+                                        <div style="margin: auto;display: table;" class="fa fa-map-marker"></div>
+                                        <div class="clearfix" ></div>
+                                        <div class="header-feature-caption" style="margin: auto;">
+                                            <h5 class="header-feature-title">Địa Chỉ</h5>
+                                            <p class="header-feature-sub-title">
+                                                {DiaChi}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <header class="main">
+                <div class="container">
+                    <div class="row">
+                        <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
+                        <nav>
+                            <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
+                                <li><a href="<?php echo BASE_DIR ?>">Trang Chủ</a></li>
+                                <?php
+                                $Model_DanhMuc = new Model_DanhMuc();
+                                $DSDanhMuc = $Model_DanhMuc->DSDanhMuc(0);
+                                foreach ($DSDanhMuc as $DanhMuc) {
+                                    $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                                    $DSDanhMuc = $Model_DanhMuc->DSDanhMuc($_DanhMuc->MaDanhMuc);
+                                    ?>
+                                    <li><a href="<?php echo $DSDanhMuc == FALSE ? $_DanhMuc->LinkDanhMuc : '#' ?>"><?php echo $_DanhMuc->TenDanhMuc ?></a>
+
+                                        <?php
+                                        if ($DSDanhMuc) {
+                                            ?>
+                                            <ul>
+                                                <?php
+                                                foreach ($DSDanhMuc as $DanhMuc) {
+                                                    $_DanhMuc1 = new Model_DanhMuc($DanhMuc);
+                                                    ?>
+                                                    <li><a href="<?php echo $_DanhMuc1->LinkDanhMuc; ?>"><?php echo $_DanhMuc1->TenDanhMuc; ?></a></li>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </ul>
+                                            <?php
+                                        }
+                                        ?>
+
+
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <!-- SEARCH AREA -->
+            <!-- END SEARCH AREA -->
+
+
+            <!-- //////////////////////////////////
+            //////////////END MAIN HEADER////////// 
+            ////////////////////////////////////-->
+
+
+            <!-- //////////////////////////////////
+            //////////////PAGE CONTENT///////////// 
+            ////////////////////////////////////-->
+            <div class="container-fluid">
+                <div class="row" >
+                    <div style="height: 20px;" ></div>
+                    <div class="col-md-3" >
+                        <aside class=""  >
+                            <h3 class="text-center" style="color: #61398d;font-size: 18px;background-color: #fff;margin: 0px;padding: 10px;" >
+                                <strong>
+                                    Danh Mục Sản Phẩm
+                                </strong>    
+                            </h3>
+                            <ul class="nav nav-tabs nav-stacked nav-coupon-category nav-coupon-category-left">
+                                <?php
+                                $Model_DanhMuc = new Model_DanhMuc();
+                                $DM = $Model_DanhMuc->TimDanhMucTieuDe("danh-muc-san-pham");
+                                $DM = new Model_DanhMuc($DM);
+                                $DSDanhMuc = $Model_DanhMuc->DSDanhMuc($DM->MaDanhMuc);
+                                ?>
+                                <?php
+                                foreach ($DSDanhMuc as $DanhMuc) {
+                                    $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                                    ?>
+                                    <li><a href="<?php echo $_DanhMuc->LinkDanhMuc; ?>"><i class="fa fa-list" ></i><?php echo $_DanhMuc->TenDanhMuc; ?></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+
+                            <h4 style="color: #61398d;font-weight: bold;" >HỖ TRỢ KHÁCH HÀNG</h4>
+                            <div class="panel panel-success" >
+                                <div class="panel-body" >
+                                    <p style="font-size: 16px;font-weight: bold;" >Hướng Dẫn Đặt Hàng</p>
+                                    <strong style="color: red;font-size: 18px;" >HotLine: {HotLine}</strong>
+                                </div>
+
+                            </div>
+                            <div class="panel panel-success" >
+                                <div class="panel-body" >
+                                    <p style="font-size: 16px;font-weight: bold;" >Xem Địa Chỉ Shop</p>
+                                    <strong style="color: red;font-size: 14px;" >{DiaChi}</strong>
+                                </div>
+
+                            </div>
+                            <div class="panel panel-success" >
+                                <div class="panel-body" >
+                                    <p style="font-size: 16px;font-weight: bold;color: blue" >FaceBook</p>
+                                    <div id="fb-root"></div>
+                                    <script>(function (d, s, id) {
+                                            var js, fjs = d.getElementsByTagName(s)[0];
+                                            if (d.getElementById(id))
+                                                return;
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=137325053404470";
+                                            fjs.parentNode.insertBefore(js, fjs);
+                                        }(document, 'script', 'facebook-jssdk'));</script>
+                                    <div class="fb-page" data-href="https://www.facebook.com/myphanvivian/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/myphanvivian/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/myphanvivian/">Vivian Quyền Năng Phái Đẹp</a></blockquote></div>
+                                </div>
+
+                            </div>
+                        </aside>
+
+                    </div>
+                    <div class="col-md-9" style="background-color: #fff;" >
+                        <?php
+                        include $Conten;
+                        ?>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- //////////////////////////////////
+            //////////////END PAGE CONTENT///////// 
+            ////////////////////////////////////-->
+
+
+
+            <!-- //////////////////////////////////
+            //////////////MAIN FOOTER////////////// 
+            ////////////////////////////////////-->
+
+            <footer class="main" id="main-footer">
+                <div class="footer-copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Copyright © 2014, Your Store, All Rights Reserved</p>
+                            </div>
+                            <div class="col-md-6 col-md-offset-2">
+                                <div class="pull-right">
+                                    <ul class="list-inline list-payment">
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/american-express-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/cirrus-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/discover-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/ebay-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/maestro-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/mastercard-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                        <li>
+                                            <img src="<?php echo BASE_DIR ?>public/hoatuoi/img/payment/visa-curved-32px.png" alt="Image Alternative text" title="Image Title" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- //////////////////////////////////
+            //////////////END MAIN  FOOTER///////// 
+            ////////////////////////////////////-->
+
+            <div id="cfacebook">
+                <a href="javascript:;" style="display: block;text-decoration: none;text-align: center;padding: 5px;background-color: #005384;color: #fff;" data-toggle="collapse" data-target="#demo" onclick="return:false;"><i class="fa fa-facebook" ></i> Chat face</a>
+                <div id="demo" class="collapse">
+                    <div class="fb-page" data-href="https://www.facebook.com/myphanvivian/" data-tabs="messages" data-height="250px" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/myphanvivian/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/myphanvivian/">Vivian Quyền Năng Phái Đẹp</a></blockquote></div>
+                    <div id="fb-root"></div>
+                    <script>(function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id))
+                                return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=137325053404470";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Scripts queries -->
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/jquery.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/boostrap.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/countdown.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/flexnav.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/magnific.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/tweet.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/fitvids.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/mail.min.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/ionrangeslider.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/icheck.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/fotorama.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/card-payment.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/owl-carousel.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/masonry.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/nicescroll.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/custom.js"></script>
+            <script src="<?php echo BASE_DIR ?>public/hoatuoi/js/switcher.js"></script>
+
+
+        </div>
+
+
+
+
+    </body>
+</html>
+
+<?php
+$str = ob_get_clean();
+$str = str_replace("{DiaChi}", Option_DiaChi, $str);
+$str = str_replace("{HotLineTuVan}", Option_Hotline, $str);
+$str = str_replace("{HotLine}", Option_SDTLienHe, $str);
+$str = str_replace("{Email}", Option_EmailLienHe, $str);
+$str = str_replace("{GioLamViec}", Option_Thoi_Gian_Lam, $str);
+$str = str_replace("{Home}", BASE_DIR, $str);
+$str = str_replace("{LinkGioiThieu}", BASE_DIR . "gioi-thieu.html", $str);
+$str = str_replace("{linkToChuSuKien}", BASE_DIR . "to-chuc-su-kien/", $str);
+$str = str_replace("{linkKuyenMai}", BASE_DIR . "khuyen-mai.html", $str);
+$str = str_replace("{linkKinhNghiem}", BASE_DIR . "kinh-nghiem.html", $str);
+$str = str_replace("{linkDMHinh}", BASE_DIR . "hinh-anh/", $str);
+$str = str_replace("{LinkVideo}", BASE_DIR . "video/", $str);
+$str = str_replace("{LinkHuongDan}", BASE_DIR . "tuyen-dung.html", $str);
+$str = str_replace("{LinkPhuongThuc}", BASE_DIR . "doi-ngu.html", $str);
+$str = str_replace("{LinkDiaChi}", BASE_DIR . "tin-tuc/", $str);
+$str = str_replace("{LinkTuyenDung}", BASE_DIR . "lien-he.html", $str);
+
+echo $str;
+?>

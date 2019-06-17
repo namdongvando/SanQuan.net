@@ -1,0 +1,61 @@
+<?php
+$Model_QuanCao = new Model_QuanCao();
+$DSQuanCao = $Model_QuanCao->DSQuanCao(1, 20, $Tong);
+?>
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-left: 0px;">
+        <a href="<?php echo $Model_QuanCao->getLinkDSQuanCao(); ?>" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+            <i class="fa fa-home"></i>
+        </a>
+        <i class="fa fa-list" ></i>
+        Tất cả Quản Cáo
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-hover">
+            <tr> 
+                <th>STT</th>
+                <th>Tên Quản Cáo</th>
+                <th>Vị Trí</th>
+                <th>STT</th>
+                <th>Hình</th>
+                <th>Tùy Chọn</th>
+            </tr>
+            <?php
+            if ($DSQuanCao) {
+                $dem = 1;
+                foreach ($DSQuanCao as $QuanCao) {
+                    $_QuanCao = new Model_QuanCao($QuanCao);
+                    ?>
+                    <tr>
+                        <td><?php echo $dem++; ?></td>
+                        <td><?php echo $_QuanCao->TenQuanCao; ?></td>
+                        <td><?php echo $_QuanCao->ViTri; ?></td>
+                        <td><?php echo $_QuanCao->Stt; ?></td>
+                        <td>
+                            <img style="height: 100px;" src="<?php echo $_QuanCao->UrlHinh; ?>" >
+                        </td>
+                        <td>
+                            <div class="btn btn-group btn-sm" style="margin-top: 0;padding: 0px;">
+                                <a  class="btn btn-primary" href="<?php echo $_QuanCao->getLinkSuaQuanCao() . $_QuanCao->MaQuanCao; ?>" >Sửa</a>
+                                <a class="btn btn-danger xoa" href="<?php echo $_QuanCao->getLinkXoaQuanCao() . $_QuanCao->MaQuanCao; ?>" >Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $(".all").change(function () {
+            $(".Chon").prop('checked', $(this).prop("checked"));
+        });
+
+    });
+
+
+</script>

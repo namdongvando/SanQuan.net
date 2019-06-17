@@ -1,0 +1,16 @@
+<div class="panel-body" >
+    <?php
+    $_POST['key'] = isset($_POST['key']) ? $_POST['key'] : '';
+    $Model_SanPham = new Model_SanPham();
+    $DSTinTuc = $Model_SanPham->DSSanPham();
+    if ($DSTinTuc) {
+        foreach ($DSTinTuc as $TinTuc) {
+            $_SanPham = new Model_SanPham($TinTuc);
+            $View_SanPham  = new View_sanphamview();
+            $View_SanPham->ListSanPham($_SanPham);
+        }
+    } else {
+        echo "Đang Cập Nhật Bài Viết";
+    }
+    ?>
+</div>

@@ -1,0 +1,70 @@
+<?php
+$Tin = $data['TinXem'];
+?>  
+<form action="<?php echo BASE_DIR ?>quantri/sulyduyettin" method="POST">
+   <div class="col-lg-10">
+
+      <input name="TieuDe" class="form-control" value="<?php echo $Tin['TieuDe'] ?>" type="text" >
+      <input name="TomTat" class="form-control" value="<?php echo $Tin['TomTat'] ?>" type="text" >
+      <input name="idTin" class="form-control" value="<?php echo $Tin['idTin'] ?>"  type="text" >
+      <input id="xImagePath" name="urlHinh" type="text" size="60" />
+      <input type="button" value="Browse Server" onclick="BrowseServer('Images:/', 'xImagePath')" />
+      <textarea class="ckeditor" name="NoiDung"><?php echo $Tin['NoiDung'] ?></textarea>
+
+   </div>
+   <div class="col-lg-2">
+      <table class="table table-bordered">
+         <tr>
+	  <td>Ngôn Ngữ</td>
+	  <td>
+	     <select name="lang">
+	        <option value="VN">Tiến Việt</option>
+	        <option value="EN">Tiếng anh</option>
+	     </select>
+
+	  </td>
+
+         </tr>
+         <tr>
+	  <td>{AnHien}</td>
+	  <td>
+	     <input  name="AnHien"  value="1" <?php echo $Tin['AnHien'] == 1 ? "checked" : "" ?>  type="checkbox"  >
+
+	  </td>
+         </tr>
+         <tr>
+	  <td>{LoaiTin}</td>
+	  <td>
+	     <select name="MaDanhMuc" >
+	        <?php
+	        $DSSanhMuc = $data['DSLoaiTin'];
+	        foreach($DSSanhMuc as $DanhMuc) {
+		 if($DanhMuc['MaDanhMuc'] != 10) {
+		    ?>
+      	        <option  <?php echo $Tin['MaDanhMuc'] == $DanhMuc['MaDanhMuc'] ? 'selected="selected"' : ''; ?> value="<?php echo $DanhMuc['MaDanhMuc'] ?>">
+		       <?php echo $DanhMuc['TenDanhMuc'] ?>
+      	        </option>
+		    <?php
+		 }
+	        }
+	        ?>
+
+
+
+	     </select>
+	  </td>
+         </tr>
+
+         <tr>
+	  <th colspan="2"><input class=""  name="them"  type="submit" value="duyet" ></th>
+         </tr>
+      </table>
+
+   </div>
+
+</form>  
+
+
+
+
+

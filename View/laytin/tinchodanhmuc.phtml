@@ -1,0 +1,41 @@
+<?php
+
+set_time_limit(0);
+// get DOM from URL or file
+$html = file_get_html('http://sangquan.com.vn/spa-tham-my-vien-r8/');
+$Model_DanhMuc = new Model_DanhMuc();
+$Model_SanPham = new Model_SanPham();
+//$Model_SanPham->NguoiLienHe
+// find all link
+//body > div:nth-child(3) > ul > li:nth-child(1) > a
+//body > div.DivCenter.banner > div.MainConTain.detail > div.MainDetail > div.productOther > table > tbody > tr:nth-child(2) > td:nth-child(2) > a
+foreach ($html->find('.productOther > table > tbody > tr > td:nth-child(2) > a ') as $e) {
+    $Dm = $Model_DanhMuc->TimDanhMucTieuDe('spa-tham-my-vien');
+    $GhiChu['Tinh'] = "32";
+    $GhiChu['Huyen'] = "33";
+    $GhiChu['DienThoai'] = "0123456789";
+    $GhiChu['NguoiLienHe'] = "Admin";
+
+    $TinTuc['IdTin'] = time() . rand(1, 1000);
+    $TinTuc['IDKhachHang'] = "KH0023";
+    $TinTuc['title'] = $e->plaintext;
+    $TinTuc['keyword'] = $e->plaintext;
+    $TinTuc['description'] = $e->plaintext;
+    $TinTuc['MaDanhMuc'] = $Dm['MaDanhMuc'];
+    $TinTuc['TieuDe'] = $e->plaintext;
+    $TinTuc['TieuDeKhongDau'] = $Model_SanPham->bodautv($e->plaintext);
+    $TinTuc['TomTat'] = "";
+    $TinTuc['NoiDung'] = "";
+    $TinTuc['AnHien'] = "0";
+    $TinTuc['NgayDang'] = date("Y-m-d H:i:s");
+    $TinTuc['UrlHinh'] = "";
+    $TinTuc['SoLanXem'] = "0";
+    $TinTuc['DoQuanTrong'] = "0";
+    $TinTuc['GhiChu'] = $Model_SanPham->_encode($GhiChu);
+    $TinTuc['TinNoiBat'] = "0";
+    $TinTuc['Gia'] = "20";
+    if ($e->plaintext)
+        $Model_SanPham->ThemSanPham($TinTuc);
+    echo $e->plaintext . "<br>";
+}
+?>

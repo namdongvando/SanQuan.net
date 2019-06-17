@@ -1,0 +1,108 @@
+<?php
+$_Pages = new Model_Pages($data['Pages']);
+?>
+
+<div class="container-fluid" >
+    <div class="panel panel-success">
+        <div class="panel-heading bg-green "  >
+            <h3 class="panel-title"  >
+                Thêm Pages
+            </h3>
+        </div>
+        <div class="panel-body" >
+            <form action="" method="POST" >
+                <div class="col-md-4 col-lg-4" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td >Tên Pages</td>
+                            <td >
+                                <input name="TieuDe" value="<?php echo $_Pages->TieuDe ?>" class="form-control" >
+                                <input name="idPa" type="hidden" value="<?php echo $_Pages->Pagesid ?>" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tên Pages Không Dấu</td>
+                            <td >
+                                <input name="TieuDeKD" value="<?php echo $_Pages->TieuDeKD ?>" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Group</td>
+                            <td >
+                                <input name="idGroup" value="<?php echo $_Pages->Pagesgroup ?>" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Loai Page</td>
+                            <td >
+                                <input name="LoaiPage" value="<?php echo $_Pages->LoaiPage ?>" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tiêu Để Trang</td>
+                            <td >
+                                <textarea name="Title" class="form-control" ><?php echo $_Pages->Title ?></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Mô Tả Trang</td>
+                            <td >
+                                <textarea name="Des" class="form-control" ><?php echo $_Pages->Des ?></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Từ Khóa</td>
+                            <td >
+                                <textarea name="Keyword" class="form-control" ><?php echo $_Pages->Keyword ?></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Ẩn Hiện</td>
+                            <td >
+                                <input value="1" name="AnHien" type="checkbox" <?php echo $_Pages->AnHien==1?'checked="checked"':'' ?>  />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td >Hình</td>
+                            <td >
+                                <img style="width: 200px;height: 100px;" src="<?php echo $_Pages->UrlHinh; ?>" >
+                                <input id="HinhSanPham" class="form-control" value="<?php echo $_Pages->UrlHinh ?>" name="UrlHinh" type="text" size="60" />
+                                <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham');" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <input type="submit"  value="Sửa" name="SuaPages" class="btn btn-success btn-block" style="font-weight: bold "  />
+                            </td>
+                        </tr>
+
+
+                    </table>                
+                </div>
+                <div class="col-md-8 col-lg-8" >
+                    <div class="row" >
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td >
+                                    Tóm Tắt
+                                    <textarea name="TomTat" id="NoiDungTomTat" class="form-control" ><?php echo $_Pages->TomTat ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    Nội Dung
+                                    <textarea name="NoiDung" id="NoiDungChinh" class="form-control" ><?php echo $_Pages->NoiDung ?></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

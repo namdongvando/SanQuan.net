@@ -1,0 +1,41 @@
+<?php
+$QuangCao = $data['ChonQuangCao'];
+?>
+<form action="<?php echo BASE_DIR ?>quantri/suaquangcao/<?php echo $QuangCao['MaViTri'] ?>" method="POST" enctype="multipart/form-data" >
+   <table class="table table-bordered">
+      <tr>
+         <td>Vị Trí Quảng Cáo</td>
+         <td>
+	  <input type="text" class="form-control" readonly="readonly"  value="<?php echo $QuangCao['MaViTri'] ?>" />
+	  <input type="hidden"  name="MaViTri" value="<?php echo $QuangCao['MaViTri'] ?>" />
+         </td>
+      </tr>
+      <tr>
+         <td>Mã Quảng Cáo</td>
+         <td>
+	  <input type="text" class="form-control" readonly="readonly" value="<?php echo $QuangCao['MaQuanCao'] ?>" />
+	  <input type="hidden"  name="MaQuangCao" value="<?php echo $QuangCao['MaQuanCao'] ?>" />
+         </td>
+      </tr>
+      <tr>
+         <td>Hình Quuảng cáo</td>
+         <td>
+	  <img style="width: 200px;"  src="<?php echo BASE_DIR ?>public/img/quancao/<?php echo $QuangCao['UrlHinh'] ?>" >
+	  <input name="UrlHinh" type="file" /></td>
+      </tr>
+      <tr>
+         <td>Tên quảng Cáo</td>
+         <td><input type="text" class="form-control"  name="TenHinh" value="<?php echo $QuangCao['TenHinh'] ?>" /></td>
+      </tr>
+      <tr>
+         <td>Link</td>
+         <td><input type="text"  class="form-control" name="Link" value="<?php echo $QuangCao['Link'] ?>" /></td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><input type="submit" class="btn btn-success sua"  name="Suaquancao" value="Sửa Quảng Cáo" /></td>
+      </tr>
+   </table>
+
+
+</form>

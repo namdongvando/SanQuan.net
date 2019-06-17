@@ -1,0 +1,46 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantrioption/chinhanh">Danh Sách Chi Nhánh</a>
+    </li>
+</ol>
+
+<div class="panel panel-default" >
+    <div class="panel-heading" >
+        <h3 class="panel-title" >Quản Trị Khách Hàng</h3>
+    </div>
+    <div class="panel-body" >
+        <!--<a class="btn btn-success btn-sm" href="<?php echo Model_ChiNhanh::$LinkThemChiNhanh; ?>" >Thêm Chi Nhánh</a>-->
+        <form action="" method="POST" > 
+            <table class="table table-bordered" >
+                <tr>
+                    <td>STT</td>
+                    <td>Mã Chi Nhánh</td>
+                    <td>Tên Chi Nhánh</td>
+                    <td>SDT Chi Nhánh</td>
+                    <td>Sửa</td>
+                </tr>
+                <?php
+                $Model_ChiNhanh = new Model_ChiNhanh();
+                $DSChiNhanh = $Model_ChiNhanh->DSChiNhanh();
+                $dem = 1;
+                if ($DSChiNhanh)
+                    foreach ($DSChiNhanh as $ChiNhanh) {
+                        $_ChiNhanh = new Model_ChiNhanh($ChiNhanh);
+                        ?>
+                        <tr>
+                            <td><?php echo $dem++; ?></td>
+                            <td><?php echo $_ChiNhanh->MaChinhanh ?></td>
+                            <td><input class="form-control" name="TenChiNhanh[<?php echo $_ChiNhanh->MaChinhanh ?>]" value="<?php echo $_ChiNhanh->TenChiNhanh ?>"  ></td>
+                            <td><input class="form-control" name="GhiChuSDT[<?php echo $_ChiNhanh->MaChinhanh ?>]" value="<?php echo $_ChiNhanh->SDT ?>"  ></td>
+                            <td>
+                                <a class="btn btn-primary" href="<?php echo Model_ChiNhanh::$LinkSuaChiNhanh . $_ChiNhanh->MaChinhanh; ?>" >Xem</a>
+                                <a class="btn btn-danger" href="<?php echo Model_ChiNhanh::$LinkXoaChiNhanh . $_ChiNhanh->MaChinhanh; ?>" >Xóa</a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            </table>
+        </form>
+    </div>    
+</div>

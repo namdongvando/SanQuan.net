@@ -1,0 +1,45 @@
+<?php
+$DanhMucSua = $data['DMSua'];
+$DSDanhMuc = $data['DSDanhMuc'];
+?>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Sửa Danh Mục
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/suadanhmuc/<?php echo $DanhMucSua['MaDanhMuc'] ?>" method="POST" enctype="multipart/form-data" >
+         <table class="table table-bordered">
+	  <tr>
+	     <td>Mã Danh Mục</td>
+	     <td>
+	        <input class="form-control" type="text" value="<?php echo $DanhMucSua['MaDanhMuc'] ?>"  readonly=""  />	     
+	        <input  type="hidden" value="<?php echo $DanhMucSua['MaDanhMuc'] ?>" name="MaDanhMuc" />	     
+	     </td>
+
+	  </tr>
+	  <tr>
+	     <td>Tên Danh Mục</td>
+	     <td>
+	        <input class="form-control" type="text" name="TenDanhMuc" value="<?php echo $DanhMucSua['TenDanhMuc'] ?>"  />	     
+	     </td>
+
+	  </tr>
+	  <tr>
+	     <td>Tên Danh Mục(Tiếng Anh)</td>
+	     <td>
+	        <input class="form-control" name="TenDanhMucEN" type="text" value="<?php echo $DanhMucSua['TenDanhMucEN'] ?>"   />	     
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>&nbsp;</td>
+	     <td>
+	        <input class="btn btn-success sua"  name="SuaDanhMuc" type="submit" value="Sửa Danh Mục"   />	     
+	     </td>
+	  </tr>
+         </table>
+
+      </form>
+
+   </div>
+</div>

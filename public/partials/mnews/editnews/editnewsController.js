@@ -1,0 +1,1 @@
+app.controller("editnewsController", editnewsController);function editnewsController($scope, $rootScope, $http, $routeParams) {    $http.get("/mnews/getPages").then(function (res) {        $scope.PagesByType = res.data;    });    $scope.editnewsInit = function(news) {        $scope._New = news;    }}

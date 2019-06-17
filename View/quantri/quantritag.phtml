@@ -1,0 +1,96 @@
+<?php
+extract($data);
+?>
+
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+         <form action="<?php echo BASE_DIR ?>quantri/themtag" method="POST">
+            <h2>Thêm Tag</h2>
+            <div class="input-group" style="margin-bottom: 10px"> 
+               <label class="label-primary">Tên Tag</label>
+               <input class="form-control" name="TagName" placeholder="Tên Tag">
+            </div>
+            <div class="input-group" style="margin-bottom: 10px">
+               <label class="label-primary">Mô Tả</label>
+               <textarea class="form-control" name="GhiChu"></textarea>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 10px">
+               <input class="btn btn-success" type="submit" name="ThemTag" value="Thêm Tag">
+            </div>
+
+         </form>
+
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+         <!--<form action="<?php BASE_DIR ?>quantri/xoatag" method="POST">--> 
+         <div style="overflow: auto; width: 100%;height: 450px; background-color: #fff;">
+            <table class="table table-bordered" >
+               <tr>
+                  <th>Chọn  </th>
+                  <th>Tên Tag</th>
+                  <th>Tùy Chọn</th>
+               </tr>
+               <?php
+               if($DSTag) {
+                  foreach($DSTag as $Tag) {
+                     extract($Tag);
+                     ?>
+                     <tr>
+                        <td><input type="checkbox" name="Chon['<?php echo $TagID; ?>']" ></td>
+                        <td>
+                           <div class="input_container">
+                              <samp id="text_<?php echo $TagID; ?>" style="display: none;" class="fa fa-check"></samp>
+                              <input id="input_<?php echo $TagID; ?>" type="text" class="input_edit" onblur="DoiTenTag('<?php echo $TagID; ?>', this.value)" value="<?php echo $TagName ?>" >
+                           </div>
+
+                        </td>
+                        <td>
+                           <div class="btn-group">
+                              <a class="btn btn-danger xoa"  href="<?php echo BASE_DIR ?>quantri/xoatag/<?php echo $TagID ?>"><i class="fa fa-times"></i></a>
+                           </div>
+                        </td>
+                     </tr>
+                     <?php
+                  }
+               }
+               ?>
+
+               <tr>
+                  <th>Chọn</th>
+                  <th>Tên Tag</th>
+                  <th>Tùy Chọn</th>
+               </tr>
+            </table> 
+         </div>
+         <div class="btn btn-group">
+            <!--<button class="btn btn-danger xoa"  type="submit" >Xóa</button>-->
+         </div>
+         <a href="<?php echo BASE_DIR ?>quantri/quantritag"><i class="fa fa-refresh"></i></a>
+         <!--</form>-->
+         click vào Tên Tag để sửa
+      </div>
+<div class="clearfix"></div>
+
+<script>
+//   <
+  
+   function DoiTenTag(TagID, TagName) {
+      if (TagName.length == 0) {
+         document.getElementById("text_" + TagID).innerHTML = "Không Bỏ Trống ô này";
+         document.getElementById("input_" + TagID).setAttribute("style", " border: 1px solid red;");
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+              document.getElementById("text_" + TagID).innerHTML = xmlhttp.responseText;
+              $("#text_" + TagID).show(2000);
+              $("#text_" + TagID).hide(5000);
+              document.getElementById("input_" + TagID).setAttribute("style", " border: none");
+           }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>quantri/suatag/" + TagID + "_" + TagName, true);
+         xmlhttp.send();
+      }
+   }
+
+</script>

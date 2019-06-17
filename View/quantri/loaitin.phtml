@@ -1,0 +1,63 @@
+<?php
+//print_r($data['DSLoaiTin']);
+?>
+<a class="btn btn-success btn-sm pull-right" href="<?php echo BASE_DIR ?>quantri/themloaitin">{ThemLoaiTin}</a>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Chủng loại Tin
+
+   </div>
+   <div class="panel-body">
+
+
+
+
+      <table class="table table-bordered table-hover" id="datatable">
+
+         <thead>
+	  <tr>
+	     <th>{MaLoai}</th>
+	     <th>{TenLoai}</th>
+	     <th>{ThuTu}</th>
+	     <th>{AnHien}</th>
+	     <th>{TenCL}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </thead>
+         <tbody>
+	  <?php
+	  if($data['DSLoaiTin'])
+	     foreach($data['DSLoaiTin'] as $Loai) {
+	        ?>   
+      	  <tr>
+      	     <td><?php echo $Loai['MaLoai'] ?></td>
+      	     <td><?php echo $Loai['TenLoai'] ?></td>
+      	     <td><?php echo $Loai['ThuTu'] ?></td>
+      	     <td><?php echo $Loai['TenCL'] ?></td>
+      	     <td><input  <?php echo $Loai['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" ></td>
+      	     <td>
+      	        <a href="<?php echo BASE_DIR ?>quantri/sualoaitin/<?php echo $Loai['MaLoai']; ?>">sửa</a>/
+      	        <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoaloaitin/<?php echo $Loai['MaLoai']; ?>">Xóa</a>
+      	  </tr>
+	        <?php
+	     }
+	  ?>
+
+
+         </tbody>
+         <tfoot>
+	  <tr>
+	     <th>{MaLoai}</th>
+	     <th>{TenLoai}</th>
+	     <th>{ThuTu}</th>
+	     <th>{AnHien}</th>
+	     <th>{TenCL}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </tfoot>
+      </table>
+
+
+
+   </div>
+</div>

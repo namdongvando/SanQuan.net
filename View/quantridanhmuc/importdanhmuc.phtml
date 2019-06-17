@@ -1,0 +1,66 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+?>
+
+<div class="panel panel-success" >
+    <div class="panel-heading" >
+        <h3 class="panel-title" >Import Danh Mục</h3>
+    </div>
+    <div class="panel-body" >
+        <form action="" enctype="multipart/form-data" method="POST" >
+            <div class="form-group">
+                <label for="">Chọn file</label>
+                <input type="File" name="FileImport" required="required" >
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success " name="SubmitImport" value="Gửi" >
+            </div>
+        </form>
+
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Ma Danh Mục</th>
+                    <th>Tên Danh Mục</th>
+                    <th>Tên Không Dấu</th>
+                    <th>Tình Trang</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($data) {
+                    $dem = 1;
+                    foreach ($data as $DanhMuc) {
+                        $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                        ?> 
+                        <tr>
+                            <td><?php echo $dem++ ?></td>
+                            <td><?php echo $_DanhMuc->MaDanhMuc ?></td>
+                            <td><?php echo $_DanhMuc->TenDanhMuc ?></td>
+                            <td><?php echo $_DanhMuc->TenKhongDau ?></td>
+                            <td><?php echo ($Model_DanhMuc->TimDanhCha($_DanhMuc->MaDanhMuc)!=FALSE)?"Có":"Không"; ?></td>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>STT</th>
+                    <th>Ma Danh Mục</th>
+                    <th>Tên Danh Mục</th>
+                    <th>Tên Không Dấu</th>
+                    <th>Tình Trạng</th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+
+
+    </div>
+</div>

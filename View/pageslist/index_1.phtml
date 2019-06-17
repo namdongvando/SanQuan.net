@@ -1,0 +1,63 @@
+<?php
+$Model_TinTuc = new Model_TinTuc();
+$Model_SanPham = new Model_SanPham();
+$_DanhMuc = new Model_DanhMuc($data['DanhMuc']);
+$DSBV = $Model_TinTuc->DSTinTucLoaiPT1(1, 8, $_DanhMuc->MaDanhMuc, $Tong);
+if ($DSBV) {
+    foreach ($DSBV as $Tin) {
+        $_Tin = new Model_TinTuc($Tin);
+        ?>
+        <div class="views-row col-xs-12 col-sm-6 col-lg-3 col-md-3">
+            <div class="thumbnail">
+                <div class="images">
+                    <a href="<?php echo $_Tin->LinkChiTiet; ?>"><img src="<?php echo BASE_DIR ?>public/home/images/img_news.png" alt="images" /></a>
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a class="wow fadeInDown" style="color: #625f5f;font-family: roboto-bold;font-size: 15px;line-height: 20px;text-transform: uppercase;padding:  10px 0px;display: block;" href="<?php echo $_Tin->LinkChiTiet; ?>"><?php echo $_Tin->TieuDe; ?></a>
+                    </div>
+                    <div class="botum" style="border-top:1px solid #ddd;padding: 10px; " >
+                        <div style="width: 50%;float: left" class="more wow fadeInDown"><a style="color: #ff9000" href="<?php echo $_Tin->LinkChiTiet; ?>">Xem thêm</a></div>
+                        <div style="width: 50%;float: left;text-align: right" class="date wow fadeInDown"><?php echo $_Tin->NgayDang; ?></div>
+                        <div class="clearfix" ></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
+<div style="height: 20px;" ></div>
+<div class="text-center">
+    <div class="row row-wrap" id="masonry">
+        <?php
+        $DSBV = $Model_SanPham->DSTinTucLoaiPT1(1, 8, $_DanhMuc->MaDanhMuc, $Tong);
+        if ($DSBV) {
+            foreach ($DSBV as $Tin) {
+                $_SanPham = new Model_SanPham($Tin);
+                ?>
+                <a class="col-md-3 col-masonry" href="<?php echo $_SanPham->LinkChiTiet; ?>">
+                    <div class="product-thumb">
+                        <header class="product-header">
+                            <img src="<?php echo $_SanPham->UrlHinh ?>" alt="<?php echo $_SanPham->TenSP; ?>" title="<?php echo $_SanPham->TenSP; ?>" />
+                        </header>
+                        <div class="product-inner">
+                            <h5 class="product-title"><?php echo $_SanPham->TenSP; ?></h5>
+                            <div class="product-desciption">MSP: <?php echo $_SanPham->MaSP; ?></div>
+                            <div class="product-meta">
+                                <ul class="product-price-list">
+                                    <li><span class="product-price">Giá: <?php echo $_SanPham->GiaVND; ?></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <?php
+            }
+        }
+        ?>
+    </div>
+</div>

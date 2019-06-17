@@ -1,0 +1,82 @@
+<?php
+$_Param[0] = isset($_Param[0]) ? $_Param[0] : 0;
+$_Param[0] = intval($_Param[0]);
+$Model_TinhThanhThanh = new Model_TinhThanh();
+$DSTinh = $Model_TinhThanhThanh->DSHuyenTheoTinh($_Param[0]);
+?>
+<style>
+    input:checked{
+        background-color: #aaa;
+    }
+</style>
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantri/">Quản Trị Chung</a>
+    </li>
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantritinhthanh/listtinh">Tỉnh Thành </a>
+    </li>
+    <li class="active">Huyện</li>
+</ol>
+<div class="container-fluid">
+    <div class="box box-success">
+        <div class="box-body table-responsive">
+            <form action="<?php echo BASE_DIR ?>quantri/pagesxoa/" method="POST" >
+                <table class="table table-hover table-compare" id="datatable" >
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Mã Huyện</th>
+                            <th>Tên Huyện</th>
+                            <th>Tên Tinh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($DSTinh) {
+                            foreach ($DSTinh as $k => $Tinh) {
+                                $_Tinh = new Model_TinhThanh($Tinh);
+                                ob_start();
+                                ?>
+                                <tr>
+                                    <td style="width: 200px;" >
+                                        <input name="idPa[{idTinh}]" value="{idTinh}" class="checkbox1"  type="checkbox" style="margin-right: 10px" >
+                                        <a href="<?php echo $_Tinh->LinkSuaTinhThanh ?>" >
+                                            <i class="fa fa-edit"></i>
+                                            Sửa</a>
+                                        |<a class="xoa" href="<?php echo $_Tinh->LinkXoaTinhThanh ?>" >
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            xóa
+                                        </a>
+                                    </td>
+                                    <td>{MaTinh}</td>
+                                    <td>{TenHuyen}</td>
+                                    <td>{TenTinh}</td>
+                                </tr>
+                                <?php
+                                $str = ob_get_clean();
+                                $str = str_replace("{TenTinh}", $_Tinh->TenDiaChiCha, $str);
+                                $str = str_replace("{TenHuyen}", $_Tinh->TenDiaChi, $str);
+                                $str = str_replace("{MaTinh}", $_Tinh->MaDiaChi, $str);
+                                echo $str;
+                            }
+                            unset($DSTinh[$k]);
+                        }
+                        ?>                
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                    <tr>
+                        <th>Action</th>
+                        <th>Mã Huyện</th>
+                        <th>Tên Huyện</th>
+                    </tr> 
+                </table>    
+            </form>
+        </div>
+
+
+    </div>
+
+</div>

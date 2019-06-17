@@ -1,0 +1,310 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+$Model_TinhThanh = new Model_TinhThanh();
+$Model_KhachHang = new Model_KhachHang();
+$Model_SanPham = new Model_SanPham();
+$KG = $Model_KhachHang->ThongTinKhachHang($_SESSION[KhachHang]['email']);
+$SanPham = $Model_SanPham->TimSanPham4IDKhachHang($KG['ID']);
+if (!$SanPham) {
+    $Model_SanPham->ThemSanPhamDefaut();
+}
+$SanPham = $Model_SanPham->TimSanPham4IDKhachHang($KG['ID']);
+$_SanPham = new Model_SanPham($SanPham[0]);
+$ThongBao = $data['ThongBao'];
+if ($ThongBao != 'false') {
+    $ThongBao = $Model_DanhMuc->_decode($ThongBao);
+    ?>
+    <div class="alert alert-<?php echo $ThongBao->Loai ?>" >
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php echo $ThongBao->NoiDung ?>
+    </div>
+    <?php
+}
+?>
+<script src="<?php echo BASE_DIR ?>public/templateadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+<link href="<?php echo BASE_DIR ?>public/templateadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" rel="stylesheet" type="text/css"/>
+<?php
+//var_dump($KG);
+?>
+<div class="container"  >
+    <div class="row" >
+        <div class="panel panel-default"  >
+            <div class="panel-body" >
+                <div class="row" >
+                    <form action="" method="POST" enctype="multipart/form-data" >
+                        <input name="IdTin" value="<?php echo $_SanPham->MaSP; ?>" type="hidden"  >
+
+                        <div class="col-lg-3 col-md-3"  >
+                            <label style="border: 1px solid pink;position: relative;margin: auto;width: 100%;border-radius: 5px;">
+                                <span style="position: absolute;z-index: 1000;line-height: 200px;width: 100%;text-align: center; " >
+                                </span>
+                                <input style="display: none;" name="UrlHinh" type="file" onchange="readURL1(this)"  >
+                                <div style="height: 250px;width: 100%;overflow: hidden;" >
+                                    <img src="<?php echo $_SanPham->UrlHinh ?>" id="SHinh"  style="width: 100%;">
+                                </div>
+                            </label>
+                            <h3 style="background-color: rgba(255, 255, 255, 0.35);padding: 10px;border-radius: 5px;color: #000; " >
+                                Chọn Hình Đại Diện
+                            </h3>
+                        </div>
+                        <div class="col-lg-9 col-md-9" >
+                            <div class="panel panel-primary"  >
+                                <div class="panel-heading" >
+                                    <h3 class="panel-title" >Hình Ảnh Khác</h3>
+                                </div>
+                                <div class="panel-body" id="DSHinh" >
+                                </div>
+                                <div class="panel-footer" > 
+                                    <p class="pull-right" >
+                                        Nhấn cập Nhật Nếu Không Thấy Hình Hiền Thị
+                                        <button class="btn btn-primary " type="button" onclick="CapNhat()" ><i class="fa fa-refresh" ></i></button>
+                                    </p>
+                                    Tố Đa 6 Hình Ảnh
+                                    <?php
+                                    $UploadImges_IM = new UploadImges_IM();
+//                                    cho up hinh
+                                    $UploadImges_IM->setUrlUpload("public/img/images/sanpham/{$_SESSION[KhachHang]["random"]}/");
+//                                    cho xu ly up hinh
+                                    $UploadImges_IM->setSever(BASE_DIR . "dangtin/uploadhinh/{$_SanPham->MaSP}/");
+//                                    UploadImges_Hinh
+                                    $UploadImges_IM->client("CapNhat");
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12"  >
+                            <input  name="GhiChu[GoiDangTin]" value="0" type="hidden"   >
+                            <input  name="TomTat" value="<?php echo $_SanPham->TomTat ?>" type="hidden"   >
+                            <div class="panel panel-primary" >
+                                <div class="panel-heading" >
+                                    <h3 class="panel-title" >
+                                        Các Thông Tin Cơ Bản
+                                    </h3>
+                                </div>
+                                <div class="panel-body" >
+                                    <div class="row" >
+                                        <div class="col-lg-12 col-md-12" >
+                                            <div class="form-group" >
+                                                <label>Tiêu Đề</label>
+                                                <input name="TieuDe" required="required" value="<?php echo $_SanPham->TenSP ?>" class="form-control" placeholder="Tiêu Đề Tin">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="form-group" >
+                                                <label>Loại hình sang nhượng </label>
+                                                <select class="form-control"  name="MaDanhMuc" >
+                                                    <?php
+                                                    $DSDanhMuc = $Model_DanhMuc->DSDanhMuc();
+                                                    foreach ($DSDanhMuc as $DanhMuc) {
+                                                        $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                                                        ?>
+                                                        <option <?php echo $_SanPham->MaDanhMuc == $_DanhMuc->MaDanhMuc ? 'selected="selected"' : '' ?>  value="<?php echo $_DanhMuc->MaDanhMuc; ?>" ><?php echo $_DanhMuc->TenDanhMuc; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="col-lg-6 col-md-6" >
+                                                <div class="row" >
+
+                                                    <div class="form-group" >
+                                                        <label>Giá Sang <span style="color: red;" >(Đơn Vị Triệu)</span></label>
+                                                        <input type="text" name="Gia" required="required" value="<?php echo $_SanPham->Gia; ?>" class="form-control" placeholder="Giá Sang Nhượng">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6" >
+                                                <div class="form-group" >
+                                                    <label>Đơn Vị </label><br>
+                                                    <label style="" >Triệu 
+                                                        <input type="radio" name="GhiChu[DonVi]" <?php echo $_SanPham->DonVi == 1 ? 'checked="checked"' : "" ?>  value="1"  >
+                                                    </label>
+                                                    <label  >Tỷ 
+                                                        <input type="radio" name="GhiChu[DonVi]" <?php echo $_SanPham->DonVi == 2 ? 'checked="checked"' : "" ?> value="2" >
+                                                    </label>
+                                                    <label  >USD
+                                                        <input type="radio" name="GhiChu[DonVi]" <?php echo $_SanPham->DonVi == 3 ? 'checked="checked"' : "" ?> value="3" >
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="form-group" >
+                                                <label>Tỉnh Thành</label>
+                                                <select class="form-control" name="GhiChu[Tinh]" onchange="LayHuyen(this.value)" >
+                                                    <option value="0" >Chọn Tỉnh Thành</option>
+                                                    <?php
+                                                    $DSTinh = $Model_TinhThanh->DSTinh();
+                                                    foreach ($DSTinh as $Tinh) {
+                                                        $_Tinh = new Model_TinhThanh($Tinh);
+                                                        ?>
+                                                        <option <?php echo $_SanPham->Tinh == $_Tinh->MaDiaChi ? 'selected="selected"' : '' ?>  value="<?php echo $_Tinh->MaDiaChi; ?>" ><?php echo $_Tinh->TenDiaChi; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="form-group" >
+                                                <label>Huyện</label>
+                                                <select class="form-control" id="SHuyen" name="GhiChu[Huyen]" >
+                                                    <?php
+                                                    $DSTinh = $Model_DanhMuc->DSHuyenTheoTinh($_SanPham->Tinh);
+                                                    foreach ($DSTinh as $Tinh) {
+                                                        $_Tinh = new Model_TinhThanh($Tinh);
+                                                        ?>
+                                                        <option <?php echo $_SanPham->Huyen == $_Tinh->MaDiaChi ? 'selected="selected"' : "" ?>  value="<?php echo $_Tinh->MaDiaChi; ?>" ><?php echo $_Tinh->TenDiaChi; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="form-group" >
+                                                <label>Người Liên Hệ </label>
+                                                <input type="text" name="GhiChu[NguoiLienHe]" required="required" value="<?php echo $_SanPham->NguoiLienHe ?>" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6" >
+                                            <div class="form-group" >
+                                                <label>Điện Thoại Liên Lạc </label>
+                                                <input type="number" name="GhiChu[DienThoai]" required="required" value="<?php echo $_SanPham->DienThoai ?>" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12" >
+                                            <div class="form-group" >
+                                                <label>Địa Chỉ</label>
+                                                <input type="text" name="GhiChu[DiaChi]" required="required" value="<?php echo $_SanPham->DiaChi ?>" class="form-control" placeholder="<?php echo $_SanPham->DiaChi ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix" ></div>
+                        <div class="col-lg-12" >
+                            <div class="panel panel-primary"  >
+                                <div class="panel-heading" >
+                                    <h3 class="panel-title" >Mô Tả</h3>
+                                </div>
+                                <div class="panel-body" >
+                                    <textarea style="height: 400px" required="required" name="NoiDung" class="form-control MoTa" ><?php echo $_SanPham->NoiDung ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 " >
+                            <div class="form-group" >
+                                <input name="DangTin" type="submit" value="Cập Nhật Tin" class="sua btn btn-primary" >
+                            </div>
+                        </div>
+                        <h3 class="text-center" style="color: red"  >
+                            * Liên hệ quản trị để được tư vấn và hiển thi tin
+                        </h3>
+
+                        <h2 class="text-center"  >HÌNH THỨC THANH TOÁN</h2>
+                        <p class="text-center" style="font-size: 18px;" >
+                            Thanh toán qua ngân hàng bằng cách chuyển khoản : <br>
+                            ( Lưu ý: Nội dung chuyển khoản quý khách ghi thanh toán cho mã tin đăng của mình - <?php echo $_SanPham->MaSP ?> ) <br>
+                            + Ngân hàng TMCP Ngoại Thương Việt Nam – Vietcombank <br>
+                            - Chủ tài khoản :   Trương Duy Sang  <br>
+                            - Số tài khoản    :  0441003949279 <br>
+                            - Chi nhánh ngân hàng :  Tân Bình, TP.HCM     <br>
+                            Liên Hê: 097.889.2755
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" >
+
+    function readURL1(input) {
+        for (var i = 0; i < input.files.length; i++) {
+            if (input.files[i]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#SHinh").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    }
+    CapNhat();
+    function CapNhat() {
+        ajaxDSHinh();
+
+    }
+    function ajaxDSHinh() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("DSHinh").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("POST", "<?php echo BASE_DIR ?>dangtin/listhinh/", true);
+        xmlhttp.send();
+    }
+    function xoaHinh(url) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                CapNhat();
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+
+    $(document).ready(function () {
+//        ajaxDSHinh();
+//            ajaxGuiMail();
+        function ajaxDSHinh() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("DSHinh").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "<?php echo BASE_DIR ?>dangtin/listhinh/", true);
+            xmlhttp.send();
+        }
+        function ajaxGuiMail() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                }
+            };
+            xmlhttp.open("GET", "<?php echo BASE_DIR ?>dangtin/SendMail/<?php echo $_SanPham->MaSP ?>", true);
+                        xmlhttp.send();
+                    }
+                });
+
+                $('.MoTa').wysihtml5();
+                $(".sua").click(function () {
+                    return confirm("Bạn Có Chắc muốn sửa?");
+                });
+</script>
+<script>
+
+    function LayHuyen(str) {
+        if (str.length == 0) {
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("SHuyen").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "<?php echo BASE_DIR ?>index/layhuyen/" + str, true);
+            xmlhttp.send();
+        }
+    }
+</script>

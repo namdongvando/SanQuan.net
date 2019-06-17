@@ -1,0 +1,61 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantri/">Quản Trị Chung</a>
+    </li>
+    <li>
+        <a href="<?php echo BASE_DIR ?>quantritinhthanh/listtinh">Tỉnh Thành</a>
+    </li>
+    <li class="active">Thêm Tỉnh Thành</li>
+</ol>
+<?php
+$Model_TinhThanh = new Model_TinhThanh();
+$DSTinh = $Model_TinhThanh->DSTinh();
+?>
+<div class="container-fluid" >
+    <div class="panel panel-success">
+
+        <div class="panel-heading bg-green "  >
+            <h3 class="panel-title"  >
+                Sửa Huyện Tỉnh Thành Phố
+            </h3>
+        </div>
+        <div class="panel-body" >
+            <form action="<?php echo $Model_TinhThanh->getLinkFormThemQuanTri() ?>" method="POST" >
+                <div class="col-md-6 col-lg-6" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td >Tỉnh Thành Phố Trực Thuộc</td>
+                            <td >
+                                <select class="form-control" name="MaDiaChiCha"  >
+                                    <option value="0" >Chọn Tỉnh Thành Phố</option>
+                                    <?php
+                                    foreach ($DSTinh as $Tinh) {
+                                        $_Tinh = new Model_TinhThanh($Tinh);
+                                        ?>
+                                    <option value="<?php echo $_Tinh->MaDiaChi ?>" ><?php echo $_Tinh->TenDiaChi ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tên Địa Chỉ / khu vực</td>
+                            <td >
+                                <input name="TenDiaChi" value="" required="required" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <input type="hidden" name="MaDiaChi" value="" >
+                                <input type="submit"  class="btn btn-success" value="Thêm" >
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

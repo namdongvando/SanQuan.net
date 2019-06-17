@@ -1,0 +1,19 @@
+<?php
+extract($data);
+?>
+<table class="table table-bordered">
+
+   <?php
+   foreach($DSThongKe as $ThongKe) {
+      ?>
+      <tr>
+         <td><?php echo $ThongKe['NgayThongKe'] ?></td>
+         <td><?php echo $ThongKe['ChuSanPham'] ?></td>
+         <td><?php echo $ThongKe['TongSanPham'] ?></td>
+      </tr>
+      <?php
+   }
+   ?>
+
+
+</table>

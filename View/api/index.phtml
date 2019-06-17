@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SanPham>
+<?php
+$SanPham = $data;
+
+foreach ($SanPham as $k=>$v) {
+    ?> 
+    <<?php echo $k ?>><?php echo $v ?></<?php echo $k ?>>
+    <?php
+}
+?>
+</SanPham>

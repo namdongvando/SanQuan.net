@@ -1,0 +1,190 @@
+<?php
+$_SanPham = new Model_SanPham($data['SanPham']);
+?>
+<div class="clearfix" ></div>
+<ol class="breadcrumb">
+    <li>
+        <a href="<?php echo BASE_DIR ?>">Trang Chủ</a>
+    </li>
+    <li>
+        <a href="<?php echo BASE_DIR ?>danhmuc/timkiem/<?php echo $_SanPham->Tinh; ?>/<?php echo $_SanPham->MaDanhMuc; ?>/"><?php echo $_SanPham->TenDanhMuc . " - " . $_SanPham->TenTinh; ?></a>
+    </li>
+    <li class="active"><?php echo $_SanPham->TenSP; ?></li>
+</ol>
+<div class="clearfix" ></div>
+<div class="col-lg-6 col-md-6">
+    <div class=" owl-carouselChiTiet" >
+        <div class="item" >
+            <img style="height: 350px;" title="<?php echo $_SanPham->TenSP ?>" alt="<?php echo $_SanPham->TenSP ?>" src="<?php echo $_SanPham->UrlHinh; ?>">
+        </div>
+        <?php
+        $dem = 2;
+        if ($_SanPham->ListHinh)
+            foreach ($_SanPham->ListHinh as $TenHinh) {
+                ?>
+                <div class="item" >
+                    <img style="height: 350px;" title="<?php echo $_SanPham->TenSP ?>" alt="<?php echo $_SanPham->TenSP ?>" src="<?php echo $TenHinh ?>">
+                </div>
+                <?php
+            }
+        ?>
+        <div class="item" >
+            <img style="height: 350px;" title="<?php echo $_SanPham->TenSP ?>" alt="<?php echo $_SanPham->TenSP ?>" src="<?php echo $_SanPham->UrlHinh; ?>">
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 col-md-6">
+    <div style="background-color: #dbeae7" class="text-center ThongTinChungTin" >
+        <table class="table table-bordered" >
+            <tr>
+                <th>Mã Tin</th>
+                <th><?php echo $_SanPham->MaSP ?></th>
+            </tr>
+            <tr>
+                <th>Danh Mục</th>
+                <th><?php echo $_SanPham->TenDanhMuc ?></th>
+            </tr>
+            <tr>
+                <th>Khu Vực</th>
+                <th><?php echo $_SanPham->TenHuyen ?>-<?php echo $_SanPham->TenTinh ?></th>
+            </tr>
+            <tr>
+                <th>Vị Trí</th>
+                <th><?php echo $_SanPham->TenViTri ?></th>
+            </tr>
+            <tr>
+                <th>Giá</th>
+                <th>
+                    <h3 style="display: table;border: 1px solid red;color: red;padding: 10px;border-radius: 3px;font-weight: bold; " >
+                        <?php echo $_SanPham->GiaVND ?>
+                    </h3>
+                </th>
+            </tr>
+            <tr>
+                <th>Người Sang</th>
+                <th>
+                    <?php echo $_SanPham->NguoiLienHe ?>
+                </th>
+            </tr>
+            <tr>
+                <th>Số Điện Thoại</th>
+                <th style="color: green" >
+                    <?php echo $_SanPham->DienThoai ?>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2" >Địa Chỉ : 
+                    <?php
+                    echo $_SanPham->DiaChi;
+                    ?>
+                </th>
+            </tr>
+        </table>
+        <div class="clearfix" ></div>
+    </div>
+</div>
+<div class="clearfix" ></div>
+<div class="row" >
+    <div class="col-lg-12 col-md-12" >
+        <h1 style="color: #055699;" >
+            <?php echo $_SanPham->TenSP; ?>
+        </h1>
+        <div class="clearfix" ></div>
+        <div >
+            <h3 style="display: table;border: 1px solid red;color: red;padding: 10px;border-radius: 3px;font-weight: bold; " >
+                <?php echo $_SanPham->GiaVND ?>
+            </h3>
+        </div>
+        <div class="text-justify table-responsive NoiDungSanPham">
+            <?php echo $_SanPham->NoiDung ?>
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+    <div class="col-lg-12 col-md-12" >
+        <h4 class="tieudeTin" >Thông Tin Chủ Sang nhượng</h4>
+        <div class="col-lg-6 col-md-6" >
+            <h3 class="btn btn-success btn-block btn-nguoilienhe" >
+                Vui Lòng Liên Hệ: <?php echo $_SanPham->NguoiLienHe; ?> </h3>
+        </div>
+        <div class="col-lg-6 col-md-6" >
+            <h3 class="btn btn-success btn-block btn-nguoilienhe" >Điện Thoại: <?php echo $_SanPham->DienThoai; ?> </h3>
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+    <div class="col-lg-12 col-md-12 " style="margin-top: 20px;"  >
+        <div class="alert alert-info" style="margin-bottom: 30px" >
+            {Lang_TBChiTiet}
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <div id="carousel-id999" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-id999" data-slide-to="0" class=""></li>
+                <li data-target="#carousel-id999" data-slide-to="1" class=""></li>
+                <li data-target="#carousel-id999" data-slide-to="2" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <?php
+                $dem = 1;
+                foreach ($_SanPham->ListHinh as $TenHinh) {
+                    ?>
+                    <div class="item <?php echo $dem == 1 ? 'active' : '' ?>">
+                        <img src="<?php echo $TenHinh ?>" style="margin: auto;width:auto;max-height: 500px;" onclick="currentSlide(<?php echo $dem++; ?>)" alt="Nature and sunrise">
+                    </div>
+                    <?php
+                    $dem++;
+                }
+                ?>
+            </div>
+            <a class="left carousel-control" href="#carousel-id999" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#carousel-id999" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function openModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+
+    }
+</script>
+

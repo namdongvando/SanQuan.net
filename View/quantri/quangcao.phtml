@@ -1,0 +1,115 @@
+<?php
+$DSQuanCao = $data['DSQuangCao'];
+//DSQuangCaoChuyenMuc
+?>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">Quảng cáo Trong Trang</h3>
+    </div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/quangcao" method="POST">
+            <div >
+                <table class="table table-bordered " id="datatable">
+                    <thead>
+                        <tr>
+                            <td>{STT}</td>
+                            <td>{QuangCao}</td>
+                            <td>Vị Trí Quản Cáo</td>
+                            <td> <label>
+<!--                                    <input type="checkbox" id="selecctall"/>Chọn Hết-->
+                                </label></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $dem = 1;
+                        if ($DSQuanCao) {
+                            foreach ($DSQuanCao as $QuangCao) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $dem++ ?></td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td >{KichThuoc}</td>
+                                                <td>
+                                                    <label><?php echo $QuangCao['KichThuoc'] ?></label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><img style="width: 100px;" src="<?php echo BASE_DIR ?>public/img/images<?php echo $QuangCao['UrlHinh'] ?>"></td>
+                                                <td><input id="LogoDaiDien<?php echo $QuangCao['MaViTri']; ?>" value="<?php echo BASE_DIR ?>public/img/images<?php echo $QuangCao['UrlHinh']; ?>" name="UrlHinh[<?php echo $QuangCao['MaViTri'] ?>]" type="text" size="60" />
+                                                    <input type="button" value="Browse Server" onclick="BrowseServer('Images:/', 'LogoDaiDien<?php echo $QuangCao['MaViTri']; ?>');" >     		      
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >{TenHinh}</td>
+                                                <td >
+                                                    <input class="form-control" type="text" value="<?php echo $QuangCao['TenHinh'] ?>" name="TenHinh[<?php echo $QuangCao['MaViTri'] ?>]" >
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >{Link}</td>
+                                                <td ><input class="form-control" type="text" value="<?php echo $QuangCao['Link'] ?>" name="Link[<?php echo $QuangCao['MaViTri'] ?>]" >
+                                                    <input type="hidden" value="<?php echo $QuangCao["MaQuanCao"] ?>" name="MaQuanCao[<?php echo $QuangCao['MaViTri'] ?>]" >
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >{MaViTri}</td>
+                                                <td ><input class="form-control" type="text" value="<?php echo $QuangCao['MaViTri'] ?>" />
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" ><input  type="submit" class="btn btn-success"  value="{SuaQuanCao}" name="SuaQuanCao" ></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <?php echo $QuangCao['MaViTri'] ?>
+                                    </td>
+                                    <td>
+                                        <input class="checkbox1" type="checkbox" name="XoaMaQuanCao[<?php echo $QuangCao["MaViTri"] ?>]" value="<?php echo $QuangCao["MaViTri"] ?>">
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>{STT}</td>
+                            <td>{QuangCao}</td>
+                            <td>Vị Trí Quản Cáo</td>
+                            <td>
+
+                                <label>
+                                    <label>
+                                        <input type="checkbox" id="selecctall"/>Chọn Hết
+                                    </label> 
+                                </label>
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+            <input class="btn btn-danger" type="submit" name="XoaQuangCao" value="Xóa Các Mục Dã Chọn" > 
+        </form>
+
+    </div>
+
+</div>
+<div class="clearfix"></div>
+
+
+
+
+
+
+
+
+

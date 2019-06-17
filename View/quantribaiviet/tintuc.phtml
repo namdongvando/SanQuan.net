@@ -1,0 +1,136 @@
+<?php
+$Model_Pages = new Model_Pages();
+$Model_TinTuc = new Model_TinTuc();
+$DSSanhMuc = $Model_Pages->DSPages4LoaiPage(1);
+$PaRam = $_Param;
+?>
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-left: 10px; ">
+        <i class="fa fa-list-ol"></i>
+        Danh Sách Bài viết
+    </div>
+    <div id="ThongBao"></div>
+    <div class="panel-body">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-offset-3 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 ">
+            <div class="panel panel-success">
+                <div class="panel-heading bg-green" >
+                    <h3 class="panel-title" style="font-weight: bold;text-align: center;"  >Danh Mục Bài Viết</h3>
+                </div>
+                <div class="panel-body">
+                    <select id="DanhMucSelect" class="form-control" onchange="window.location.href = '<?php echo $Model_Pages->getLinkDSBVPages() ?>' + this.value;" >
+                        <option value="">__Tất Cả Danh Mục__</option>
+                        <?php
+                        foreach ($DSSanhMuc as $Page) {
+                            $_Page = new Model_Pages($Page);
+                            ?>
+                            <option <?php echo $_Page->Pagesid == $PaRam[0] ? 'selected="selected"' : '' ?>    value="<?php echo $_Page->Pagesid ?>">
+                                <?php echo $_Page->TieuDe ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <form action="<?php echo $Model_TinTuc->getLinkXoaBaiViet() ?>" method="POST" >
+            <table class="table table-bordered table-hover" id="datatable">
+                <thead>
+                    <tr>
+                        <th style="width: 20px" >Chọn</th>
+                        <th style="width: 40px;" >STT</th>
+                        <th>Tiêu Đề</th>
+                        <th>Danh Mục</th>
+                        <th>STT</th>
+                        <th style="width: 100px;text-align: center;" >Hot</th>
+                        <th style="width: 100px;text-align: center;" >Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($data['DSTinTuc']) {
+                        $Dem = 1;
+                        foreach ($data['DSTinTuc'] as $TinTuc) {
+                            $_TinTuc = new Model_TinTuc($TinTuc);
+                            ?>   
+                            <tr>
+                                <td>
+                                    <label style="display: block;"><input class="checkbox1" name="Chon[<?php echo $_TinTuc->IDTin ?>]" type="checkbox" value="<?php echo $_TinTuc->IDTin; ?>" ></label> 
+                                </td>
+                                <td style="text-align: center;" ><?php echo $Dem++;
+                            ?></td>
+                                <td><?php echo $_TinTuc->TieuDe ?></td>
+                                <td><?php echo $_TinTuc->TenDanhMuc ?></td>
+                                <td><?php echo $_TinTuc->Stt ?></td>
+                                <td style="width: 100px;text-align: center;" >
+                                    <input id="<?php echo $_TinTuc->IDTin ?>" onchange="AnHienTinNoiBat('<?php echo $_TinTuc->IDTin ?>')"  <?php echo $TinTuc['TinNoiBat'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >                        
+                                </td>
+                                <td style="text-align: center;">
+                                    <input id="<?php echo $_TinTuc->IDTin ?>" onchange="AnHienTin('<?php echo $_TinTuc->IDTin ?>')"  <?php echo $TinTuc['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >
+                                </td>
+                                <td style="width: 100px;text-align: center;">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" href="<?php echo $Model_TinTuc->getLinkSuaBaiViet() . $_TinTuc->IDTin; ?>"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger xoa" href="<?php echo $Model_TinTuc->getLinkXoaBaiViet() . $_TinTuc->IDTin; ?>"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th><label> <input type="checkbox" id="selecctall"/> Hết Chọn </label></th>
+                        <th>STT</th>
+                        <th>Tiêu Đề</th>
+                        <th>Danh Mục</th>
+                        <th>STT</th>
+                        <th style="text-align: center;" >Hot</th>
+                        <th>Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <input name="XoaChon" class="xoa"  value="Xóa Mục Đang Chọn" type="submit" >
+
+        </form>
+    </div>
+</div>
+<script>
+    function AnHienTin(IDTin) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+            }
+        };
+        xmlhttp.open("GET", "<?php echo BASE_URL ?>quantri/tintucanhien/" + IDTin, true);
+        xmlhttp.send();
+    }
+    function ChuyenMaTinTuc(IDTin, loaitin) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById(IDTin + 'Tin_Tuc').innerHTML = "ok";
+            }
+        };
+        xmlhttp.open("GET", "<?php echo BASE_URL ?>quantri/sualoaitintuc/" + IDTin + "/" + loaitin, true);
+        xmlhttp.send();
+    }
+    function AnHienTinNoiBat(IDTin) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById('ThongBao').innerHTML = "ok";
+            }
+        };
+        xmlhttp.open("GET", "<?php echo BASE_URL ?>quantri/tintucanhiennoibat/" + IDTin, true);
+        xmlhttp.send();
+    }
+
+</script>

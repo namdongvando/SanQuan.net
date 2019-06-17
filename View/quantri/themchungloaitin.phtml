@@ -1,0 +1,29 @@
+<?php
+//print_r($data);
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      chi tiết Chủng loại Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/themchungloaitin" method="post">
+         <table >
+	  <caption>Thêm Chủng Loại Tin</caption>
+   	  <tr>
+	     <th>{TenCL}</th>
+	     <th>
+	        <input class="form-control"  name="TenCL" type="text" >
+	     </th>
+	  </tr>
+   	  <tr>
+	     <th colspan="2"><input class="them"  name="them"  type="submit" value="{Them}" ></th>
+	  </tr>
+
+
+
+         </table>
+
+      </form>
+
+   </div>
+</div>

@@ -1,0 +1,69 @@
+<table   class="table table-bordered table-condensed table-datatable">
+   <caption><a href="<?php echo BASE_DIR  ?>quantri/themmenu"><b class="fa fa-plus"></b> Thêm Menu</a> </caption>
+   <thead>
+      <tr>
+         <th>Mã Menu </th>
+         <th>Tiêu Đề </th>
+         <th>Link </th>
+         <th>Cấp</th>
+         <th>Action</th>
+      </tr>
+   </thead>
+   <tbody>
+      <?php
+      foreach($data['DSMenuCha'] as $Cha) {
+         ?>
+         <tr>
+            <td><?php echo $Cha['MaMenu']; ?></td>
+            <td><?php echo $Cha['TieuDe']; ?></td>
+            <td><?php echo $Cha['Link']; ?></td>
+            <td><?php echo "Cấp Cha";
+	  ?></td>
+            <td><a href="<?php echo BASE_DIR ?>quantri/suamenu/<?php echo $Cha['MaMenu']; ?>">Sửa</a></td>
+	  
+         </tr>
+         <?php
+         foreach($data['DSMenu'] as $Menu) {
+	  if($Cha['MaMenu'] == $Menu['CapCha']) {
+	     ?>
+               <tr>
+                  <td><?php echo $Menu['MaMenu'];?></td>
+                  <td><?php echo $Menu['TieuDe']; ?></td>
+                  <td><?php echo $Menu['Link']; ?></td>
+                  <td><?php echo $Menu['CapCha']; ?></td>
+	        <td><a href="<?php echo BASE_DIR ?>quantri/suamenu/<?php echo $Menu['MaMenu']; ?>">Sửa</a></td>
+               </tr>
+	  <?php
+	  }
+         }
+         ?>
+
+
+<?php } ?>
+
+   </tbody>
+
+   <tfoot>
+      <tr>
+         <th>Mã Menu </th>
+         <th>Tiêu Đề </th>
+         <th>Link </th>
+         <th>ThuTu</th>
+         <th>Action</th>
+      </tr>
+   </tfoot>
+
+
+
+
+
+
+
+
+
+</table>
+
+
+
+
+

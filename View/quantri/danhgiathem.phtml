@@ -1,0 +1,103 @@
+<?php
+$Model_DanhGia = new Model_DanhGia();
+$_MaDanhMuc = $Model_DanhGia->GetDanhMucDanhGia();
+ob_start();
+?>
+<div class="panel panel-primary ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Thêm Đánh Giá </h3>
+    </div>
+    <div class="panel-body">
+        <form action="" method="POST" class="form" >
+            <div class="col-lg-3 col-md-3">
+                <div class="row">
+                    <input name="IdTin" type="hidden" >  
+                    <input type="hidden" name="description" >  
+                    <input name="MaDanhMuc" type="hidden" value="<?php echo $_MaDanhMuc ?>" >  
+                    <input type="hidden" name="TieuDeKhongDau" >  
+
+                    <div class="clearfix" style="margin-bottom: 10px" ></div> 
+                    <div class="form-group-sm">
+                        <div class="col-lg-12 col-md-12">
+                            <h3>Phát Biểu</h3>
+                            <input name="TieuDe" placeholder="Greatest, awesome  " class="form-control">  
+                        </div>
+                    </div>
+                    <div class="form-group-sm">
+                        <div class="col-lg-12 col-md-12">
+                            <h3>Tên Người Nhật Xét</h3>
+                            <input name="title"  placeholder="Alex Albert" class="form-control">  
+                        </div>
+                    </div>
+                    <div class="form-group-sm">
+                        <div class="col-lg-12 col-md-12">
+                            <h3>Chức Vụ Người Nhật Xét</h3>
+                            <input name="keyword" placeholder="CEO. Envato studio" class="form-control">  
+                        </div>
+                    </div>
+                    <div class="form-group-sm">
+                        <div class="col-lg-12 col-md-12">
+                            <h3>Tóm Tat</h3>
+                            <textarea name="TomTat" rows="5" style="width: 100%;"  ></textarea>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                        <div class="col-lg-6 col-md-6">
+                            <h3>{Stt}</h3>
+                            <input name="Stt" value="1" class="form-control">  
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <h3>{AnHien}</h3>
+                            <input type="checkbox" name="AnHien" checked="checked" value="1" >  
+                        </div>
+                    </div>
+                    <input type="hidden" name="NgayDang" value="<?php echo date("Y-m-d"); ?>" class="form-control">  
+                    <div class="clearfix" style="margin-bottom: 10px" ></div> <div class="form-group-sm">
+                        <label class="col-lg-2 col-md-2">{UrlHinh}</label>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="clearfix" ></div>
+                            <input class="form-control" value="" id="UrlHinh" name="UrlHinh" type="text" />
+                            <input  type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/slide/', 'UrlHinh')" />
+                            <div class="clearfix"></div>
+                            <div id="thumbnail" ></div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="TinNoiBat" value="0" >  
+                    <input type="hidden" name="SoLanXem" value="0" class="form-control">  
+                    <input type="hidden" name="lang" value="vi" class="form-control">  
+                    <div class="clearfix" style="margin-bottom: 10px" ></div>
+
+                    <div style="text-align: center;padding-top: 10px;">
+                        <input name="ThemDanhGia" value="Thêm" type="submit"  class="btn btn-primary" >
+                        <input  value="Làm Lại" type="reset"  class="btn btn-default" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="row">
+                    <div class="clearfix" style="margin-bottom: 10px" ></div> 
+                    <div class="form-group-sm">
+                        <div class="col-lg-12 col-md-12">
+                            <h3>{NoiDung}</h3>
+                            <textarea name="NoiDung" id="NoiDungChinh" ></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<?php
+$str = ob_get_clean();
+$str = str_replace("{NoiDung}", "Nội Dung", $str);
+$str = str_replace("{AnHien}", "Ẩn Hiện", $str);
+$str = str_replace("{UrlHinh}", "Hình", $str);
+$str = str_replace("{Stt}", "STT", $str);
+echo $str;
+?>

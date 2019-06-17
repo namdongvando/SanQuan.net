@@ -1,0 +1,78 @@
+<?php
+$_QuanTri = new Model_QuanTri($_SESSION[QuanTri]);
+$DSPages = $data['DSPages'];
+?>
+<style>
+    input:checked{
+        background-color: #aaa;
+    }
+</style>
+<div class="container-fluid">
+    <div class="box box-success">
+        <div class="box-body table-responsive">
+            <form action="<?php echo BASE_DIR ?>quantri/pagesxoa/" method="POST" >
+                <table class="table table-hover table-compare" >
+                    <tr>
+                        <th>Action</th>
+                        <th>Tên Pages</th>
+                        <th>Group</th>
+                        <th>Loại Pages</th>
+                        <th>Ẩn Hiện</th>
+                    </tr>
+                    <?php
+                    foreach ($DSPages as $Pages) {
+                        $_Pages = new Model_Pages($Pages);
+                        ob_start();
+                        ?>
+                        <tr>
+                            <td style="width: 200px;" >
+                                <input name="idPa[{idPages}]" value="{idPages}" class="checkbox1"  type="checkbox" style="margin-right: 10px" >
+                                <a href="<?php echo BASE_DIR ?>quantri/pagessua/{idPages}" >
+                                    <i class="fa fa-edit"></i>
+                                    Sửa</a>
+                                <?php
+                                if ($_QuanTri->Nhom == 1) {
+                                    ?>
+                                    |<a class="xoa" href="<?php echo BASE_DIR ?>quantri/pagesxoa/{idPages}" >
+                                        <i class="fa fa-dot-circle-o"></i>
+                                        xóa
+                                    </a>
+                                    <?php
+                                }
+                                ?>
+                            </td>
+                            <td>{TenPages}</td>
+                            <td>{idGroup}</td>
+                            <td>{TenPagesKD}</td>
+                            <td>{Title}</td>
+                        </tr>
+                        <?php
+                        $str = ob_get_clean();
+                        $str = str_replace("{TenPages}", $_Pages->TieuDe, $str);
+                        $str = str_replace("{TenPagesKD}", $_Pages->TenLoaiPage, $str);
+                        $str = str_replace("{idGroup}", $_Pages->Pagesgroup, $str);
+                        $str = str_replace("{Title}", $_Pages->AnHien, $str);
+                        $str = str_replace("{idPages}", $_Pages->Pagesid, $str);
+                        echo $str;
+                    }
+                    ?>                
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" id="selecctall"/>
+                                Chọn Hết
+                            </label>
+                            <input name="XoaPages" class="btn btn-danger xoa btn-sm" type="submit"  value="Xóa Chọn" >
+                        </th>
+                        <th>Tên Pages</th>
+                        <th>Pages</th>
+                        <th>Ẩn Hiện</th>
+                    </tr> 
+                </table>    
+            </form>
+        </div>
+
+
+    </div>
+
+</div>

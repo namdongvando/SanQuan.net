@@ -1,0 +1,76 @@
+<?php
+$DSDanhMuc = $data['DSDanhMuc'];
+$WebMauTim = $data['WebMauTim'];
+?>
+<div class="panel panel-primary"> 
+   <div class="panel-heading ">
+      {SuaWebMau}
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/suawebmau" method="POST">
+         <div class="col-lg-6">
+	  <table class="table table-bordered">
+	     <tr>
+	        <td>{Hinh}</td>
+	        <td>
+		 <img style="width: 100px;" src="<?php echo BASE_DIR ?>public/template/images/webmau/<?php echo $WebMauTim['HinhDaiDien'] ?>">
+		 <input id="xFilePath" name="HinhDaiDien" value="<?php echo BASE_DIR ?>public/images/webmau/<?php echo $WebMauTim['HinhDaiDien'] ?>" type="text" />
+		 <input type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/', 'xFilePath')" />
+		 <input type="hidden" name="mathietke" value="<?php echo $WebMauTim['mathietke'] ?>" />
+		 <input type="hidden" name="LuotXem" value="<?php echo $WebMauTim['LuotXem'] ?>" />
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{Gia}</td>
+	        <td>
+		 <input name="Gia" value="<?php echo $WebMauTim['Gia'] ?>" type="text" class="form-control" />
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{Link}</td>
+	        <td>
+		 <input name="Link" value="<?php echo $WebMauTim['Link'] ?>" type="text" class="form-control" />
+	        </td>
+	     </tr>
+	     <tr>
+	        <td>{LoaiWeb}</td>
+	        <td>
+		 <select name="MaDanhMuc" class="form-control" >
+		    <?php
+		    foreach($DSDanhMuc as $DanhMuc) {
+		       $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+		       if($ThuocTinh->type == 3) {
+			if(isset($DanhMuc['CapCon'])) {
+			   foreach($DanhMuc['CapCon'] as $k => $DSWebMau) {
+			      ?>
+	  		    <option <?php echo $WebMauTim['MaDanhMuc'] == $DSWebMau['MaDanhMuc'] ? 'selected="selected"' : '' ?>  value="<?php echo $DSWebMau['MaDanhMuc'] ?>">
+			         <?php echo $DSWebMau['TenDanhMuc']; ?>
+	  		    </option>
+			      <?php
+			   }
+			}
+		       }
+		    }
+		    ?>
+		 </select>
+	        </td>
+	     </tr>
+	     <tr>
+	        <td colspan="2">
+		 <input name="SuaWebMau" value="{SuaWebMau}" type="submit" >
+	        </td>
+	     </tr>
+	  </table>
+
+         </div>
+
+      </form>
+
+
+   </div>
+
+</div>
+
+
+
+

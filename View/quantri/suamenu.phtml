@@ -1,0 +1,46 @@
+<?php
+$Menu = $data['chitietmenu'][0];
+?>
+<form action="<?php echo BASE_DIR ?>quantri/suamenu" method="POST">
+   <table style="width: 100%;">
+      <tr>
+         <td>Mã Menu</td>
+         <td><input value="<?php echo $Menu['MaMenu'] ?>" name="MaMenu" type="text" ></td>
+      </tr>
+      <tr>
+         <td>Tiêu Đề</td>
+         <td><input value="<?php echo $Menu['TieuDe'] ?>" name="TieuDe" type="text" ></td>
+      </tr>
+      <tr>
+         <td>Link</td>
+         <td><input value="<?php echo $Menu['Link'] ?>" name="Link" type="text" ></td>
+      </tr>
+      <tr>
+         <td>Thứ Tự</td>
+         <td><input value="<?php echo $Menu['ThuTu'] ?>" name="ThuTu" type="text" ></td>
+      </tr>
+      <tr>
+         <td>Cấp Cha</td>
+         <td>
+
+	  <select name="CapCha">
+	     <option value="0">Cấp Cha</option>
+	     <?php
+	     foreach($data['DSMenuCha'] as $DSMenu) {
+	        ?>
+	     <option  <?php echo $DSMenu['MaMenu']==$Menu['CapCha']?"selected='selected'":"";  ?>  value="<?php echo $DSMenu['MaMenu'] ?>"><?php echo $DSMenu['TieuDe'] ?></option>
+	        <?php
+	     }
+	     ?>
+
+
+	  </select>
+         </td>
+      </tr>
+      <tr>
+         <td>Ẩn Hiện</td>
+         <td><input value="1" <?php echo $Menu['AnHien'] == 1 ? "checked" : "" ?>  name="AnHien" type="checkbox" ></td>
+      </tr>
+   </table>
+   <button name="SuaMenu" type="submit">Sua</button>
+</form>

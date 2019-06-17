@@ -1,0 +1,86 @@
+<?php
+$Model_KhachHang = new Model_KhachHang();
+$alert = new Application\Alert();
+$Content = $alert->getAlert();
+?>
+<div class="col-md-6" style="margin-top: 20px;" >
+    <form action="<?php echo $Model_KhachHang->getLinkDangKy(); ?>" method="POST" class="formdangnhap" >
+        <div class="panel panel-default" >
+            <div class="panel-body" >
+                <?php
+                if ($Content) {
+                    ?> 
+                    <div class="alert alert-danger" >
+                        <?php echo $Content["Content"] ?>
+                    </div>
+                    <?php
+                }
+                ?>
+
+                <table  class="table form-dangky " >
+                    <tr>
+                        <td>Tên Đăng Nhập (<span style="color: red" >*</span>)<br>
+                            <span style="color: red" >
+                                Tối Thiểu 6 ký tự
+                            </span>
+                        </td>
+                        <td>
+                            <input required="required" min="6"  name="TaiKhoan" class="form-control" value="<?php echo isset($_POST['TaiKhoan']) ? $_POST['TaiKhoan'] : '' ?>" placeholder="Tên Đăng Nhập"  >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mật Khẩu (<span style="color: red" >*</span>)<br>
+                            <span style="color: red" >
+                                Tối Thiểu 6 ký tự
+                            </span>
+                        </td>
+                        <td>
+                            <input required="required" name="password" type="password" class="form-control" value="" placeholder="Mật Khẩu"  >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nhập Lại Mật Khẩu (<span style="color: red" >*</span>) </td>
+                        <td>
+                            <input required="required" name="repassword" type="password" class="form-control" value="" placeholder="Nhật Lại Mật Khẩu"  >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Họ & Tên (<span style="color: red" >*</span>)</td>
+                        <td>
+                            <input required="required" name="HoTen" class="form-control" value="<?php echo isset($_POST['HoTen']) ? $_POST['HoTen'] : '' ?>" placeholder="Họ Tên"  >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Điện Thoại (<span style="color: red" >*</span>) </td>
+                        <td>
+                            <input required="required" name="SDT" class="form-control" value="<?php echo isset($_POST['SDT']) ? $_POST['SDT'] : '' ?>" placeholder="Số Điện Thoại"  >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tỉnh Thành (<span style="color: red" >*</span>)</td>
+                        <td ng-controller="locationController" >
+                            <select name="DiaChi" class="form-control">
+                                <option ng-repeat="item in getLocationByParent(0)" value="{{item.MaDiaChi}}" >{{item.TenDiaChi}}</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+
+                            <div class="form-group text-center" >
+                                <div class="g-recaptcha" data-sitekey="6LeRE5oUAAAAABshXCC-S5T4n-TNDVkd7h-uEUUy"></div>
+                                <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="text-right">
+            <input type="submit" value="Đăng ký" class="btn btn-primary" >
+            <input type="reset" value="Hủy" style="padding: 7px 25px ; " class="btn btn-default" >
+        </div>
+    </form>
+    <p> <a href="<?php echo $Model_KhachHang->getLinkDangNhap(); ?>" >Bạn Đã Có Tài Khoản</a> </p>
+</div>

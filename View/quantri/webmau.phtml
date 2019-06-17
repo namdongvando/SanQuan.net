@@ -1,0 +1,77 @@
+<?php
+$DSDanhMuc = $data['DSDanhMuc'];
+$DSWebMaua = isset($data['DSTinTuc']) ? $data['DSTinTuc'] : FALSE;
+?>
+<a class="btn btn-success" href="<?php echo BASE_DIR ?>quantri/themwebmau">{ThemWebMau}</a>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      {WebMau}
+      <select onchange="window.location.href = '<?php echo BASE_DIR ?>quantri/webmau/' + this.value;" >
+         <option value="all">___all___</option>
+         <?php
+         foreach($DSDanhMuc as $DanhMuc) {
+	  $ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
+	  if($ThuocTinh->type == 3) {
+	     if(isset($DanhMuc['CapCon'])) {
+	        foreach($DanhMuc['CapCon'] as $k => $DSWebMau) {
+		 ?>
+	           <option value="<?php echo $DSWebMau['MaDanhMuc'] ?>">
+		    <?php echo $DSWebMau['TenDanhMuc']; ?>
+	           </option>
+		 <?php
+	        }
+	     }
+	  }
+         }
+         ?>
+      </select>
+   </div>
+   <div class="panel-body">
+      <table class="table table-bordered table-hover" id="datatable">
+         <thead>
+	  <tr>
+	     <th>{MaWebMau}</th>
+	     <th>{Hinh}</th>
+	     <th>{Gia}</th>
+	     <th>{Link}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </thead>
+         <tbody>
+	  <?php
+	  if($DSWebMaua) {
+	     foreach($DSWebMaua as $TinTuc) {
+	        ?>   
+      	  <tr>
+      	     <td><?php echo $TinTuc['mathietke'] ?></td>
+      	     <td>
+	        <img style="width: 40px;" src="<?php echo BASE_DIR ?>public/template/images/webmau/<?php echo $TinTuc['HinhDaiDien'] ?>">
+	        </td>
+      	     <td><?php echo $TinTuc['Gia'] ?></td>
+      	     <td><?php echo $TinTuc['Link'] ?></td>
+      	     <td>
+      	        <a href="<?php echo BASE_DIR ?>quantri/suawebmau/<?php echo $TinTuc['mathietke'] ?>" >{Sua}</a>
+      	        /<a class="xoa" href="<?php echo BASE_DIR ?>quantri/webmau/xoa/<?php echo $TinTuc['mathietke'] ?>" >{Xoa}</a>
+      	     </td>
+      	  </tr>
+	        <?php
+		    flush();
+	     }
+	  }
+	  ?>
+         </tbody>
+         <tfoot>
+	  <tr>
+	     <th>{MaWebMau}</th>
+	     <th>{Hinh}</th>
+	     <th>{Gia}</th>
+	     <th>{Link}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </tfoot>
+      </table>
+
+
+
+   </div>
+</div>

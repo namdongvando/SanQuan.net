@@ -1,0 +1,100 @@
+<div class="container-fluid" >
+    <div class="panel panel-success">
+        <div class="panel-heading bg-green "  >
+            <h3 class="panel-title"  >
+                Thêm Pages
+            </h3>
+        </div>
+        <div class="panel-body" >
+            <form action="" method="POST" >
+                <div class="col-md-4 col-lg-4" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td >Tên Pages</td>
+                            <td >
+                                <input name="TieuDe" value="" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tên Pages Không Dấu</td>
+                            <td >
+                                <input name="TieuDeKD" value="" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Group</td>
+                            <td >
+                                <input name="idGroup" value="1" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Loai Page</td>
+                            <td >
+                                <input name="LoaiPage" value="0" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Tiêu Để Trang</td>
+                            <td >
+                                <textarea name="Title" value="" class="form-control" ></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Mô Tả Trang</td>
+                            <td >
+                                <textarea name="Des" value="" class="form-control" ></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Từ Khóa</td>
+                            <td >
+                                <textarea name="Keyword" value="" class="form-control" ></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >Hình</td>
+                            <td >
+                                <input id="HinhSanPham" class="form-control" value="<?php echo BASE_DIR ?>public/img/images" name="UrlHinh" type="text" size="60" />
+                                <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham');" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <input type="submit"  value="Thêm" name="ThemPages" class="btn btn-success btn-block" style="font-weight: bold "  />
+                            </td>
+                        </tr>
+
+
+                    </table>                
+                </div>
+                <div class="col-md-8 col-lg-8" >
+                    <div class="row" >
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td >
+                                    Tóm Tắt
+                                    <textarea name="TomTat" id="NoiDungTomTat" value="" class="form-control" ></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    Nội Dung
+                                    <textarea name="NoiDung" id="NoiDungChinh" value="" class="form-control" ></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+

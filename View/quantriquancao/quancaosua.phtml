@@ -1,0 +1,70 @@
+<?php 
+$Model_QuanCao = new Model_QuanCao();
+$_Quancao = new Model_QuanCao($Model_QuanCao->TimQuanCao4ID($_Param[0]));
+?>
+<div class="container-fluid" >
+    <div class="panel panel-success">
+        <div class="panel-heading bg-green "  >
+            <h3 class="panel-title"  >
+                Thêm Quảng Cáo
+            </h3>
+        </div>
+        <div class="panel-body" >
+            <form action="<?php $Model_QuanCao->getLinkSuaQuanCao() ?>" method="POST" >
+                <div class="col-md-4 col-lg-4" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td >
+                                Tên Quảng Cáo
+                                <input name="TenQuanCao" value="<?php echo $_Quancao->TenQuanCao ?>" class="form-control" required="required" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                Vị Trí
+                                <input name="ViTri" value="<?php echo $_Quancao->ViTri ?>" class="form-control" required="required" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                STT
+                                <input name="Stt" value="<?php echo $_Quancao->Stt ?>" class="form-control" required="required" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                Link Quản Cáo
+                                <input name="LinkQuanCao" value="<?php echo $_Quancao->LinkQuanCao ?>" required="required" class="form-control" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <input style="display: none;"  id="HinhSanPham" class="form-control" value="<?php echo $_Quancao->UrlHinh ?>" name="UrlHinh" type="text" size="60" />
+                                <label style="position: relative;border: 1px solid blue;" >
+                                    <span style="position: absolute;" >
+                                        Hình Quảng Cáo
+                                    </span> 
+                                    <input style="display: none;" type="button"  value="Browse Server" onclick="BrowseServer('Images:/quangcao/', 'HinhSanPham');" />
+                                    <img id="HinhQuanCao" src="<?php echo $_Quancao->UrlHinh ?>" style="width: 200px;height: 200px;" >
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <input type="submit"  value="Sửa" name="SuaQuanCao" class="btn btn-success btn-block" style="font-weight: bold "  />
+                                <input type="hidden"  value="<?php echo $_Quancao->MaQuanCao ?>" name="MaQuanCao"  />
+                            </td>
+                        </tr>
+                    </table>                
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+

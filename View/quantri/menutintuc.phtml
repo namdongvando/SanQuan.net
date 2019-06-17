@@ -1,0 +1,23 @@
+<?php
+include 'menu/menutintuc.php';
+$DSMenu = $data['DSMenu'];
+?>
+<div>
+   <ul>
+      <?php
+      foreach($DSMenu as $Menu) {
+         ?>
+         <li><a href=""><?php echo $Menu['MenuTitle'] ?></a>
+            <ul>
+               <li><a>aa</a></li>
+               
+            </ul>
+            
+         </li>
+         <?php
+      }
+      ?>
+   </ul>
+
+
+</div>

@@ -1,0 +1,115 @@
+<?php
+$GioiThieu = $data['GioiThieu'];
+?>
+
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Bài Viết Giới Thiệu</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/gioithieu" method="POST">
+         <table class="table table-hover">
+            <tbody>
+               <tr>               <td><span><?php echo $GioiThieu['MaGioiThieu'] ?></span>
+                     <input type="hidden" value="<?php echo $GioiThieu['MaGioiThieu'] ?>" name="MaGioiThieu">
+                  </td>
+
+               </tr>
+               <tr>
+                  <td>
+                     <label>{NoiDung}</label>
+                     <textarea class="ckeditor" name="NoiDung"><?php echo $GioiThieu['NoiDung']; ?></textarea>
+                     <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Tạo Slide</a>                  
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <label>{NoiDungEN}</label>
+                     <textarea class="ckeditor" name="NoiDungEN"><?php echo $GioiThieu['NoiDungEN']; ?></textarea>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <input value="{Sua}" class="sua btn btn-success" name="SuaGioiThieu" type="submit" >
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+
+      </form>
+
+   </div>
+</div>
+
+<div class="modal fade" id="modal-id">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Tạo slide</h4>
+         </div>
+         <div class="modal-body">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Tạo Slide</h3>
+               </div>
+               <div class="panel-body">
+                  <div class="col-lg-4">
+                     <label>Chiều Dài</label>
+                     <input id="ChieuDai" class="form-control" name="ChieuDai">
+                  </div>
+                  <div class="col-lg-4">
+                     <label>Chiều Rộng</label>
+                     <input id="ChieuRong" class="form-control" name="ChieuRong">
+                  </div>
+                  <div class="col-lg-4">
+                     <label>Căn Lề</label>
+                     <select class="form-control" id="Can" >
+                        <option value="left">left</option>
+                        <option value="right">right</option>
+                     </select>
+
+
+                  </div>
+                  <div id="HinhAnh">
+                     <div class="HinhAnh"> 
+                        <input id="HinhSanPham" class="form-control" value="" name="UrlHinh" type="text" size="60" />
+                        <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham');" />
+                     </div>
+                     <div class="HinhAnh"> 
+                        <input id="HinhSanPham1" class="form-control" value="" name="UrlHinh" type="text" size="60" />
+                        <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham1');" />
+                     </div>
+                     <div class="HinhAnh"> 
+                        <input id="HinhSanPham2" class="form-control" value="" name="UrlHinh" type="text" size="60" />
+                        <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham2');" />
+                     </div>
+                     <a style="display: block;padding: 10px;cursor: pointer;" onclick="ThemHinhAnh()">Tạo Code</a>
+                  </div>
+
+                  <input class="form-control" id="code" type="text">
+
+               </div>
+            </div> 
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   function ThemHinhAnh() {
+      var dai = document.getElementById('ChieuDai').value;
+      var rong = document.getElementById('ChieuRong').value;
+      var can = document.getElementById('Can').value;
+      var h1 = document.getElementById('HinhSanPham').value;
+      var h2 = document.getElementById('HinhSanPham1').value;
+      var h3 = document.getElementById('HinhSanPham2').value;
+      document.getElementById('code').value = '{slide}' + dai + '|' + rong + '|' + can + '|' + h1 + '|' + h2 + '|' + h3 + '{/slide}';
+   }
+
+
+</script>
+

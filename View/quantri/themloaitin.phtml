@@ -1,0 +1,43 @@
+<?php ?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      chi tiết Chủng loại Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/themloaitin" method="post">
+         <table class="table table-bordered" >
+	  <caption>Thêm Chủng Loại Tin</caption>
+	  <tr>
+	     <td>{TenLoai}</td>
+	     <td>
+	        <input class="form-control"  name="TenLoai" type="text" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{TenChungLoai}</td>
+	     <td>
+	        <select class="form-control" name="MaCL">
+		 <?php
+		 if($data['DSChungLoaiTin'])
+		    foreach($data['DSChungLoaiTin'] as $ChungLoaiTin) {
+		       ?>
+      		 <option value="<?php echo $ChungLoaiTin['MaCL'] ?>"><?php echo $ChungLoaiTin['TenCL'] ?></option>
+		       <?php
+		    }
+		 ?>
+	        </select>
+	     </td>
+	  </tr>
+
+	  <tr>
+	     <th colspan="2"><input class="them"  name="them"  type="submit" value="{Them}" ></td>
+	  </tr>
+
+
+
+         </table>
+
+      </form>
+
+   </div>
+</div>

@@ -1,0 +1,52 @@
+<?php
+$Model_HoTro = new Model_HoTro();
+$DSHoTro = $data['DSHoTro'];
+?>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Thông Tin Hỗ Trợ
+    </div>
+    <div class=panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/hotro" method="POST"> 
+            <table class="table table-bordered">
+                <tr>
+                    <th>Stt</th>
+                    <th>Email</th>
+                    <th>SĐT</th>
+                    <th>Tên</th>
+                    <th>Thao Tác</th>
+                </tr>
+                <?php
+                $dem = 1;
+                if ($DSHoTro) {
+                    foreach ($DSHoTro as $HoTro) {
+                        $Model_HoTro->HoTro($HoTro);
+                        ?>
+                        <tr>
+                            <th><?php echo $dem++; ?></th>
+                            <th><?php echo $Model_HoTro->EmailHoTro; ?></th>
+                            <th><?php echo $Model_HoTro->SDTHoTro; ?></th>
+                            <th><?php echo $Model_HoTro->TenHoTro; ?></th>
+                            <th>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="<?php echo $Model_HoTro->SuaHoTro; ?>">Sửa</a>
+                                    <a class="btn btn-danger pull-right xoa "  href="<?php echo $Model_HoTro->XoaHoTro; ?>">Xóa</a>
+                                </div>
+                            </th>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
+            </table>
+        </form>
+
+
+
+
+
+
+    </div>
+
+</div>
+

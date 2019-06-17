@@ -1,0 +1,212 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+$Model_TinhThanh = new Model_TinhThanh();
+$Model_KhachHang = new Model_KhachHang();
+$Model_SanPham = new Model_SanPham();
+$KG = $_SESSION[KhachHang];
+$SanPham = $Model_SanPham->TimSanPham4IDKhachHang($KG['ID']);
+if (!$SanPham) {
+    $Model_SanPham->ThemSanPhamDefaut();
+}
+$SanPham = $Model_SanPham->TimSanPham4IDKhachHang($KG['ID']);
+$_SanPham = new Model_SanPham($SanPham[0]);
+$ThongBao = $data['ThongBao'];
+if ($ThongBao != 'false') {
+    $ThongBao = $Model_DanhMuc->_decode($ThongBao);
+    ?>
+    <div class="alert alert-<?php echo $ThongBao->Loai ?>" >
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php echo $ThongBao->NoiDung ?>
+    </div>
+    <?php
+}
+?>
+<form action="" method="POST" enctype="multipart/form-data" >
+    <div class="container" ng-controller="dangtinController"  ng-init="getHinhSanPham()" >
+        <div class="row" ng-init="homeint()" >
+            <h2 class="text-center" >Đăng Tin</h2>
+
+            <div class="clearfix" ></div>
+            <div class="col-md-9" >
+                <div class="row" >
+                    <div class="panel"  >
+                        <div class="panel-body" >
+                            <div class="row" >
+                                <input name="IdTin" value="<?php echo $_SanPham->MaSP; ?>" type="hidden"  >
+
+                                <div class="clearfix" ></div>
+                                <div class="col-lg-12 col-md-12" >
+                                    <div class="form-group" >
+                                        <label>Tiêu Đề</label>
+                                        <input name="TieuDe" required="required" value="<?php echo $_SanPham->TenSP ?>" class="form-control" placeholder="Tiêu Đề Tin">
+                                    </div>
+                                </div>
+                                <div class="clearfix" ></div>
+
+                                <div class="col-lg-12" >
+                                    <h3 class="panel-title" >Mô Tả</h3>
+                                    <textarea id="Mota" style="height: 400px" required="required" name="NoiDung" class="form-control MoTa" ><?php echo $_SanPham->NoiDung ?></textarea>
+                                </div>
+                                <div class="clearfix" ></div>
+                                <div style="height: 15px;" ></div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>    
+            </div>
+            <div class="col-md-3" >
+                <div class=""  >
+                    <input  name="GhiChu[GoiDangTin]" value="0" type="hidden"   >
+                    <input  name="TomTat" value="<?php echo $_SanPham->TomTat ?>" type="hidden"   >
+                    <div class="panel" >
+                        <div class="panel-body" >
+                            <div class="row" >
+                                <div class="row" >
+                                    <div class="form-group"  >
+                                        <label>Loại hình sang nhượng </label>
+                                        <select class="form-control"  name="MaDanhMuc" >
+                                            <option ng-selected="item.MaDanhMuc=='<?php echo $_SanPham->MaDanhMuc ?>'" value="{{item.MaDanhMuc}}" ng-repeat="item in getDanhMucByParent(0)" >{{item.TenDanhMuc}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label>Giá Sang <span style="color: red;" >(Đơn Vị Triệu)</span></label>
+                                        <input type="text" name="Gia" required="required" value="<?php echo $_SanPham->Gia; ?>" class="form-control" placeholder="Giá Sang Nhượng">
+                                    </div>
+                                    <div class="form-group hidden"  >
+                                        <label>Đơn Vị </label><br>
+                                        <select class="form-control" name="GhiChu[DonVi]" >
+                                            <option value="1" >Triệu</option>
+                                            <option value="2" >Tỷ</option>
+                                            <option value="3" >USD</option>
+                                        </select>
+                                    </div>
+                                    <div class="" ng-controller="locationController" >
+                                        <div class="form-group" >
+                                            <label>Tỉnh Thành</label>
+                                            <select class="form-control" name="GhiChu[Tinh]" ng-model="res.Provice"  >
+                                                <option ng-repeat="item in getLocationByParent(0)" value="{{item.MaDiaChi}}" >{{item.TenDiaChi}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label>Huyện</label>
+                                            <select class="form-control" name="GhiChu[Tinh]"   >
+                                                <option ng-repeat="item in getLocationByParent(res.Provice)" value="{{item.MaDiaChi}}" >{{item.TenDiaChi}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="" >
+                                        <div class="form-group" >
+                                            <label>Người Liên Hệ </label>
+                                            <input type="text" name="GhiChu[NguoiLienHe]" required="required" value="<?php echo $_SanPham->NguoiLienHe ?>" 
+                                                   class="form-control" placeholder="Tên người liên hệ...">
+                                        </div>
+                                    </div>
+                                    <div class="" >
+                                        <div class="form-group" >
+                                            <label>Điện Thoại Liên Lạc </label>
+                                            <input type="number" name="GhiChu[DienThoai]" required="required" value="<?php echo $_SanPham->DienThoai ?>" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="" >
+                                        <div class="form-group" >
+                                            <label>Địa Chỉ</label>
+                                            <input type="text" name="GhiChu[DiaChi]" required="required" value="<?php echo $_SanPham->DiaChi ?>" class="form-control" placeholder="<?php echo $_SanPham->DiaChi ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <input name="DangTin" type="submit" value="Cập Nhật Tin" class="sua btn-block btn btn-primary" >
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3"  >
+                <label style="border: 1px solid pink;position: relative;margin: auto;width: 100%;border-radius: 5px;">
+                    <span style="position: absolute;z-index: 1000;line-height: 200px;width: 100%;text-align: center; " >
+                    </span>
+                    <div style="height: 250px;width: 100%;overflow: hidden;" >
+                        <img src="<?php echo $_SanPham->UrlHinh ?>" id="SHinh"  style="width: 100%;">
+                    </div>
+                    <div style="top: 50%;position: absolute;width: 100%;" >
+                        <input name="UrlHinh" type="file" style="width: 100%;" class="btn btn-primary" onchange="readURL1(this)"  >
+                    </div>
+                </label>
+            </div>
+            <div class="panel "  >
+                <div class="col-md-9"  >
+                    <div class="panel-heading" >
+                        <h3 class="panel-title" >Hình Ảnh Khác</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div class="row" >
+                            <div class="col-md-3" ng-repeat="item  in DSHinhSanPham" >
+                                <div style="position: relative;" >
+                                    <button style="position: absolute;right: 0px;top: 0px;" type="button" ng-click="xoaHinh(item.Key)" class="btn btn-xs btn-danger" >Xóa</button>
+                                    <img src="{{item.Value}}"   class="img img-responsive img-thumbnail" style="width: 100%;height: 150px;margin-bottom: 10px;" >
+                                </div>
+                            </div>
+                        </div>
+                        <p class="pull-right" >
+                            Nhấn cập Nhật Nếu Không Thấy Hình Hiền Thị
+                            <button class="btn btn-primary " type="button" ng-click="getHinhSanPham()" ><i class="fa fa-refresh" ></i></button>
+                        </p>
+                    </div>
+                    <div class="panel-footer" > 
+                        Tố Đa 6 Hình Ảnh
+                        <input name="FileLisHinh[]" type="file" multiple="multiple" max="6" class="pull-right btn btn-primary" >
+                        <div class="clearfix" ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" ></div>
+            <h3 class="text-center" style="color: red"  >
+                * Liên hệ quản trị để được tư vấn và hiển thi tin
+            </h3>
+
+            <h2 class="text-center"  >HÌNH THỨC THANH TOÁN</h2>
+            <p class="text-center" style="font-size: 18px;" >
+                Thanh toán qua ngân hàng bằng cách chuyển khoản : <br>
+                ( Lưu ý: Nội dung chuyển khoản quý khách ghi thanh toán cho mã tin đăng của mình - <?php echo $_SanPham->MaSP ?> ) <br>
+                + Ngân hàng TMCP Ngoại Thương Việt Nam – Vietcombank <br>
+                - Chủ tài khoản :   Trương Duy Sang  <br>
+                - Số tài khoản    :  0441003949279 <br>
+                - Chi nhánh ngân hàng :  Tân Bình, TP.HCM     <br>
+                Liên Hê: 097.889.2755
+            </p>
+        </div>
+    </div>
+</form>
+<script src="<?php echo BASE_DIR ?>public/templateadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+<link href="<?php echo BASE_DIR ?>public/templateadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" >
+                                function readURL1(input) {
+                                    for (var i = 0; i < input.files.length; i++) {
+                                        if (input.files[i]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                $("#SHinh").attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(input.files[i]);
+                                        }
+                                    }
+                                }
+                                function xoaHinh(url) {
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange = function() {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            CapNhat();
+                                        }
+                                    };
+                                    xmlhttp.open("GET", url, true);
+                                    xmlhttp.send();
+                                }
+                                $(function() {
+                                    $('.MoTa').attr("id").wysihtml5();
+                                    $(".sua").click(function() {
+                                        return confirm("Bạn Có Chắc muốn sửa?");
+                                    });
+                                });
+</script>

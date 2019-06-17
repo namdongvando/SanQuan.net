@@ -1,0 +1,105 @@
+<?php
+$SanPham = $data['SanPhamDuyet'];
+$ChuSanPham = $data['ChuSanPham'];
+$DanhMuc = $data['DanhMucSanPham'];
+
+
+//print_r($SanPham);
+?>
+<div class="container">
+
+   <div class="columns-container">
+      <div class="container" id="columns">
+         <div class="row">
+            <div class="clearfix"></div>
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+               <!-- Product -->
+               <div id="product">
+                  <div class="primary-box row">
+                     <div class="pb-left-column col-xs-12 col-sm-6">
+                        <!-- product-imge-->
+                        <div class="product-image">
+                           <div class="product-full" style="text-align: center">
+                              <img style="height: 250px;margin: auto;" class="img-responsive" alt="product" src="<?php echo BASE_DIR ?>public/img/images/<?php echo $SanPham['UrlHinh'] ?>" />
+                           </div>
+                        </div>
+                        <!-- product-imge-->
+                     </div>
+                     <div class="pb-right-column col-xs-12 col-sm-6">
+                        <h1 class="product-name"><?php echo $SanPham['TenSanPham'] ?></h1>
+                        <div class="product-comments">
+                           <div class="product-star">
+        <!--                <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star-half-o"></i>-->
+                           </div>
+                           <div class="comments-advices">
+                              {CapNhat}:<?php echo date('d-m-Y h:i:s', strtotime($SanPham['NgayDang'])); ?>
+                           </div>
+                           <br/>
+                           <div class="comments-advices">
+                              {DanhMuc}: <?php echo $DanhMuc['TenDanhMuc'] ?>
+                           </div>
+                           <br/>
+                           <div class="comments-advices">
+                              <span>Nơi Đăng: <?php echo $ChuSanPham['DiaChi']; ?></span>
+                              <?php
+//                              echo date('m', time() - strtotime($SanPham['NgayDang']))." {Thang} ";
+//                              echo date('d', time() - strtotime($SanPham['NgayDang']))." {Ngay} ";
+//                              echo date('h:i:s', time() - strtotime($SanPham['NgayDang']));
+                              ?>
+                           </div>
+                        </div>
+                        <div class="product-price-group">
+                           <span class="price">{Gia}: <?php echo $SanPham['Gia'] > 0 ? number_format($SanPham['Gia'], 0) : "{LienHe}" ?></span>
+                        </div>
+                        <div class="info-orther">
+                           <p>{MaSanPham} : <b>#<?php echo $SanPham['MaSanPham'] ?></b></p>
+
+                           <p>{NguoiDangTin} : <b><?php echo $ChuSanPham['HoTen'] ?></b></p>
+   <!--                           <p>{txtEmail} : <b><?php echo $ChuSanPham['email'] ?></b></p>
+                           <p>{Phone} : <b><?php echo $ChuSanPham['SDT'] ?></b></p>-->
+
+
+                        </div>
+                        <div class="product-desc">
+                           <span class="btn">Liên Hệ</span>
+                           <span id="SoDienThoai" onclick="LaySanSDTChuSanPham('<?php echo $SanPham['MaSanPham'] ?>')" class="btn btn-success">SDT</span>
+                           <span id="LayEmail" onclick="LaySanEmailChuSanPham('<?php echo $SanPham['MaSanPham'] ?>')" class="btn btn-success">Email</span>
+                        </div>
+                        <div class="product-desc">
+                           <?php echo $SanPham['MoTa'] ?>
+                        </div>
+                        <div class="form-share">
+                           <!--            <div class="sendtofriend-print">
+                                                    <a href="javascript:print();"><i class="fa fa-print"></i> Print</a>
+                                                    <a href="#"><i class="fa fa-envelope-o fa-fw"></i>Send to a friend</a>
+                                                 </div>
+                                                 <div class="network-share">
+                                                 </div>-->
+                        </div>
+                     </div>
+                     <div class="chiTiet" style="text-align: justify;width: 100%;clear: both;padding: 10px;"> 
+                        <?php echo $SanPham['ChiTiet'] ?>
+                     </div>
+                  </div>
+               </div>
+               <!-- Product -->
+            </div>
+            <!-- ./ Center colunm -->
+
+            <!--còn 1 cot o dây nữa-->
+
+         </div>
+         <!-- ./row-->
+      </div>
+   </div>
+</div>
+<a href="<?php echo BASE_DIR ?>quantri/duyetsanpham/chapnhan/<?php echo $SanPham['MaSanPham'] ?>" class="btn btn-success">Chấp Nhận</a>
+<a href="<?php echo BASE_DIR ?>quantri/duyetsanpham/an/<?php echo $SanPham['MaSanPham'] ?>" class="btn btn-danger">Ẩn</a>
+<a href="<?php echo BASE_DIR ?>quantri/duyetsanpham/khongchapnhan/<?php echo $SanPham['MaSanPham'] ?>" class="btn btn-danger">Không Chấp Nhận</a>
+<a href="<?php echo BASE_DIR ?>quantri/suasanpham/<?php echo $SanPham['MaSanPham'] ?>" class="btn btn-warning">Sửa bài Viết</a>
+
+

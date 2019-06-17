@@ -1,0 +1,178 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+$DMChon = new Model_DanhMuc($data['DMChon']);
+?>
+<form action="" method="POST">
+    <input type="hidden" name="MaDanhMuc" value="<?php echo $DMChon->MaDanhMuc ?>"  >
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding-left: 5px;">
+            <a href="<?php echo $DMChon->LinkListDanhMuc ?>" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            Sửa Danh Mục 
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 " >
+                    <div class="form-group">
+                        <label for="">Danh Mục Cha</label>
+                        <select class="form-control" name="CapCha" >
+                            <option value="0" >Chọn Danh Mục</option>
+                            <?php
+                            $DSDanhMuc = $data['DSDanhMucCha'];
+                            foreach ($DSDanhMuc as $DanhMuc) {
+                                ?>
+                                <option  <?php echo $DMChon->CapCha == $DanhMuc['MaDanhMuc'] ? 'selected="selected"' : '' ?>  value="<?php echo $DanhMuc['MaDanhMuc']; ?>" ><?php echo $DanhMuc['TenDanhMuc']; ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tên Danh mục</label>
+                        <input autofocus="autofocus" name="TenDanhMuc" value="<?php echo $DMChon->TenDanhMuc ?>" id="" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tên Không dấu</label>
+                        <input autofocus="autofocus" value="<?php echo $DMChon->TenKhongDau ?>" name="TenKhongDau" id="" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="STT">STT</label>
+                        <input name="STT" id="STT" value="<?php echo $DMChon->STT ?>" type="text"  class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label>Pages
+                        </label>
+                        <select name="LoaiDanhMuc" class="form-control"    >
+                            <option value="0" >Chọn Pages</option>
+                            <?php
+                            $Model_Pages = new Model_Pages();
+                            $DSPages = $Model_Pages->DSPages();
+                            foreach ($DSPages as $Pages) {
+                                $_Pages = new Model_Pages($Pages);
+                                ?>
+                                <option value="<?php echo $_Pages->Pagesid ?>" ><?php echo $_Pages->TieuDe ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        Hình Danh Mục
+                        <div id="thumbnail">
+                            <img src="<?php echo $DMChon->UrlHinh ?>" style="width: 100px;height: 100px;" >
+                        </div>
+                        <input class="form-control" value="<?php echo $DMChon->UrlHinh ?>" name="UrlHinh" id="UrlHinh" type="text" />
+                        <input  type="button" value="Browse Server" class="ChonSV" onclick="BrowseServer('Images:/icon/', 'UrlHinh')" />
+                        <div style="clear: both"></div>
+
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 " >
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="LoaiDanhMuc">Các Hiển Thị Khác</label>
+                            </div>
+                            <table class="table table-bordered" >
+                                <tr>
+                                    <td><label for="MailMenu" >
+                                            Mail Menu
+                                        </label> </td>
+                                    <td>
+                                        <?php
+                                        $anHien = isset($DMChon->ThuocTinh->MailMenu) ? $DMChon->ThuocTinh->MailMenu : 0;
+                                        ?>
+                                        <select class="form-control" name="ThuocTinh[MailMenu]" >
+                                            <option <?php echo $anHien == 1 ? 'selected="selected"' : '' ?> value="1" >Hiện</option>
+                                            <option <?php echo $anHien == 0 ? 'selected="selected"' : '' ?> value="0" >Ẩn</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="MailMenu" >
+                                            Tìm Kiếm Trang Chủ
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $anHien = isset($DMChon->ThuocTinh->TimKiemHome) ? $DMChon->ThuocTinh->TimKiemHome : 0;
+                                        ?>
+                                        <select class="form-control" name="ThuocTinh[TimKiemHome]" >
+                                            <option <?php echo $anHien == 1 ? 'selected="selected"' : '' ?> value="1" >Hiện</option>
+                                            <option <?php echo $anHien == 0 ? 'selected="selected"' : '' ?> value="0" >Ẩn</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="MailMenu" >
+                                            View Danh Mục
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $anHien = isset($DMChon->ThuocTinh->DanhMucView) ? $DMChon->ThuocTinh->DanhMucView : "";
+                                        ?>
+                                        <select class="form-control" name="ThuocTinh[DanhMucView]" >
+                                            <option <?php echo $anHien == "" ? 'selected="selected"' : '' ?> value="index" >Chọn View</option>
+                                            <option <?php echo $anHien == "danhmucsangquan" ? 'selected="selected"' : '' ?> value="danhmucsangquan" >View Của DanhMuc Sang Quán</option>
+                                            <option <?php echo $anHien == "danhmuccafe" ? 'selected="selected"' : '' ?> value="danhmuccafe" >View Của DanhMuc Cafe</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="MailMenu" >
+                                            2 Danh Mục liện Quan
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $anHien = isset($DMChon->ThuocTinh->DanhMucLienQuan1) ? $DMChon->ThuocTinh->DanhMucLienQuan1 : "";
+                                        ?>
+                                        <div class="form-group" >
+                                            <select class="form-control" name="ThuocTinh[DanhMucLienQuan1]" >
+                                                <?php
+                                                $DSDanhMuc = $Model_DanhMuc->DSDanhMuc();
+                                                foreach ($DSDanhMuc as $k => $DanhMuc) {
+                                                    if ($DMChon->MaDanhMuc == $DanhMuc['MaDanhMuc']) {
+                                                        unset($DSDanhMuc[$k]);
+                                                    } else {
+                                                        $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                                                        ?>
+                                                        <option <?php echo $anHien == $_DanhMuc->MaDanhMuc ? 'selected="selected"' : '' ?> value="<?php echo $_DanhMuc->MaDanhMuc; ?>" ><?php echo $_DanhMuc->TenDanhMuc; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <?php
+                                        $anHien = isset($DMChon->ThuocTinh->DanhMucLienQuan2) ? $DMChon->ThuocTinh->DanhMucLienQuan2 : "";
+                                        ?>
+                                        <div class="form-group" >
+                                            <select class="form-control" name="ThuocTinh[DanhMucLienQuan2]" >
+                                                <?php
+                                                foreach ($DSDanhMuc as $DanhMuc) {
+                                                    $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                                                    ?>
+                                                    <option <?php echo $anHien == $_DanhMuc->MaDanhMuc ? 'selected="selected"' : '' ?> value="<?php echo $_DanhMuc->MaDanhMuc; ?>" ><?php echo $_DanhMuc->TenDanhMuc; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" name="SuaDanhMuc" class="btn btn-primary">Sửa</button>
+            <button type="reset"  class="btn btn-default">Làm Lại</button>
+        </div>
+    </div>
+</form>
+

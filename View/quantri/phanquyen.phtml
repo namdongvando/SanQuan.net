@@ -1,0 +1,71 @@
+<?php
+$Model_QuangTri = new Model_QuanTri();
+$DSNhom = FALSE;
+$DSAction = $data['DSAction'];
+if(isset($_Param[0])) {
+   $MaNhom = $_Param[0];
+} else {
+   $MaNhom = 1;
+}
+$DSQuyenNhom = $Model_QuangTri->DanhSachQuenNhom($MaNhom);
+if(!$DSQuyenNhom){
+   $DSQuyenNhom = array();
+}
+?>
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">Phân Quền</h3>
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/phanquyen" method="POST">
+         <select name="MaNhom" class="form-control" onchange="window.location.href = '<?php echo BASE_DIR ?>quantri/phanquyen/' + this.value"> 
+            <option <?php echo $_Param[0] == 1 ? 'selected="selected"' : ''; ?>  value="1">just</option>
+            <option <?php echo $_Param[0] == 2 ? 'selected="selected"' : ''; ?> value="2">Cấp 1</option>
+            <option <?php echo $_Param[0] == 3 ? 'selected="selected"' : ''; ?> value="3">cấp 2</option>
+            <option <?php echo $_Param[0] == 4 ? 'selected="selected"' : ''; ?> value="4">Cấp 3</option>
+         </select>
+         <input name="CapQuen" value="Cấp Quền" type="submit" class="btn btn-success" style="margin: 10px;" />
+         <label>
+            <input onchange="" name="" value="" id="chon" type="checkbox">
+            Chọn Hết
+         </label>
+         <div id="ChonHet">
+            <?php
+            foreach($DSAction as $Action) {
+               ?>
+               <div class="col-md-4">
+                  <label style="display: block;background-color: wheat">
+                     <input name="Quyen[]" <?php echo in_array($Action, $DSQuyenNhom) ? 'checked="checked"' : '' ?>  value="<?php echo $Action ?>" type="checkbox" >
+                     <?php echo $Action; ?>
+                  </label>
+               </div>
+               <?php
+            }
+            ?>
+         </div>
+      </form>
+   </div>
+</div>
+
+<script>
+
+   $(document).ready(function () {
+      $('#chon').click(function (event) {
+         if (this.checked) {
+	  // Iterate each checkbox
+	  $('#ChonHet input:checkbox').each(function () {
+	     this.checked = true;
+	  });
+         } else {
+	  $('#ChonHet input:checkbox').each(function () {
+	     this.checked = false;
+	  });
+         }
+      });
+   });
+
+
+
+</script>
+
+

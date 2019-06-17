@@ -1,0 +1,100 @@
+<?php
+//print_r($data['DSLoaiTinCL']);
+$ChiTietTin = $data['ChiTietTin'];
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Chi tiết Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/suatintuc/<?php echo $ChiTietTin['idTin'] ?>" method="post">
+         <table class="table table-bordered" >
+	  <caption>Thêm Chủng Loại Tin</caption>
+	  <tr>
+	     <td>{TieuDe}</td>
+	     <td>
+	        <input class="form-control"  name="TieuDe" type="text" value="<?php echo $ChiTietTin['TieuDe'] ?>" >
+	        <input  name="idTin" type="hidden" value="<?php echo $ChiTietTin['idTin'] ?>" >
+	        <input  name="SoLanXem" type="hidden" value="<?php echo $ChiTietTin['SoLanXem'] ?>" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{KeyWord}</td>
+	     <td>
+	        <input class="form-control"  name="TieuDeKhongDau" type="text" value="<?php echo $ChiTietTin['TieuDeKhongDau'] ?>" >
+	     </td>
+	  </tr>
+	  <tr>
+	  <tr>
+	     <td>{TomTat}</td>
+	     <td>
+	        <textarea class="form-control" name="TomTat"><?php echo $ChiTietTin['TomTat'] ?></textarea>
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{Hinh}</td>
+	     <td>
+	        <img src="<?php echo BASE_DIR ?>public/img/images/tintuc/<?php echo $ChiTietTin['urlHinh'] ?>" width="100" height="100">
+	        <input id="xFilePath" name="urlHinh" type="text" size="60" value="<?php echo BASE_DIR ?>public/img/images/tintuc/<?php echo $ChiTietTin['urlHinh'] ?>" />
+	        <input type="button" value="Browse Server" onclick="BrowseServer();" />
+	        <!--<input name="Hinh" id="HinhCongTy" data-taget="HinhCongTy" type="text" class="form-control LayHinh"  />-->
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{NoiDung}</td>
+	     <td>
+	        <textarea name="NoiDung"  class="ckeditor"><?php echo $ChiTietTin['NoiDung'] ?></textarea>
+
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{LoaiTin}</td>
+	     <td>
+	        <select name="MaDanhMuc" >
+		 <?php
+		 $DSSanhMuc = $data['DSLoaiTin'];
+		 foreach($DSSanhMuc as $DanhMuc) {
+		    if($DanhMuc['MaDanhMuc'] != 10) {
+		       ?>
+      		 <option  <?php echo $ChiTietTin['MaDanhMuc'] == $DanhMuc['MaDanhMuc'] ? 'selected="selected"' : ''; ?> value="<?php echo $DanhMuc['MaDanhMuc'] ?>">
+			<?php echo $DanhMuc['TenDanhMuc'] ?>
+      		 </option>
+		       <?php
+		    }
+		 }
+		 ?>
+
+
+
+	        </select>
+	     </td>
+	  </tr>
+
+
+	  <tr>
+	     <td>{AnHien}</td>
+	     <td>
+	        <input  name="AnHien"  value="1" <?php echo $ChiTietTin['AnHien'] == 1 ? "checked" : "" ?>  type="checkbox"  >
+
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>Ngôn Ngữ</td>
+	     <td>
+	        <select name="lang">
+		 <option value="VN">Tiến Việt</option>
+		 <option value="EN">Tiếng anh</option>
+	        </select>
+
+	     </td>
+	  </tr>
+
+	  <tr>
+	     <th colspan="2"><input class="sua"  name="sua"  type="submit" value="{Sua}" ></th>
+	  </tr>
+         </table>
+
+      </form>
+
+   </div>
+</div>

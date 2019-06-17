@@ -1,0 +1,61 @@
+<?php
+$DSDanhMucChoDuyet = $data['DSDanhMucChoDuyet'];
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      Tất Cả Các Danh Mục
+   </div>
+   <div class="panel-body">
+
+      <table class="table table-bordered table-hover" id="datatable">
+
+         <thead>
+	  <tr>
+	     <th>{MaDanhMuc}</th>
+	     <th>{ChuSanPham}</th>
+	     <th>{TenSanPham}</th>
+	     <th>{LoaiSanPham}</th>
+	     <th>Ngày Đăng</th>
+	     <th>{Hinh}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </thead>
+         <tbody>
+	  <?php
+	  if($DSDanhMucChoDuyet)
+	     foreach($DSDanhMucChoDuyet as $SanPham) {
+	        ?>   
+      	  <tr>
+      	     <td><?php echo $SanPham['MaSanPham'] ?></td>
+      	     <td><?php echo $SanPham['ChuSanPham'] ?></td>
+      	     <td><?php echo $SanPham['TenSanPham'] ?></td>
+      	     <td><?php echo $SanPham['MaDanhMuc'] ?></td>
+      	     <td><?php echo $SanPham['NgayDang'] ?></td>
+      	     <td>
+      	        <img style="width: 100px;" src="<?php echo BASE_DIR ?>public/img/images<?php echo $SanPham['UrlHinh']; ?>">
+      	     </td>
+      	     <td>
+      	        <a href="<?php echo BASE_DIR ?>quantri/xemsanphamduyet/<?php echo $SanPham['MaSanPham'] ?>" class="btn btn-view-more">Xem</a>
+      	     </td>
+      	  </tr>
+	        <?php
+	     }
+	  ?>
+         </tbody>
+         <tfoot>
+	  <tr>
+	     <th>{MaDanhMuc}</th>
+	     <th>{ChuSanPham}</th>
+	     <th>{TenSanPham}</th>
+	     <th>{LoaiSanPham}</th>
+	     <th>Ngày Đăng</th>
+	     <th>{Hinh}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </tfoot>
+      </table>
+
+
+
+   </div>
+</div>

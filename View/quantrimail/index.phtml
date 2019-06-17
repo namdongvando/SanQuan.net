@@ -1,0 +1,58 @@
+<?php
+$Model_DangKy = new Model_DangKy();
+$page = $_Param[0];
+$page = intval($page);
+$page > 1 ? $page : 1;
+$DSDangKy = $Model_DangKy->DSMailPT($page, 10, $TongSanPham);
+?>
+
+<div class="panel panel-default" >
+    <div class="panel-body" >
+        <div class="clearfix"  ></div>
+        <div class="panel panel-default" >  
+            <div class="panel-heading" >
+                <h3 class="panel-title" >
+                    Danh Sách Email Đăng Ký
+                </h3>
+            </div>
+            <div class="panel-body table-responsive" >
+                <table  class="table table-bordered"  >
+                    <thead>
+                        <tr>
+                            <td>STT</td>
+                            <td>Email</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $dem = 1;
+                        foreach ($DSDangKy as $Email) {
+                            ?>
+                            <tr>
+                                <td><?php echo $dem++; ?></td>
+                                <td><?php echo $Email['email'] ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td>STT</td>
+                            <td>Email</td>
+                        </tr>
+                    </thead>
+
+                </table>
+
+                <?php
+                $TongTrang = ceil($TongSanPham / 10);
+                echo $Model_DangKy->PhanTrang($TongTrang, $page, BASE_DIR . "quantrimail/index/[i]");
+                ?>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

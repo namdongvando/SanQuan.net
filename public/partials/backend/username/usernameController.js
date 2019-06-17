@@ -1,0 +1,1 @@
+app.controller("usernameController", usernameController);  function usernameController($scope, $rootScope, $http, $routeParams) {}

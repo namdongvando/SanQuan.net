@@ -1,0 +1,97 @@
+<?php
+$DSSanhMuc = $data['DSLoaiTin'];
+//echo $this->_Param[0];
+include 'menu/menutintuc.php';
+$PaRam = $_Param;
+?>
+<div class="panel panel-default">
+   <div id="ThongBao"></div>
+   <div class="panel-body">
+      <table class="table table-bordered table-hover" id="datatable">
+         <thead>
+            <tr>
+               <th>{STT}</th>
+               <th>{MaTin}</th>
+               <th>{TieuDe}</th>
+               <th>{Hinh}</th>
+               <th>{Hot}</th>
+               <th>{AnHien}</th>
+               <th>{Action}</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            if($data['DSTinTuc']) {
+               $Dem = 1;
+
+               foreach($data['DSTinTuc'] as $TinTuc) {
+                  ?>   
+                  <tr>
+                     <td><?php echo $Dem ?></td>
+                     <td><?php echo $TinTuc['idTin'] ?></td>
+                     <td><?php echo $TinTuc['TieuDe'] ?></td>
+                     <td><img style="width: 30px;height: 30px;" src="<?php echo BASE_DIR ?>public/img/images/<?php echo $TinTuc['urlHinh'] ?>" /></td>
+
+                     <td>
+                        <input id="<?php echo $TinTuc['idTin'] ?>" onchange="AnHienTinNoiBat('<?php echo $TinTuc['idTin'] ?>')"  <?php echo $TinTuc['TinNoiBat'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >                        
+
+                     </td>
+                     <td>
+                        <input id="<?php echo $TinTuc['idTin'] ?>" onchange="AnHienTin('<?php echo $TinTuc['idTin'] ?>')"  <?php echo $TinTuc['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >
+                     </td>
+                     <td style="width: 100px;">
+      <!--                        <a href="<?php echo BASE_DIR ?>quantri/suatintuc/<?php echo $TinTuc['idTin']; ?>">sửa</a>/
+                        <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoatintuc/<?php echo $TinTuc['idTin']; ?>">Xóa</a>-->
+
+                        <div class="btn-group">
+                           <a class="btn btn-success" href="<?php echo BASE_DIR ?>quantri/tintucsua/<?php echo $TinTuc['idTin']; ?>"><i class="fa fa-check"></i></a>
+                           <a class="btn btn-danger xoa" href="<?php echo BASE_DIR ?>quantri/xoatintuc/<?php echo $TinTuc['idTin']; ?>"><i class="fa fa-close"></i></a>
+                        </div>
+                     </td>
+                  </tr>
+                  <?php
+                  $Dem++;
+               }
+            }
+            ?>
+         </tbody>
+         <tfoot>
+            <tr>
+               <th>{STT}</th>
+               <th>{MaTin}</th>
+               <th>{TieuDe}</th>
+               <th>{Hinh}</th>
+               <th>{Hot}</th>
+               <th>{AnHien}</th>
+               <th>{Action}</th>
+            </tr>
+         </tfoot>
+      </table>
+   </div>
+</div>
+<script>
+   function AnHienTin(idTin) {
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+
+         }
+      };
+      xmlhttp.open("GET", "<?php echo BASE_URL ?>quantri/tintucanhien/" + idTin, true);
+      xmlhttp.send();
+   }
+   function AnHienTinNoiBat(idTin) {
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+           document.getElementById('ThongBao').innerHTML = "ok";
+         }
+      };
+      xmlhttp.open("GET", "<?php echo BASE_URL ?>quantri/tintucanhiennoibat/" + idTin, true);
+      xmlhttp.send();
+   }
+
+</script>

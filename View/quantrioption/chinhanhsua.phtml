@@ -1,0 +1,31 @@
+<?php
+$Model_ChiNhanh = new Model_ChiNhanh();
+$_ChiNhanh = new Model_ChiNhanh($Model_ChiNhanh->TimChiNhanh($_Param[0]));
+
+?>
+
+<div class="panel panel-success">   
+    <div class="panel-heading">
+        <h3 class="panel-title">Thêm Tùy Chọn</h3>
+    </div>
+    <div class="panel-body">
+        <form action="" method="POST">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Tên chi nhánh</td>
+                    <td><input type='text' name="GiaTriVN" required="required" class="form-control" value="<?php echo $_ChiNhanh->TenChiNhanh ?>"  ></td>
+                </tr>
+                <tr>
+                    <td>SDT</td>
+                    <td><input type='text' name="GhiChu[SDT]" required="required" class="form-control" value="<?php echo $_ChiNhanh->SDT ?>" ></td>
+                </tr>
+                <tr>
+                    <td>Địa Chỉ</td>
+                    <td><input type='text' name="GhiChu[DiaChi]" required="required" class="form-control" value="<?php echo $_ChiNhanh->DiaChi ?>"  ></td>
+                </tr>
+            </table>
+            <input class="btn-sm btn-success " name="Sua" type="submit" value="Sửa Chi Nhánh">
+            <input name="MaChiNhanh" type="hidden" value="<?php echo $_ChiNhanh->MaChinhanh ?>">
+        </form>
+    </div>
+</div>

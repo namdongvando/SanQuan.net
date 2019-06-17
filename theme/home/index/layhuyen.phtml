@@ -1,0 +1,10 @@
+<?php
+$DSHuyen = $data['DSHuyen'];
+
+foreach ($DSHuyen as $Huyen) {
+    $_Huyen = new Model_TinhThanh($Huyen);
+    ?>
+    <option value="<?php echo $_Huyen->MaDiaChi; ?>" ><?php echo $_Huyen->TenDiaChi; ?></option>
+    <?php
+}
+?>

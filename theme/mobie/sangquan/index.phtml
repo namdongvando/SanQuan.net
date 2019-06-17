@@ -1,0 +1,46 @@
+<?php
+$maTinhThanh = explode("-", $_Param[1]);
+$maTinhThanh = end($maTinhThanh);
+$Model_TinhThanh = new Model_TinhThanh();
+$Model_DanhMuc = new Model_DanhMuc();
+$_KhuVuc = new Model_TinhThanh($Model_TinhThanh->TimTinhHuyen($maTinhThanh));
+if ($_Param[0] != "all") {
+    $_DanhMuc = new Model_DanhMuc($Model_DanhMuc->TimDanhMucTieuDe($_Param[0]));
+} else {
+    $_DanhMuc = new Model_DanhMuc(0);
+    $_DanhMuc->TenDanhMuc = "{Lang_TatCa}";
+    $_DanhMuc->MaDanhMuc = "";
+}
+?>
+<div class="clearfix" ></div>
+<div class="col-lg-12 col-md-12" >
+    <h3 ><?php echo $_DanhMuc->TenDanhMuc ?>: <?php echo $_KhuVuc->TenDiaChi ?></h3>
+    <hr>
+    <?php
+    $Model_SanPham = new Model_SanPham();
+    $View_SanPham = new theme_mobie_layout();
+    $DSSanPham = $Model_SanPham->DSSanPham4TinhThanh2DanhMuc($_DanhMuc->MaDanhMuc, '\"Huyen\"\:\"' . $maTinhThanh . '\"', '\"Tinh\"\:\"' . $maTinhThanh . '\"');
+    if ($DSSanPham)
+        foreach ($DSSanPham as $SanPham) {
+            $_SanPham = new Model_SanPham($SanPham);
+            $View_SanPham->ListSanPham($_SanPham);
+        }
+    ?>
+    <div class="clearfix" ></div>
+    <?php
+    $Model_TinhThanh = new Model_TinhThanh();
+    $MaDiaChi = $_KhuVuc->MaDiaChi;
+    if ($_KhuVuc->MaDiaChiCha > 0) {
+        $MaDiaChi = $_KhuVuc->MaDiaChiCha;
+    }
+
+    $DSHuyen = $Model_TinhThanh->DSHuyenTheoTinh($MaDiaChi);
+    foreach ($DSHuyen as $Huyen) {
+        $_Huyen = new Model_TinhThanh($Huyen);
+        ?>
+        <a href="<?php echo $_DanhMuc->getLinkDanhMucTinhThanh($_Huyen->TenKhongDau) ?>" class="col-lg-6 col-md-6 list-group-item" ><?php echo $_DanhMuc->TenDanhMuc ?>: <?php echo $_Huyen->TenDiaChi ?></a>
+        <?php
+    }
+    ?>
+</div>
+<div class="clearfix" ></div>

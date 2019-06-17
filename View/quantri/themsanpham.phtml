@@ -1,0 +1,98 @@
+<?php
+$DSChuyenMuc = $data['DSDanhMuc'];
+//print_r($SanPham);
+?>  
+<form action="<?php echo BASE_DIR ?>quantri/themsanpham" method="POST" >
+   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{ThemSanPham}</h3>
+         </div>
+         <div class="panel-body">
+
+
+            <div class="form-group">
+               <label for="TenSanPham">{TenSanPham}</label>
+               <input id="TenSanPham" type="text"  class="form-control" name="TenSanPham"  />
+
+            </div>
+            <div class="form-group">
+               <label for="Gia">{Gia}</label>
+               <input id="Gia" type="text"  class="form-control" name="Gia"  />
+            </div>
+            <div class="form-group">
+               <label for="MoTa">{MoTa}</label>
+               <textarea class="ckeditor"  name="MoTa"></textarea>
+            </div>
+            <div class="form-group">
+               <label for="ChiTiet">{ChiTiet}</label>
+               <textarea class="ckeditor" name="ChiTiet"></textarea>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding: 0px;">
+      <!--Các thong số chung-->
+
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{HinhSanPham}</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="form-group">
+               <label for="DanhMucSanPham">{DanhMucSanPham}</label>
+               <select id="DanhMucSanPham" class="form-control" name="MaDanhMuc">
+                  <?php
+                  foreach($DSChuyenMuc as $ChuyenMuc) {
+                     ?>			   
+                     <option value="<?php echo $ChuyenMuc['MaDanhMuc'] ?>" ><?php echo $ChuyenMuc['TenDanhMuc'] ?></option>
+<?php
+
+                  }
+                  ?>
+               </select>
+
+            </div>
+         </div>
+      </div>
+
+
+
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{HinhSanPham}</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="form-group">
+               <input id="HinhSanPham" class="form-control" value="<?php echo BASE_DIR ?>public/img/images" name="UrlHinh" type="text" size="60" />
+               <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham');" />
+            </div>
+         </div>
+
+
+      </div>
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{AnHien}</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="slideThree">	
+               <input  type="checkbox" value="1" id="slideThree" checked="checked" name="AnHien" />
+               <label for="slideThree"></label>
+            </div>
+         </div>
+      </div>
+      <div class="box-footer">
+
+         <input type="submit" class="btn btn-success" name="ThemSanPham" value="{ThemSanPham}" />
+      </div>
+
+
+   </div>
+
+</form>
+
+<div class="clearfix"></div>

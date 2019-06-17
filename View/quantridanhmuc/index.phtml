@@ -1,0 +1,93 @@
+<?php
+$Model_DanhMuc = new Model_DanhMuc();
+$Model_ThongBao = new Model_ThongBao();
+$DanhMucTim = isset($data['ChonDanhMuc']) ? $data['ChonDanhMuc'] : FALSE;
+if ($DanhMucTim) {
+    $ThuocTinhDanhMuc = json_decode($DanhMucTim['ThuocTinh']);
+}
+$DSDanhMucOp = $data['DSDanhMucOp'];
+?>
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-left: 0px;">
+        <a href="index" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+            <i class="fa fa-home"></i>
+        </a>
+        <i class="fa fa-list" ></i>
+        Tất cả Danh Muc Quản Lý
+    </div>
+    <div class="panel-body">
+        <a class="btn btn-success pull-right"  href="<?php echo $Model_DanhMuc->export(); ?>" >Export Excell</a>        
+        <a class="btn btn-primary pull-right"  href="<?php echo BASE_DIR ?>quantridanhmuc/importdanhmuc" >Import Excell</a>        
+        <table class="table table-bordered table-hover">
+            <tr> 
+                <th><input name="all" value="1" class="all" type="checkbox" ></th>
+                <th>STT</th>
+                <th>Tên Danh Muc</th>
+                <th>Tên Không Dấu</th>
+                <th>Danh  Mục Cha</th>
+                <th>Tùy Chọn</th>
+            </tr>
+            <?php
+            $DSDanhMuc = $data['DSDanhMucCha'];
+            if ($DSDanhMuc) {
+                $dem = 1;
+                foreach ($DSDanhMuc as $DanhMuc) {
+                    $_DanhMuc = new Model_DanhMuc($DanhMuc);
+                    ?>
+                    <tr>
+                        <td ><input name="Dm[<?php echo $_DanhMuc->MaDanhMuc ?>]" class="Chon"  type="checkbox" ></td>
+                        <td ><?php echo $_DanhMuc->STT; ?></td>
+                        <td >
+                            <?php
+                            if ($_DanhMuc->TongDanhMucCon($_DanhMuc->MaDanhMuc) > 0) {
+                                ?>
+                                <a href="<?php echo BASE_DIR ?>quantri/danhmuc/<?php echo $DanhMuc['MaDanhMuc'] ?>" >
+                                    <?php
+                                    echo $_DanhMuc->TenDanhMuc;
+                                    ?>
+                                </a>
+                                <?php
+                            } else {
+                                echo $_DanhMuc->TenDanhMuc;
+                            }
+                            ?>
+                        </td>
+                        <td >
+                            <?php
+                            echo $_DanhMuc->TenKhongDau;
+                            ?>
+                        </td>
+                        <td >
+                            <?php
+                            echo $_DanhMuc->TenCapCha($_DanhMuc->CapCha);
+                            ?>(
+                            <?php
+                            echo $_DanhMuc->TongDanhMucCon($_DanhMuc->MaDanhMuc);
+                            ?>)
+                        </td>
+                        <td>
+                            <div class="btn btn-group btn-sm" style="margin-top: 0;padding: 0px;">
+                                <a  class="btn btn-primary" href="<?php echo $_DanhMuc->LinkSuaDanhMuc; ?>" >Sửa</a>
+                                <a  class="btn btn-success" href="<?php echo BASE_DIR ?>quantridanhmuc/danhmuccopy/<?php echo $_DanhMuc->MaDanhMuc ?>" >Copy</a>
+                                <a class="btn btn-danger xoa" href="<?php echo $_DanhMuc->LinkXoaDanhMuc; ?>" >Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $(".all").change(function () {
+            $(".Chon").prop('checked', $(this).prop("checked"));
+        });
+
+    });
+
+
+</script>

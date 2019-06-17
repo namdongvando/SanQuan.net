@@ -1,0 +1,59 @@
+<?php
+$DSDonHang = $data['DSDonHang'];
+?>
+<div class="panel panel-success">
+   <div class="panel-heading">
+      <h3 class="panel-title">Danh Sách Đơn Hàng</h3>
+   </div> 
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/xoadonhang" method="post" >
+         <table class="table table-compare" id="datatable" >
+            <tr>
+               <th>Chọn</th>
+               <th>STT</th>
+               <th>Ngày Tạo</th>
+               <th>Tổng Tiền</th>
+               <th>Khách Hàng</th>
+               <th>Email</th>
+               <th>Action</th>
+            </tr>
+            <?php
+            $dem = 1;
+            if($DSDonHang) {
+               foreach($DSDonHang as $DonHang) {
+                  ?>
+                  <tr>
+                     <td><input type="checkbox" name="xoa['<?php echo $DonHang['MaDonHang'] ?>']" value="<?php echo $DonHang['MaDonHang'] ?>" > </td>
+                     <td><?php echo $dem; ?></td>
+                     <td><?php echo date("d-m-Y", strtotime($DonHang['NgayTao'])) ?></td>
+                     <td><?php echo $DonHang['TongTien']; ?></td>
+                     <td><?php echo $DonHang['MaKhachHang']; ?></td>
+                     <td><?php echo $DonHang['EmailKhachHang']; ?></td>
+                     <td>
+                        <a href="<?php echo BASE_DIR ?>quantri/xoadonhang/<?php echo $DonHang['MaDonHang'] ?>" class="btn btn-danger btn-sm xoa" >Xóa</a>
+                     </td>
+                  </tr>
+                  <?php
+                  $dem++;
+               }
+            }
+            ?>
+            <tr>
+               <th>Chọn</th>
+               <th>STT</th>
+               <th>Ngày Tạo</th>
+               <th>Tổng Tiền</th>
+               <th>Khách Hàng</th>
+               <th>Email</th>
+               <th>Action</th>
+            </tr>
+            <tr>
+               <th colspan="7" >
+                  <input type="submit" value="Xóa Mục Đã Chọn" name="XoaSelect" >
+               </th>
+            </tr>
+         </table>
+      </form>
+   </div>
+
+</div>

@@ -1,0 +1,11 @@
+<div class="col-lg-12 col-md-12 text-justify" style="padding-top: 15px;" >
+    <div class="clearfix" ></div>
+    <?php
+//    lấy nội dung liên hệ
+    try {
+        echo file_get_contents("http://namdongvando.com/api/baiviet/5", FALSE);
+    } catch (Exception $exc) {
+        echo "không có nội dung";
+    }
+    ?>
+</div>

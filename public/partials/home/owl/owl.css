@@ -1,0 +1,19 @@
+.carouseSanPham .nameProduct{
+    font-size: 1em;
+    line-height: 14px;
+    height: 30px;
+    overflow: hidden;
+}
+.carouseSanPham .im-sanpham{
+    min-height: 200px;
+}
+.SanPhamMoi .img-sanpham
+{
+    min-height: 140px;
+}
+.SanPhamMoi .nameProduct{
+    font-size: 1em;
+    line-height: 14px;
+    height: 30px;
+    overflow: hidden;
+}

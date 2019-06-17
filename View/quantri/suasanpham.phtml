@@ -1,0 +1,119 @@
+<?php
+$DSChuyenMuc = $data['DSDanhMuc'];
+$SanPham = $data['SanPham'];
+//print_r($SanPham);
+?> 
+<form action="<?php echo BASE_DIR ?>quantri/suasanpham" method="POST" >
+   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">Sửa Sản Phẩm</h3>
+         </div>
+         <div class="panel-body">
+            <div class="form-group">
+               <label for="TenSanPham">Tên Sản Phẩm</label>
+               <input id="TenSanPham" type="text" value="<?php echo $SanPham['TenSanPham'] ?>" class="form-control" name="TenSanPham"  />
+               <input type="hidden" value="<?php echo $SanPham['MaSanPham'] ?>"  name="MaSanPham"  />
+            </div>
+            <div class="form-group">
+               <label for="Gia">Giá</label>
+               <input id="Gia" type="text" value="<?php echo $SanPham['Gia']; ?>" class="form-control" name="Gia"  />
+            </div>
+            <div class="form-group">
+               <label for="MoTa">Mô Tả</label>
+               <textarea class="form-control"  name="MoTa"><?php echo $SanPham['MoTa'] ?></textarea>
+            </div>
+            <div class="form-group">
+               <label for="ChiTiet">Chi Tiết</label>
+               <textarea class="ckeditor" name="ChiTiet"><?php echo $SanPham['ChiTiet'] ?></textarea>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding: 0px;">
+      <!--Các thong số chung-->
+
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">Danh Mục Sản Phẩn</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="form-group">
+               <label for="DanhMucSanPham">Sản Phẩm Thuộc</label>
+               <select id="DanhMucSanPham" class="form-control" name="MaDanhMuc">
+                  <?php
+                  foreach($DSChuyenMuc as $ChuyenMuc) {
+                     ?>			   
+                   <option <?php echo $SanPham['MaDanhMuc']==$ChuyenMuc['MaDanhMuc']?'selected="selected"':'' ?>  value="<?php echo $ChuyenMuc['MaDanhMuc'] ?>" ><?php echo $ChuyenMuc['TenDanhMuc'] ?></option>
+                     <?php
+                     if(isset($ChuyenMuc['CapCon'])) {
+                        $DSChuyenMucCap1 = $ChuyenMuc['CapCon'];
+                        foreach($DSChuyenMucCap1 as $ChuyenMucCap1) {
+                           ?>      
+                           <option  <?php echo $ChuyenMucCap1['MaDanhMuc'] == $SanPham['MaDanhMuc'] ? 'selected="selected"' : ''; ?>  value="<?php echo $ChuyenMucCap1['MaDanhMuc'] ?>">--|<?php
+                              echo $ChuyenMucCap1['TenDanhMuc'];
+//			         print_r($ChuyenMucCap1['CapCon']);
+                              flush();
+                              ?></option>
+                           <?php
+                           if(isset($ChuyenMucCap1['CapCon'])) {
+                              $DSChuyenMucCap2 = $ChuyenMucCap1['CapCon'];
+                              foreach($DSChuyenMucCap2 as $ChuyenMucCap2) {
+                                 ?>      
+                                 <option <?php echo $ChuyenMucCap2['MaDanhMuc'] == $SanPham['MaDanhMuc'] ? 'selected="selected"' : ''; ?>  value="<?php echo $ChuyenMucCap2['MaDanhMuc'] ?>">--|--|<?php echo $ChuyenMucCap2['TenDanhMuc'] ?></option>
+
+                                 <?php
+                                 flush();
+                              }
+                           }
+                        }
+                     }
+                  }
+                  ?>
+               </select>
+
+            </div>
+         </div>
+      </div>
+
+
+
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{HinhSanPham}</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="form-group">
+               <img src="<?php echo BASE_DIR ?>public/img/images/<?php echo $SanPham['UrlHinh'] ?>" style="width: 100px; height: 100px;" />
+               <input id="HinhSanPham" class="form-control" value="<?php echo BASE_DIR ?>public/img/images/<?php echo $SanPham['UrlHinh'] ?>" name="UrlHinh" type="text" size="60" />
+               <input type="button"  value="Browse Server" onclick="BrowseServer('Images:/', 'HinhSanPham');" />
+            </div>
+         </div>
+
+
+      </div>
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+            <h3 class="panel-title">{AnHien}</h3>
+         </div>
+         <div class="panel-body"> 
+            <div class="slideThree">	
+               <input  type="checkbox" value="1" id="slideThree" <?php echo $SanPham['AnHien']==1?'checked="checked"':'' ?>  name="AnHien" />
+               <label for="slideThree"></label>
+            </div>
+         </div>
+      </div>
+      <div class="box-footer">
+
+         <input type="submit" class="btn btn-success" name="SuaSanPham" value="{SuaSanPham}" />
+      </div>
+
+
+   </div>
+
+</form>
+
+<div class="clearfix"></div>

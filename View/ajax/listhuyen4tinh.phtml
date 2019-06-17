@@ -1,0 +1,9 @@
+<?php
+if ($data)
+    foreach ($data as $huyen) {
+        $_Huyen = new Model_TinhThanh($huyen);
+        ?>
+        <li ><a href="<?php echo $_Huyen->getLinkSanPhamThemTinhThanh(); ?>" ><i class="fa fa-angle-double-right" ></i><?php echo $_Huyen->TenDiaChi ?></a></li>
+        <?php
+    }
+?>

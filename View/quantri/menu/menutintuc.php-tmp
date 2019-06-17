@@ -1,0 +1,91 @@
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+
+Notice: Use of undefined constant T_YIELD - assumed 'T_YIELD' in C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 1125
+
+Call Stack:
+    0.0036     988896   1. {main}() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:0
+    0.0072    1040560   2. CodeFormatter->formatCode() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:1736
+    0.0085    1117024   3. ResizeSpaces->format() C:\Users\VanDo\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php:326
+
+<ul>
+   <li><a href="<?php echo BASE_DIR?>quantri/tintuc">Tin Tức</a></li>
+   <li><a href="<?php echo BASE_DIR?>quantri/tintucthem">Thêm Tin Tức</a></li>
+
+</ul>
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div>
+</nav>
+

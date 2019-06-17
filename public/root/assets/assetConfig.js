@@ -1,0 +1,1 @@
+document.write('<script type="text/javascript" src="/public/root/assets/libs/angular.min.js"></script>');document.write('<script type="text/javascript" src="/public/root/assets/libs/angular-route.min.js"></script>');

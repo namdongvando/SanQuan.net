@@ -1,0 +1,37 @@
+<?php
+$Model_Adapter = new Model_Adapter();
+?>
+<div class="panel panel-primary" >
+    <div class="panel-heading" >
+        <h3 class="panel-title" >Tạo cotroller</h3>
+    </div>
+    <form action="" method="POST" >
+        <table class="table table-bordered" >
+            <tr>
+                <td>
+                    <label>Tên ConTroller</label>
+                </td>
+                <td>
+                    <input name="nameController" value="" class="form-control" placeholder="name controller" >
+                </td>
+                <td>
+                    <input name="createController" class="btn btn-success" type="submit" value="Tao"  >
+                </td>
+            </tr>
+            <?php
+            $DSController = $Model_Adapter->readDir("Controller");
+            if ($DSController) {
+                foreach ($DSController as $nameController) {
+                    echo <<<LC
+                    <tr>
+                        <td colspan="3" >{$nameController}</td>
+                    </tr>
+LC;
+                }
+            }
+            ?>
+        </table>
+
+    </form>
+
+</div>

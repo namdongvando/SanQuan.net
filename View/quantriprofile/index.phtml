@@ -1,0 +1,82 @@
+<?php
+$User = $data['User'];
+
+$Model_QuangTri = new Model_QuanTri();
+?>
+<div class="box box-success">
+    <div class="box-heading">
+        <h3 class="box-title text-center">Thông Tin Tài Khoản</h3>
+    </div>
+    <div class="box-body" style="padding: 0px;">
+        <div class="col-xs-12 col-lg-8 col-sm-12 col-md-8" style="padding-right   : 0px;">
+            <div class="panel panel-success">
+                <div class="panel-heading bg-green">
+                    <h3 class="panel-title">Thông Tin Chung</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="<?php echo BASE_DIR ?>quantriprofile/" >
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>Username</label>
+                            <input name="HoTen" readonly="" value="<?php echo $User['username'] ?>" class="form-control"  >
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>Họ Tên</label>
+                            <input name="HoTen" value="<?php echo $User['HoTen'] ?>" class="form-control"  >
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>SDT</label>
+                            <input name="SDT" value="<?php echo $User['SDT'] ?>" class="form-control"  >
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>Email</label>
+                            <input name="email" value="<?php echo $User['email'] ?>" class="form-control"  >
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>Địa Chỉ</label>
+                            <textarea name="DiaChi" class="form-control"><?php echo $User['DiaChi'] ?></textarea>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <label>Nhóm</label>
+                            <input name="Nhom" readonly="readonly" value="<?php echo $Model_QuangTri->HienTenNhom($User['Nhom'])?>" class="form-control"  >
+                        </div>
+                        <div class="clearfix" ></div>
+
+                        <div class="form-group col-lg-6 col-md-6 " >
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <input value="Sửa Thông Tin" type="submit" name="SuaThongTinChung" class="btn btn-success btn-block" /> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-4 col-sm-12 col-md-4" style="">
+            <div class="panel panel-success ">
+                <div class="panel-heading bg-green">
+                    <h3 class="panel-title">Mật Khẩu</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="<?php echo BASE_DIR ?>quantri/suapass" >
+                        <div class="form-group">
+                            <label>Mật Khẩu Cũ</label>
+                            <input name="password" type="password" value="" class="form-control"  >
+                        </div>
+                        <div class="form-group">
+                            <label>Mật Khẩu Mới</label>
+                            <input name="newpassword" type="password" value="" class="form-control"  >
+                        </div>
+                        <div class="form-group">
+                            <label>nhập lại Mật Khẩu</label>
+                            <input name="repassword" type="password" value="" class="form-control"  >
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <input value="Sửa Mật Khẩu" type="submit" name="SuaPassword" class="btn btn-success btn-block" /> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<?php
+if ($data)
+    foreach ($data as $Hinh) {
+        ?> 
+        <div class="col-lg-2 col-md-3" >
+            <button type="button" onclick="xoaHinh('<?php echo BASE_DIR ?>dangtin/xoahinh/<?php echo md5($Hinh) ?>')" class="btn btn-danger" >Xóa</button>
+            <img src="<?php echo $Hinh ?>" class="img img-thumbnail" style="height: 150px; width: 100%;margin-bottom: 10px;" >
+        </div>
+        <?php
+    }
+?>

@@ -1,0 +1,48 @@
+<?php
+//print_r($data);
+?>
+<table class="table table-bordered table-hover" id="datatable">
+
+   <thead>
+      <tr>
+         <th>{MaLienHe}</th>
+         <th>Tên Khách Hàng</th>
+         <th>Emai</th>
+         <th>SoDT</th>
+         <th>{Action}</th>
+      </tr>
+   </thead>
+   <tbody>
+      <?php
+      if($data['DSKhachHang'])
+         foreach($data['DSKhachHang'] as $LienHe) {
+	  ?>   
+            <tr>
+               <td><?php echo $LienHe['MalienHe'] ?></td>
+               <td><?php echo $LienHe['HoTen'] ?></td>
+               <td><?php echo $LienHe['Email'] ?></td>
+
+               <td>
+	        <?php echo $LienHe['SoDT'] ?>
+
+               </td>
+               <td>
+      	  <!--<a href="<?php echo BASE_DIR ?>quantri/sualienhe/<?php echo $LienHe['MalienHe']; ?>">sửa</a>/-->
+      	  <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoalienhe/<?php echo $LienHe['MalienHe']; ?>">Xóa</a>
+            </tr>
+	  <?php
+         }
+      ?>
+
+
+   </tbody>
+   <tfoot>
+      <tr>
+         <th>{MaLienHe}</th>
+         <th>Tên Khách Hàng</th>
+         <th>Emai</th>
+         <th>SoDT</th>
+         <th>{Action}</th>
+      </tr>
+   </tfoot>
+</table>

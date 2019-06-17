@@ -1,0 +1,58 @@
+<?php
+$ChiTietLoai = $data['ChiTietLoaiTin'][0];
+//print_r($data);
+?>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      chi tiết Chủng loại Tin
+   </div>
+   <div class="panel-body">
+      <form action="<?php echo BASE_DIR ?>quantri/sualoaitin" method="post">
+         <table class="table table-bordered" >
+	  <caption>Thêm Chủng Loại Tin</caption>
+	  <tr>
+	     <td>{TenLoai}</td>
+	     <td>
+	        <input class="form-control" value="<?php echo $ChiTietLoai['TenLoai'] ?>"  name="TenLoai" type="text" >
+	        <input  value="<?php echo $ChiTietLoai['MaLoai'] ?>"  name="MaLoai" type="hidden" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{TenChungLoai}</td>
+	     <td>
+	        <select class="form-control" name="MaCL">
+		 <?php
+		 if($data['DSChungLoaiTin'])
+		    foreach($data['DSChungLoaiTin'] as $ChungLoaiTin) {
+		       ?>
+      		 <option <?php echo $ChiTietLoai['MaCL'] == $ChungLoaiTin['MaCL'] ? "selected='selected'" : ""; ?>  value="<?php echo $ChungLoaiTin['MaCL'] ?>"><?php echo $ChungLoaiTin['TenCL'] ?></option>
+		       <?php
+		    }
+		 ?>
+	        </select>
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{ThuTu}</td>
+	     <td>
+	        <input class="form-control" value="<?php echo $ChiTietLoai['ThuTu'] ?>"  name="ThuTu" type="text" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <td>{AnHien}</td>
+	     <td>
+	        <input  name="AnHien" <?php echo $ChiTietLoai['AnHien'] == 1 ? "checked='checked'" : ""; ?> value="1"  type="checkbox" >
+	     </td>
+	  </tr>
+	  <tr>
+	     <th colspan="2"><input class="sua"  name="sua"  type="submit" value="{Sua}" ></td>
+	  </tr>
+
+
+
+         </table>
+
+      </form>
+
+   </div>
+</div>

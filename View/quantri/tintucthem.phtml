@@ -1,0 +1,127 @@
+<?php
+$Model_Pages = new Model_Pages();
+$DSPages = $Model_Pages->DSPages4LoaiPage(1);
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a  href="<?php echo BASE_DIR ?>quantri/tintuc">
+            <i class="btn btn-primary fa fa-arrow-left fa-border" ></i>
+        </a>
+        Thêm Bài Viết
+    </div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/tintucthem" method="post" enctype="multipart/form-data" >
+            <div class="col-lg-9 col-md-9 " style="padding: 0px;margin: 0px;">
+                <table class="table table-bordered" >
+                    <tr>
+                        <td colspan="2" >
+                            <h4>
+                                Tiêu Đề Tin(không quá 200 ký tự).
+                            </h4>
+                            <input name="TieuDe" class="form-control" name="TieuDe" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h4>Tóm Tắt</h4>
+                            <textarea id="NoiDungTomTat" class="ckeditor" name="TomTat"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <h4>Nội Dung</h4>
+                            <textarea name="NoiDung" id="NoiDungChinh" ></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 col-md-3 " >
+                <table class="table table-bordered"> 
+                    <tr>
+                        <td colspan="2" >
+                            <h4>Danh Mục Bài Viết</h4>
+                            <select name="MaDanhMuc" class="form-control" >
+                                <?php
+                                if ($DSPages)
+                                    foreach ($DSPages as $Page) {
+                                        $_Pages = new Model_Pages($Page);
+                                        ?>
+                                        <option   value="<?php echo $_Pages->Pagesid ?>" ><?php echo $_Pages->TieuDe ?></option>
+                                        <?php
+                                    }
+                                ?>
+                            </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            keyword
+                            <textarea class="form-control"  name="keyword" cols="10" rows="4"  ></textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            description
+                            <textarea class="form-control"  name="description" cols="10" rows="4"  ></textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Title
+                            <textarea class="form-control"  name="title" cols="10" rows="4"  ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ẩn Hiện</td>
+                        <td>
+                            <div class="slideThree">	
+                                <input type="checkbox" checked="checked" value="1" id="slideThree" name="AnHien" />
+                                <label for="slideThree"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nổi Bật</td>
+                        <td>
+                            <div class="slideThree">	
+                                <input type="checkbox" checked="checked" value="1" id="slideFor" name="TinNoiBat" />
+                                <label for="slideFor"></label>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Thứ Tự</td>
+                        <td>
+                            <input   name="Stt" value="1" type="text" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type=text name="UrlHinh" id="UrlHinh" class="form-control" style="display: none;"  value="" />
+                            <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2" >
+                                Chọn Hình
+                                <input style="display: none" onclick="BrowseServer('Images:/tintuc/', 'UrlHinh')"  type="button" name="btnChonFile" id="btnChonFile" value="Chọn File" />
+                                <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1" >
+                                    <img src="<?php echo $Model_DoiTac->UrlHinh ?>" style="height: 100px;opacity: 0.4" >
+                                </div>
+                            </label>
+                            <div style="clear: both"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><input class="them btn btn-success btn-block"  name="them"  type="submit" value="Thêm" ></th>
+                    </tr>
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="clearfix"></div>

@@ -1,0 +1,77 @@
+<?php
+$PaRam = $_Param;
+?>
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-left: 10px; ">
+        <a href="sanpham" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <a href="<?php echo isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:BASE_DIR."quantri" ?>" style="border: 1px solid #aaa;padding: 5px;margin-right: 10px;color: #000;height: 100%;margin-left: 5px">
+            <i class="fa fa-arrow-right"></i>
+        </a>       
+        <i class="fa fa-list-ol"></i>
+        Danh Sách Bài viết
+    </div>
+    <div id="ThongBao"></div>
+    <div class="panel-body">
+        <form action="<?php echo BASE_DIR ?>quantri/xoasanphamchon" method="POST" >
+            <table class="table table-bordered table-hover" id="datatable">
+                <thead>
+                    <tr>
+                        <th style="width: 20px" >Chọn</th>
+                        <th style="width: 40px;" >STT</th>
+                        <th>Tiêu Đề</th>
+                        <th style="width: 100px;text-align: center;" >Giá</th>
+                        <th style="width: 100px;text-align: center;" >Hot</th>
+                        <th style="width: 100px;text-align: center;" >Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($data['DSTinTuc']) {
+                        $Dem = 1;
+                        foreach ($data['DSTinTuc'] as $TinTuc) {
+                            $_TinTuc = new Model_SanPham($TinTuc);
+                            ?>   
+                            <tr>
+                                <td><label style="display: block;"><input class="checkbox1" name="Chon[<?php echo $_TinTuc->MaSP ?>]" type="checkbox" value="<?php echo $_TinTuc->MaSP; ?>" ></label> </td>
+                                <td style="text-align: center;" ><?php echo $Dem++;
+                            ?></td>
+                                <td><?php echo $_TinTuc->TenSP ?></td>
+                                <td><?php echo $_TinTuc->GiaVND ?></td>
+                                <td style="width: 100px;text-align: center;" >
+                                    <input id="<?php echo $_TinTuc->MaSP ?>" onchange="AnHienTinNoiBat('<?php echo $_TinTuc->MaSP ?>')"  <?php echo $TinTuc['TinNoiBat'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >                        
+                                </td>
+                                <td style="text-align: center;">
+                                    <input id="<?php echo $_TinTuc->MaSP ?>" onchange="AnHienTin('<?php echo $_TinTuc->MaSP ?>')"  <?php echo $TinTuc['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" >
+                                </td>
+                                <td style="width: 100px;text-align: center;">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" href="<?php echo BASE_DIR ?>quantri/sanphamsua/<?php echo $_TinTuc->MaSP; ?>"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger xoa" href="<?php echo BASE_DIR ?>quantri/xoasanpham/<?php echo $_TinTuc->MaSP; ?>"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th><label> <input type="checkbox" id="selecctall"/> Hết Chọn </label></th>
+                        <th>STT</th>
+                        <th>Tiêu Đề</th>
+                        <th style="text-align: center;" >Giá</th>
+                        <th style="text-align: center;" >Hot</th>
+                        <th>Ẩn Hiện</th>
+                        <th style="text-align: center;" >Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <input name="XoaChon" class="xoa"  value="Xóa Mục Đang Chọn" type="submit" >
+
+        </form>
+    </div>
+</div>

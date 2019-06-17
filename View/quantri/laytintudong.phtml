@@ -1,0 +1,69 @@
+<?php
+//print_r($data);
+?>
+
+
+<button onclick="LayTinTuDong('ok')">lấy Tin</button>
+<div id="DangSachCongTy">danglay</div>
+<table class="table table-bordered table-hover" id="datatable">
+   <thead>
+      <tr>
+         <th>{Stt}</th>
+         <th>{TieuDe}</th>
+         <th>{Link}</th>
+         <th>{Action}</th>
+      </tr>
+   </thead>
+   <tbody>
+      <?php
+      $dem = 0;
+      if($data['DSTinLayTuDong'])
+         foreach($data['DSTinLayTuDong'] as $TinTD) {
+	  ?>   
+            <tr>
+               <td><?php echo $dem++ ?></td>
+               <td><?php echo $TinTD['TieuDe'] ?></td>
+               <td><?php echo $TinTD['Link'] ?></td>
+               <td>
+      	  <a href="<?php echo BASE_DIR ?>quantri/duyetbai/<?php echo $TinTD['idtin']; ?>">sửa</a>/
+      	  <a class="xoa" href="<?php echo BASE_DIR ?>quantri/xoabaitudong/<?php echo $TinTD['idtin']; ?>">Xóa</a>
+               </td>
+            </tr>
+	  <?php
+         }
+      ?>
+
+
+   </tbody>
+   <tfoot>
+      <tr>
+         <th>{Stt}</th>
+         <th>{TieuDe}</th>
+         <th>{Link}</th>
+         <th>{Action}</th>
+      </tr>
+   </tfoot>
+
+</table>
+
+
+
+<script >
+   function LayTinTuDong(str) {
+      if (str.length == 0) {
+         document.getElementById("DangSachCongTy").innerHTML = "";
+         return;
+      } else {
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	     myFunction(xmlhttp.responseText);
+	     document.getElementById("DangSachCongTy").text() = "Xong";
+	  }
+         }
+         xmlhttp.open("GET", "<?php echo BASE_DIR ?>ajax/LayTinTuDong.php", true);
+         xmlhttp.send();
+      }
+   }
+</script>
+

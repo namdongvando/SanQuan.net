@@ -1,0 +1,67 @@
+<?php
+//print_r($data['DSLoaiTin']);
+$DSTinTuc = $data['DSTincanDuyet'];
+?>
+
+<script>
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	  }
+         };
+         xmlhttp.open("GET", "<?php echo BASE_URL ?>ajax/LayTinTuDong.php", true);
+         xmlhttp.send();
+</script>
+<a class="btn btn-success btn-sm pull-right" href="<?php echo BASE_DIR ?>quantri/themtintuc">{ThemTin}</a>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      {TinTucHead}
+   </div>
+
+   <div class="panel-body">
+      <table class="table table-bordered table-hover" id="datatable">
+
+         <thead>
+	  <tr>
+	     <th>{MaTin}</th>
+	     <th>{TieuDe}</th>
+	     <th>{LoaiTin}</th>
+	     <th>{View}</th>
+	     <th>{AnHien}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </thead>
+         <tbody>
+	  <?php
+	  if($DSTinTuc)
+	     foreach($DSTinTuc as $TinTuc) {
+	        ?>   
+      	  <tr>
+      	     <td><?php echo $TinTuc['idTin'] ?></td>
+      	     <td><?php echo $TinTuc['TieuDe'] ?></td>
+      	     <td><?php echo $TinTuc['MaDanhMuc'] ?></td>
+      	     <td><?php echo $TinTuc['SoLanXem'] ?></td>
+      	     <td><input  <?php echo $TinTuc['AnHien'] == 1 ? "checked='checked'" : ""; ?>  type="checkbox" ></td>
+      	     <td>
+      	        <a href="<?php echo BASE_DIR ?>quantri/xemtin/<?php echo $TinTuc['idTin']; ?>">Xem</a>/
+      	  </tr>
+	        <?php
+	     }
+	  ?>
+         </tbody>
+         <tfoot>
+	  <tr>
+	     <th>{MaTin}</th>
+	     <th>{TieuDe}</th>
+	     <th>{LoaiTin}</th>
+	     <th>{View}</th>
+	     <th>{AnHien}</th>
+	     <th>{Action}</th>
+	  </tr>
+         </tfoot>
+      </table>
+
+
+
+   </div>
+</div>
